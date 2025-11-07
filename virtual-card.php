@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
@@ -6,6 +7,49 @@ include 'functions/bachatdaddyfunctions.php';
 $common = new Common();
 $industry = $common->getAllIdustry();
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if user is logged in by checking session user_id
+    if (!isset($_SESSION['user_id'])) {
+        // User is not logged in, redirect directly to profile completion
+        header("Location: complete-profile.php");
+        exit();
+    }
+
+    $user_id = $_SESSION['user_id'];
+    // Connect to database (adjust credentials accordingly)
+    $conn = new mysqli("localhost:3307", "root", "", "bachatdaddy_db");
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Query user data
+    $sql = "SELECT * FROM users WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+    // Required fields
+    $required = ["name", "email", "phone", "address", "password", "image", "adhar", "birthday", "anniversary", "state", "city", "pincode", "representative_name"];
+    $incomplete = false;
+    foreach ($required as $field) {
+        if (empty($user[$field])) {
+            $incomplete = true;
+            break;
+        }
+    }
+
+    if ($incomplete) {
+        // Redirect incomplete user to complete-profile.php
+        header("Location: complete-profile.php");
+        exit();
+    } else {
+        // If profile complete, show a message and keep showing the page below
+        $message = "Your profile is already complete!";
+    }
+}
 ?>
 
 
@@ -68,12 +112,44 @@ $industry = $common->getAllIdustry();
             <div class='virtual-grid-two-part'>
                 <div class="virtual-content">
                     <h1>Where simplicity <br>meets financial <span>power</span></h1>
-                    <!-- <p>Where simplicity meets financial power, our virtual card brings exclusive 
-                        discounts across hotels, restaurants, hospitals, 
-                        and more—making every spend smarter and more rewarding.</p> -->
                 </div>
+                <div class="virtual-content">
+                    <p>
+                        Unlock more joy and savings—We brings you exclusive privileges at top hotels, restaurants, 
+                        and lifestyle spots, so you never have to choose between fun and smart spending.
+                    </p>
+                </div>
+                <form action="" method="post">
+                    <div class="cta">
+                        <button>
+                            Apply now
+                            <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+                </form>
                 <div class="virtual-image">
                     <img src="images/AdobeExpress.png" alt="">
+                    <div class="client first">
+                        <h6>
+                            <span><i class="ri-user-3-fill"></i></span>
+                            Manish Sharma
+                        </h6>
+                        <p>Very useful! I am happy with bachatdaddy</p>
+                    </div>
+                    <div class="client secound">
+                        <h6>
+                            <span><i class="ri-user-3-fill"></i></span>
+                            Kanika Yadav
+                        </h6>
+                        <p>This card is awesome</p>
+                    </div>
+                    <div class="client third">
+                        <h6>
+                            <span><i class="ri-user-3-fill"></i></span>
+                            Sunny Gautam
+                        </h6>
+                        <img src="./images/rating.png" alt="">
+                    </div>
                 </div>
             </div>
         </section>
@@ -81,9 +157,14 @@ $industry = $common->getAllIdustry();
         <!-- landing page end -->
         <section class="feature-card">
             <div class="feature1">
-                <h1>Experience Smarter Spending with India’s Most Rewarding Discount <span>Card</span></h1>
-                <h4>BachatDaddy discount card brings you effortless savings at top waterparks, hotels, restaurants, and more. With instant discounts, verified partners, easy application, and customer support always ready, your smart card makes every spend simpler and more rewarding.</h4>
-                <button>More Feature</button>
+                <h2>Experience smarter spending with india’s most rewarding <span>discount card</span></h2>
+                <p>
+                    Bachatdaddy discount card brings you effortless 
+                    savings at top waterparks, hotels, restaurants, and more with instant 
+                    discounts, verified partners, easy application 
+                    and customer support always ready, your smart card 
+                    makes every spend simpler and more rewarding
+                </p>
             </div>
             <div class="feature2">
                 <div class="card-detail1">
@@ -127,9 +208,6 @@ $industry = $common->getAllIdustry();
         <?php include('include/mobilefooter.php') ?>
         <?php include('include/footer.php') ?>
     </div>
-
-
-
 
     <script src="vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>

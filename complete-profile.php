@@ -3,7 +3,6 @@
         session_start();
     }
     
-    
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
@@ -97,7 +96,7 @@
         ***********************************-->
 
         <!--Page Header Start-->
-        <section class="page-header">
+        <!-- <section class="page-header">
             
             <div class="container">
                 <div class="page-header__inner">
@@ -110,7 +109,7 @@
                     </ul>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <div class="section pt-75 pb-75">
             <div class="container">
