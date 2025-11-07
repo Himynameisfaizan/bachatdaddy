@@ -145,16 +145,12 @@
         function changeLogo() {
             var logo = document.getElementById('logoImg');  // Get the image element by its ID
             // Change the image source to the new one
-            if (logo.src.indexOf('logo.jpg') > -1) {
-                logo.src = 'images/logo/favicon.png';  // Replace with your new image path
-            } else {
-                logo.src = 'images/logo/logo.jpg';  // Revert to the original image
+            if (logo.src.indexOf('Asset 19-8.png') > -1) {
+				logo.src = 'images/logo/logo1.png';  // Replace with your new image path
+			} else {
+				logo.src = 'images/logo/Asset 19-8.png';  // Revert to the original image
             }
         }
     </script>
-
-    
-	
-	
 </body>
 </html>

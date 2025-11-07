@@ -23,7 +23,10 @@ $industry = $common->getAllIdustry();
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
+<link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
     <link
@@ -64,12 +67,10 @@ $industry = $common->getAllIdustry();
         <section class='virtual-container'>
             <div class='virtual-grid-two-part'>
                 <div class="virtual-content">
-                    <p>APPLY FOR</p>
-                    <h1>MINDBLOWING <br><span>DISCOUNT CARD </span><br>FROM BACHATDADDY</h1>
-                    <div class="btn-to-connect">
-                        <!-- <a href="contact.php"><button>Apply now</button></a> -->
-                        <!-- <a class="cta-btn " href="javascript:void(0)">Get Your Card</a> -->
-                    </div>
+                    <h1>Where simplicity <br>meets financial <span>power</span></h1>
+                    <!-- <p>Where simplicity meets financial power, our virtual card brings exclusive 
+                        discounts across hotels, restaurants, hospitals, 
+                        and more—making every spend smarter and more rewarding.</p> -->
                 </div>
                 <div class="virtual-image">
                     <img src="images/AdobeExpress.png" alt="">
@@ -77,11 +78,52 @@ $industry = $common->getAllIdustry();
             </div>
         </section>
 
-
         <!-- landing page end -->
-
-        <h4>hello</h4>
-
+        <section class="feature-card">
+            <div class="feature1">
+                <h1>Experience Smarter Spending with India’s Most Rewarding Discount <span>Card</span></h1>
+                <h4>BachatDaddy discount card brings you effortless savings at top waterparks, hotels, restaurants, and more. With instant discounts, verified partners, easy application, and customer support always ready, your smart card makes every spend simpler and more rewarding.</h4>
+                <button>More Feature</button>
+            </div>
+            <div class="feature2">
+                <div class="card-detail1">
+                    <div class="icon">
+                        <i class="ri-verified-badge-line"></i>
+                        <h2>Verified Partners</h2>
+                    </div>
+                    <div class="desc">
+                        <h4>Get exclusive discounts at top waterparks, hotels, restaurants, and real estate brands—all trusted partners working with BachatDaddy.</h4>
+                    </div>
+                </div>
+                <div class="card-detail1">
+                    <div class="icon">
+                        <i class="ri-discount-percent-line"></i>
+                        <h2>Instant Discounts</h2>
+                    </div>
+                    <div class="desc">
+                        <h4>Just show your card and enjoy special savings instantly, no extra steps or coupons needed.</h4>
+                    </div>
+                </div>
+                <div class="card-detail1">
+                    <div class="icon">
+                        <i class="ri-timer-line"></i>
+                        <h2>24/7 Customer Support</h2>
+                    </div>
+                    <div class="desc">
+                        <h4>We’re always here to help—connect anytime for queries or assistance regarding your card benefits.</h4>
+                    </div>
+                </div>
+                <div class="card-detail1">
+                    <div class="icon">
+                        <i class="ri-gift-2-line"></i>
+                        <h2>Transparent Benefits</h2>
+                    </div>
+                    <div class="desc">
+                        <h4>All offers and discounts are clearly listed, with no hidden charges or surprises.</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
         <?php include('include/mobilefooter.php') ?>
         <?php include('include/footer.php') ?>
     </div>
