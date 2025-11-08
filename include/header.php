@@ -97,8 +97,12 @@ if (!isset($_SESSION)) {
                                         </ul>
                                     </li>
                                     
-                                    <li>
+                                    <!-- <li>
                                         <a href="what-we-do.php">What We Do</a>
+                                    </li> -->
+
+                                    <li>
+                                        <a href="virtual-card.php">Get Card</a>
                                     </li>
                                     
                                     <li>
