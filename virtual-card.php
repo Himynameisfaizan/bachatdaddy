@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- template styles -->
     <link rel="stylesheet" href="css/bachat-daddy.css">
-    <link rel="stylesheet" href="css/virtual-card.css">
+    <link rel="stylesheet" href="css/virtual-card-vendors.css">
     <link rel="stylesheet" href="css/bachat-daddy-responsive.css">
 </head>
 
@@ -228,7 +228,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="vendors/timepicker/timePicker.js"></script>
     <script src="vendors/circleType/jquery.circleType.js"></script>
     <script src="vendors/circleType/jquery.lettering.min.js"></script>
-
     <script src="js/bachat-daddy.js"></script>
 
 </body>

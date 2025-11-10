@@ -68,8 +68,6 @@ $subin = $common->getAllSubIn();
     <link rel="stylesheet" href="css/bachat-daddy.css">
     <link rel="stylesheet" href="css/bachat-daddy-responsive.css">
 
-
-
 </head>
 
 <body class="custom-cursor">
@@ -464,7 +462,6 @@ $subin = $common->getAllSubIn();
     <section class="bg-counter">
         <div class="container pt-75 pb-75">
             <h2 class="section__title-two text-center mb-5">Trusted by Top Brands</h2>
-
             <!-- Swiper -->
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">

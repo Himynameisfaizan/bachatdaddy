@@ -1,7 +1,7 @@
 /*---------------------------------------------------- 
 landing section start 
 ------------------------------------------------------*/
-.virtual-grid-two-part{
+.virtual-grid-two-part, .vendors-grid-content{
   display: flex;
   width: 100%;
   padding: 3rem 4rem 0 4rem;
@@ -12,14 +12,14 @@ landing section start
   gap: 2rem;
 }
 
-.virtual-content{
+.virtual-content,.vendors-content{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   /* background-color: aqua; */
-  width: 65%;
+  width: 74%;
 }
 .cta button{
   border-width: 0;
@@ -123,7 +123,7 @@ landing section start
   height: 50px;
   object-fit: cover;
 }
-.virtual-content h1{
+.virtual-content h1, .vendors-content h1{
   font-family: var(--bachat-daddy-font);
   font-weight: 500;
   font-size: 70px;
@@ -132,6 +132,10 @@ landing section start
   letter-spacing: -1px;
 }
 
+.virtual-content p{
+  width: 80%;
+  line-height: 20px;
+}
 .btn-to-connect button{
   border: none;
   border-radius: 4px;
@@ -239,11 +243,76 @@ landing section end
   display: flex;
   align-items: center;
 }
+
+.vendorshome-bg{
+  background: linear-gradient(0deg,rgba(238, 141, 33, 0.2) 0%, rgb(255, 255, 255) 100%);
+}
+.vendorshome-bg hr{
+  margin: 2rem 0;
+  color: #141111;
+}
 .feature2 .card-detail1 .desc h4{
   font-size: 14px;
   font-weight: 400;
 }
 
+.vendors-content h1 .highlight{
+  background-image: linear-gradient(to right,#c7c7c7 , 64% ,#eb891a);
+  color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 1px #f08b18b0;
+}
+
 /*---------------------------------------------------- 
 feature card section end 
 ------------------------------------------------------*/
+
+/* vendors benefits start */
+.vendors-benefits-section{
+  padding: 80px 0;
+}
+.vendors-benefits-section h2{
+  text-align: center;
+}
+.vendors-benefits-container{
+  background-color: #f1f1f1;
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 50px !important;
+  display: grid; 
+  gap: 10px;
+  max-width: 1000px;
+  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr);
+}
+.vendors-benefits-container .vendors-benefits-content:nth-child(1){
+  grid-row: 2 span;
+}
+.vendors-benefits-container .vendors-benefits-content:nth-child(2){
+  grid-column: 2 span;
+
+}
+.vendors-benefits-container .vendors-benefits-content:nth-child(5){
+  grid-column: 2 span;
+}
+
+
+.vendors-benefits-container .vendors-benefits-content{
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px 0 #ee8e212d;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.vendors-benefits-container .vendors-benefits-content h5{
+  font-size: 22px;
+}
+.vendors-benefits-container .vendors-benefits-content p{
+  font-size: 16px;
+}
+.vendors-benefits-container .vendors-benefits-content img{
+  width: 200px;
+}
+/* vendors benefits end */
