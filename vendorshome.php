@@ -72,6 +72,23 @@ $subin = $common->getAllSubIn();
     <link rel="stylesheet" href="css/bachat-daddy.css">
     <link rel="stylesheet" href="css/bachat-daddy-responsive.css">
     <link rel="stylesheet" href="css/virtual-card-vendors.css">
+    <style>
+    .vertical {
+      width: 100%;
+      height: 100%;
+    }
+
+    .slider {
+      text-align: center;
+      font-size: 18px;
+      background: #444;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  
+    </style>
 </head>
 
 <body>
@@ -132,12 +149,11 @@ $subin = $common->getAllSubIn();
                     </div>
                 </div>
             </div>
-
         </section>
     </section>
 
     <section class="vendors-benefits-section">
-        <h2>Vendors Benefits</h2>
+        <h2>How vendors gain value</h2>
         <div class="vendors-benefits-container">
             <div class="vendors-benefits-content">
                 <h5><i class="ri-seo-line"></i> Free marketing support</h5>
@@ -160,7 +176,7 @@ $subin = $common->getAllSubIn();
                 </p>
             </div>
             <div class="vendors-benefits-content">
-                <h5>Personalized outreach that works</h5>
+                <h5><i class="ri-group-3-line"></i> Personalized outreach that works</h5>
                 <p>
                     Our face-to-face engagement with customers ensures your business gets noticed by the right audience.
                 </p>
@@ -181,12 +197,68 @@ $subin = $common->getAllSubIn();
         </div>
     </section>
 
+    <section class="vendors-benefits-section">
+        <h2>What we deliver</h2>
+        <div class="our-work-container">
+            <div class="our-work-content">
+                <h5><i class="ri-pushpin-2-line"></i> Premium partnerships across india</h5>
+                <p>At <b>BACHATDADDY,</b> we collaborate exclusively with top hotels, resorts, restaurants, bars, and lifestyle outlets all over India. Our carefully curated partnerships
+                ensure that our members enjoy world-class experiences with unbeatable discounts and benefits wherever they go.</p>
+            </div>
+            <div class="our-work-content">
+                <h5><i class="ri-pushpin-2-line"></i> Exclusive privileges for our members</h5>
+                <p>Our Privilege Card offers members access to elite deals and special offers not available anywhere else. Whether it’s a luxury stay, 
+                    fine dining, or a leisure outing, members save smartly while enjoying premium lifestyle perks.</p>
+            </div>
+            <div class="our-work-content">
+                <h5><i class="ri-pushpin-2-line"></i> Making luxury affordable for all</h5>
+                <p>We believe luxury should be accessible, not just a privilege for a few. BACHAT DADDY opens the doors to premium 
+                    experiences at budget-friendly rates, empowering our members to live richly without compromising their savings.</p>
+            </div>
+            <div class="our-work-content">
+                <h5><i class="ri-pushpin-2-line"></i> A trusted network that rewards both sides</h5>
+                <p>We connect value-conscious customers with premier brands in a trusted ecosystem. 
+                    This collaboration builds loyal repeat clientele for our vendors, while members benefit from substantial discounts and unmatched value.</p>
+            </div>
+            <div class="our-work-content">
+                <h5><i class="ri-pushpin-2-line"></i> Smart savings that enhance your lifestyle</h5>
+                <p>Our mission goes beyond just discounts. We enable members to experience more, worry less, and enjoy the freedom of choice
+                     with <b>BACHATDADDY,</b> saving money means gaining happiness and lifestyle freedom.</p>
+            </div>
+            <div class="our-work-content">
+                <h5><i class="ri-pushpin-2-line"></i> Innovative digital experience</h5>
+                <p><b>BACHATDADDY</b> harnesses advanced digital technology to deliver a seamless and intuitive experience for every member. From an easy-to-use mobile platform to contactless 
+                    privilege card solutions, we make discovering, redeeming, and tracking offers effortless and secure.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="vendors-benefits-section">
+        <h2>Testmonials</h2>
+        <div class="clients">
+            <div class="swiper slider">
+    <div class="swipe">
+      <div class="slider">Slide 1</div>
+      <div class="slider">Slide 2</div>
+      <div class="slider">Slide 3</div>
+      <div class="slider">Slide 4</div>
+      <div class="slider">Slide 5</div>
+      <div class="slider">Slide 6</div>
+      <div class="slider">Slide 7</div>
+      <div class="slider">Slide 8</div>
+      <div class="slider">Slide 9</div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+        </div>
+    </section>
+
         <?php require('include/mobilefooter.php');  ?>
         <?php require('include/footer.php'); ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
 
     <script>
     var swiper = new Swiper(".mySwiper", {
@@ -201,6 +273,15 @@ $subin = $common->getAllSubIn();
         clickable: true,
       },
     });
+
+   var swiper = new Swiper(".slider", {
+      direction: "vertical",
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+
   </script>
 </body>
 
