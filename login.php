@@ -81,7 +81,6 @@ if (session_status() == PHP_SESSION_NONE) {
         <div class="section">
             <div class="login-container">
                 <div class="row login-row">
-
                     <div class="col-lg-6  login-content">
                         <div class="andro_auth-wrapper d-flex">
                             <div class="andro_auth-form">
@@ -115,9 +114,9 @@ if (session_status() == PHP_SESSION_NONE) {
           <!--**********************************
            footer start ti-comment-alt
         ***********************************-->
-        
-		
+
 		<?php require ('include/footer.php'); ?>
+        
 		<!--**********************************
             footer end ti-comment-alt
         ***********************************-->
@@ -251,9 +250,6 @@ if (session_status() == PHP_SESSION_NONE) {
             });
         }
     </script>
-
-
-
 </body>
 
 </html>

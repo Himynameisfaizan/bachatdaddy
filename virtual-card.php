@@ -107,7 +107,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include('include/header.php') ?>
 
         <!-- landing page start -->
-
         <section class='virtual-container'>
             <div class='virtual-grid-two-part'>
                 <div class="virtual-content">

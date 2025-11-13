@@ -40,7 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $result = $auth->vendorLogin($userId, $password);
             if ($result === true) {
-                $response = array('status' => 'success', 'message' => 'Login successful', 'redirect' => 'users-list.php');
+                // $response = array('status' => 'success', 'message' => 'Login successful', 'redirect' => 'users-list.php');
+                $response = array('status' => 'success', 'message' => 'Login successful', 'redirect' => 'vendorshome.php');
+
             } else {
                 $response = array('status' => 'error', 'message' => 'Invalid credentials. Please try again.');
             }
