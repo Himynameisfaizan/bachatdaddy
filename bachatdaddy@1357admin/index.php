@@ -74,8 +74,6 @@ session_start();
 										<h3 class="text-center mb-2 text-black">Sign In</h3>
 									
 									</div>
-									
-									
 									<div class="mb-3">
 										<label for="exampleFormControlInput1" class="form-label mb-2 fs-13 label-color font-w500 index-input">Email address</label>
 									  <input type="email" name="email" class="form-control" id="exampleFormControlInput1" >

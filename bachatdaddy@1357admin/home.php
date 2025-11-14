@@ -78,41 +78,28 @@
             Sidebar end
         ***********************************-->
 
-
-
-
-		
-        
-		
-
 	</div>
-	<!-- <div class="content-body">
-	
-		<div class="container-fluid">
-			
+
+	<div class="content-body">
+		<div class="container-fluid">	
 			<div>
 				<div>
 					<div class="container-fluid pt-0 ps-0 pe-lg-4 pe-0">
 						<div class="row">
-						
 						</div>
-						
 						<div class="col-xl-12">
 							<div class="content">
-								<h1>Welcome To Admin</h1>
+								<h1>Welcome To Bachatdaddy</h1>
 								<br>
-								<img src="images/logo/logo.jpg" alt="Gaadiplan Logo">
+								<!-- <img src="images/logo/Asset 21-8.png" alt="Gaadiplan Logo"> -->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		
-	</div> -->
-	
+	</div>
 
-	
     <!--**********************************
         Scripts
     ***********************************-->
@@ -136,9 +123,7 @@
 				hljs.highlightElement(el);
 			});
 			});
-			
-	
-			
+		
 	</script>
 	<script>
         // Function to change the logo image source
@@ -146,7 +131,7 @@
             var logo = document.getElementById('logoImg');  // Get the image element by its ID
             // Change the image source to the new one
             if (logo.src.indexOf('Asset 19-8.png') > -1) {
-				logo.src = 'images/logo/logo1.png';  // Replace with your new image path
+				logo.src = 'images/logo/Asset 19-8.png';  // Replace with your new image path
 			} else {
 				logo.src = 'images/logo/Asset 19-8.png';  // Revert to the original image
             }

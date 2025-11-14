@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> BACHATDADDY </title>
     <!-- favicons Icons -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/resources/logo.jpg">
+    <link rel="icon" type="image/png" sizes="50x50" href="images/resources/Asset 3.png">
 
     <meta name="description" content="BACHATDADDY">
 

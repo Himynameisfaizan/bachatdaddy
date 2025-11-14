@@ -29,7 +29,7 @@
         	</div>
         </div>
 
-        <div class="header">
+        <div class="header" style="background-color: #141111;">
         	<div class="header-content">
         		<nav class="navbar navbar-expand">
         			<div class="collapse navbar-collapse justify-content-between">
@@ -64,9 +64,6 @@
 
         									</div>
         									<div class="card-body p-3">
-
-
-
         										<a href="change-pass.php" class="dropdown-item ai-icon ">
         											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1" class="svg-main-icon">
         												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
