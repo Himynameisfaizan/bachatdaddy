@@ -1,20 +1,20 @@
 <?php
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-    include 'config/config.php';
-    include 'functions/bachatdaddyfunctions.php';
-    include 'functions/authentication.php';
-    $common = new Common();
-    $industry=$common->getAllIdustry();
-    $id=$_SESSION['USERS_USER_ID'];
-    $user = new User();
-    $userdata=$user->getUsersDetails($id);
-    $auth = new Authentication();
-    $auth->checkSession();
-    if($userdata['adhar']==null){
-        header('Location: complete-profile.php');
-    }
+if (!isset($_SESSION)) {
+    session_start();
+}
+include 'config/config.php';
+include 'functions/bachatdaddyfunctions.php';
+include 'functions/authentication.php';
+$common = new Common();
+$industry = $common->getAllIdustry();
+$id = $_SESSION['USERS_USER_ID'];
+$user = new User();
+$userdata = $user->getUsersDetails($id);
+$auth = new Authentication();
+$auth->checkSession();
+if ($userdata['adhar'] == null) {
+    header('Location: complete-profile.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,13 +63,13 @@
 <body class="custom-cursor">
 
     <div class="page-wrapper">
-<!--**********************************
+        <!--**********************************
             Header start ti-comment-alt
         ***********************************-->
-        
-		
-		<?php require ('include/header.php'); ?>
-		<!--**********************************
+
+
+        <?php require('include/header.php'); ?>
+        <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
@@ -79,7 +79,7 @@
             <div class="page-header__bg" style="background-image: url(images/backgrounds/bg-what.jpg);
             opacity: 0.1;">
             </div>
-            
+
             <div class="container">
                 <div class="page-header__inner page-header__inner-color">
                     <h2>My Profile</h2>
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!--Profile Start-->
         <section class="team-details">
             <div class="container">
@@ -100,7 +100,7 @@
                         <div class="col-xl-5 col-lg-5">
                             <div class="team-details__left">
                                 <div class="team-details__img">
-                                <img src="<?php echo !empty($userdata['image']) ? 'bachatdaddy@1357admin/adminuploads/images/users/' . $userdata['image'] : 'images/services/male-avatar.jpg'; ?>" alt="">
+                                    <img src="<?php echo !empty($userdata['image']) ? 'bachatdaddy@1357admin/adminuploads/images/users/' . $userdata['image'] : 'images/services/male-avatar.jpg'; ?>" alt="">
 
                                 </div>
                                 <div class="team-details__contact-box">
@@ -129,30 +129,30 @@
                         </div>
                         <div class="col-xl-7 col-lg-7">
                             <div class="team-details__right">
-                                <h3 class="team-details__title-1"><?php echo $userdata['name'];?></h3>
+                                <h3 class="team-details__title-1"><?php echo $userdata['name']; ?></h3>
                                 <div class="d-block d-md-flex gap-2 mt-2">
                                     <p class="key">Email :</p>
-                                    <p class="value"><?php echo $userdata['email'];?></p>
+                                    <p class="value"><?php echo $userdata['email']; ?></p>
                                 </div>
                                 <div class="d-block d-sm-flex gap-2 mt-2">
                                     <p class="key">Contact No :</p>
-                                    <p class="value"><?php echo $userdata['phone'];?></p>
+                                    <p class="value"><?php echo $userdata['phone']; ?></p>
                                 </div>
                                 <div class="d-block d-sm-flex gap-2 mt-2">
                                     <p class="key">Aadhar No :</p>
-                                    <p class="value"><?php echo $userdata['adhar'];?></p>
+                                    <p class="value"><?php echo $userdata['adhar']; ?></p>
                                 </div>
                                 <div class="d-block d-sm-flex gap-2 mt-2">
                                     <p class="key">Date of birth :</p>
-                                    <p class="value"><?php echo $userdata['birthday'];?></p>
+                                    <p class="value"><?php echo $userdata['birthday']; ?></p>
                                 </div>
                                 <div class="d-block d-sm-flex gap-2 mt-2">
                                     <p class="key">Anniversary :</p>
-                                    <p class="value"><?php echo $userdata['anniversary'];?></p>
+                                    <p class="value"><?php echo $userdata['anniversary']; ?></p>
                                 </div>
                                 <div class="d-block d-sm-flex gap-2 mt-2">
                                     <p class="key">Address :</p>
-                                    <p class="value"><?php echo $userdata['address'].", ". $userdata['city'].", ". $userdata['pincode'].", ". $userdata['state'];?></p>
+                                    <p class="value"><?php echo $userdata['address'] . ", " . $userdata['city'] . ", " . $userdata['pincode'] . ", " . $userdata['state']; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -162,13 +162,13 @@
         </section>
         <!--Profile End-->
 
-          <!--**********************************
+        <!--**********************************
            footer start ti-comment-alt
         ***********************************-->
-        
-		
-		<?php require ('include/footer.php'); ?>
-		<!--**********************************
+
+
+        <?php require('include/footer.php'); ?>
+        <!--**********************************
             footer end ti-comment-alt
         ***********************************-->
 

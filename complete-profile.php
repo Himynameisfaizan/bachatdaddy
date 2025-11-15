@@ -1,24 +1,24 @@
 <?php
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-    
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    
-    include 'config/config.php';
-    include 'functions/bachatdaddyfunctions.php';
-    include 'functions/authentication.php';
-    $common = new Common();
-    $user= new User();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-    $userdetail=$user->getUsersDetails($_SESSION['USERS_USER_ID']);
-    $industry=$common->getAllIdustry();
-    $db = new dbClass();
-    $auth = new Authentication();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-    $auth->checkSession();
+include 'config/config.php';
+include 'functions/bachatdaddyfunctions.php';
+include 'functions/authentication.php';
+$common = new Common();
+$user = new User();
+
+$userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
+$industry = $common->getAllIdustry();
+$db = new dbClass();
+$auth = new Authentication();
+
+$auth->checkSession();
 
 ?>
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
         href="https://fonts.googleapis.com/css2-1?family=Inter+Tight:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
 
-        <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="vendors/animate/animate.min.css">
     <link rel="stylesheet" href="vendors/animate/custom-animate.css">
     <link rel="stylesheet" href="vendors/fontawesome/css/all.min.css">
@@ -74,23 +74,14 @@
 
 <body class="custom-cursor">
 
-
-
-
-
-
-    
- 
-
-
     <div class="page-wrapper">
-<!--**********************************
+        <!--**********************************
             Header start ti-comment-alt
         ***********************************-->
-        
-		
-		<?php require ('include/header.php'); ?>
-		<!--**********************************
+
+
+        <?php require('include/header.php'); ?>
+        <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
@@ -99,12 +90,12 @@
             
             <div class="container">
                 <div class="page-header__inner">
-                    <h2><?php echo !empty( $userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></h2>
+                    <h2><?php echo !empty($userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></h2>
                     <ul class="thm-breadcrumb list-unstyled">
                         <li><a href="index.php">Home</a></li>
                         <li><span class="icon-down-arrow"></span></li>
                         
-                        <li><?php echo !empty( $userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></li>
+                        <li><?php echo !empty($userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></li>
                     </ul>
                 </div>
             </div>
@@ -116,92 +107,92 @@
                     <div class="col-lg-10">
                         <div class="andro_auth-wrapper d-flex">
                             <div class="andro_auth-form form-1 w-100">
-                                <h2><?php echo !empty( $userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></h2>
-                            <form id="profileForm" method="post" onsubmit="return submitForm(event, 'profileForm');">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="image">Profile Image</label>
-                                        <input type="file" class="form-control" placeholder="Profile Image" name="image" id="image" accept="image/*">
-                                    </div>
+                                <h2><?php echo !empty($userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></h2>
+                                <form id="profileForm" method="post" onsubmit="return submitForm(event, 'profileForm');">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="image">Profile Image</label>
+                                                <input type="file" class="form-control" placeholder="Profile Image" name="image" id="image" accept="image/*">
+                                            </div>
 
                                         </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="name">Full Name</label>
-                                            <input type="text" class="form-control" value="<?= $userdetail['name']; ?>" placeholder="Full Name" name="name" id="name">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="name">Full Name</label>
+                                                <input type="text" class="form-control" value="<?= $userdetail['name']; ?>" placeholder="Full Name" name="name" id="name">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="email" class="form-control" value="<?= $userdetail['email']; ?>" placeholder="Email" name="email" id="email">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input type="email" class="form-control" value="<?= $userdetail['email']; ?>" placeholder="Email" name="email" id="email">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="phone">Phone Number</label>
-                                            <input type="tel" class="form-control" value="<?= $userdetail['phone']; ?>" placeholder="Phone Number" name="phone" id="phone">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="phone">Phone Number</label>
+                                                <input type="tel" class="form-control" value="<?= $userdetail['phone']; ?>" placeholder="Phone Number" name="phone" id="phone">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="adhar_no">Aadhar Number</label>
-                                            <input type="text" class="form-control" value="<?= $userdetail['adhar'] ?? ''; ?>" placeholder="Aadhar Number" name="adhar_no" id="adhar_no">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="adhar_no">Aadhar Number</label>
+                                                <input type="text" class="form-control" value="<?= $userdetail['adhar'] ?? ''; ?>" placeholder="Aadhar Number" name="adhar_no" id="adhar_no">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="representative_name">Representative's Name</label>
-                                            <input type="text" class="form-control" value="<?= $userdetail['representative_name'] ?? ''; ?>" placeholder="Representative's Name" name="representative_name" id="representative_name">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="representative_name">Representative's Name</label>
+                                                <input type="text" class="form-control" value="<?= $userdetail['representative_name'] ?? ''; ?>" placeholder="Representative's Name" name="representative_name" id="representative_name">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="birthday">Birthday</label>
-                                            <input type="date" class="form-control" value="<?= $userdetail['birthday'] ?? ''; ?>" name="birthday" id="birthday">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="birthday">Birthday</label>
+                                                <input type="date" class="form-control" value="<?= $userdetail['birthday'] ?? ''; ?>" name="birthday" id="birthday">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="anniversary">Anniversary</label>
-                                            <input type="date" class="form-control" value="<?= $userdetail['anniversary'] ?? ''; ?>" name="anniversary" id="anniversary">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="anniversary">Anniversary</label>
+                                                <input type="date" class="form-control" value="<?= $userdetail['anniversary'] ?? ''; ?>" name="anniversary" id="anniversary">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="state">State</label>
-                                            <select class="form-control" name="state" id="state"  >
-                                                <option value="<?php echo $userdetail['state']; ?>" selected><?php echo $userdetail['state']; ?></option>
-                                            </select>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="state">State</label>
+                                                <select class="form-control" name="state" id="state">
+                                                    <option value="<?php echo $userdetail['state']; ?>" selected><?php echo $userdetail['state']; ?></option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="city">City</label>
-                                            <input type="text" class="form-control" value="<?= $userdetail['city'] ?? ''; ?>" placeholder="City" name="city" id="city">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="city">City</label>
+                                                <input type="text" class="form-control" value="<?= $userdetail['city'] ?? ''; ?>" placeholder="City" name="city" id="city">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="pincode">Pincode</label>
-                                            <input type="text" class="form-control" value="<?= $userdetail['pincode'] ?? ''; ?>" placeholder="Pincode" name="pincode" id="pincode">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="pincode">Pincode</label>
+                                                <input type="text" class="form-control" value="<?= $userdetail['pincode'] ?? ''; ?>" placeholder="Pincode" name="pincode" id="pincode">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="address">Address</label>
-                                            <textarea class="form-control" placeholder="Address" name="address" id="address" rows="3"><?= $userdetail['address'] ?? ''; ?></textarea>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="address">Address</label>
+                                                <textarea class="form-control" placeholder="Address" name="address" id="address" rows="3"><?= $userdetail['address'] ?? ''; ?></textarea>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    
-                                    <div class="col-md-12 text-center">
-                                        <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
-                                        <button type="submit" name="submit" class="thm-btn btn-p mb-3" id="submitButton">Submit</button>
+
+                                        <div class="col-md-12 text-center">
+                                            <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
+                                            <button type="submit" name="submit" class="thm-btn btn-p mb-3" id="submitButton">Submit</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
 
                             </div>
                         </div>
@@ -209,15 +200,15 @@
                 </div>
             </div>
         </div>
-        
-        
-           <!--**********************************
+
+
+        <!--**********************************
            footer start ti-comment-alt
         ***********************************-->
-        
-		
-		<?php require ('include/footer.php'); ?>
-		<!--**********************************
+
+
+        <?php require('include/footer.php'); ?>
+        <!--**********************************
             footer end ti-comment-alt
         ***********************************-->
 
@@ -311,175 +302,175 @@
 
 
 
-   <script>
-    // Function to validate the form
-    function validateForm(formName) {
-        var form = $('#' + formName);
-        
-        // Initialize jQuery Validation
-        form.validate({
-            rules: {
-                name: {
-                    required: true, 
-                    minlength: 3
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                phone: {
-                    required: true,
-                    // phoneUS: true 
-                },
-                birthday: {
-                    required: true,
-                    date: true
-                },
-                adhar_no: {
-                    required: true,
-                    digits:true,
-                    minlength: 12,
-                    maxlength: 12  
-                },
-                state: {
-                    required: true,
-                    notEmptyOrWhitespace: true
-                },
-                city: {
-                    required: true,
-                    minlength: 2
-                },
-                pincode: {
-                    required: true,
-                    digits: true,
-                    minlength: 6,
-                    maxlength: 6
-                },
-                address: {
-                    required: true,
-                    minlength: 10
-                },
-                representative_name: {
-                    required: true,
-                    minlength: 3
-                }
-            },
-            messages: {
-                name: {
-                    required: "Please enter your full name",
-                    minlength: "Your name must be at least 3 characters long"
-                },
-                email: {
-                    required: "Please enter your email address",
-                    email: "Please enter a valid email address"
-                },
-                phone: {
-                    required: "Please enter your phone number",
-                    phoneUS: "Please enter a valid phone number" // Modify for international format if needed
-                },
-                birthday: {
-                    required: "Please select your birthday",
-                    date: "Please enter a valid date"
-                },
-                adhar_no: {
-                    required: "Please enter your Aadhar Number",
-                    digits: "Please enter a valid Aadhar Number",
-                    minlength: "Aadhar Number must be 12 digits long",
-                    maxlength: "Aadhar Number must be 12 digits long"
-                },
-                state: {
-                    required: "Please enter your state",
-                    notEmptyOrWhitespace: "Please Select a State"
-                },
-                city: {
-                    required: "Please enter your city",
-                    minlength: "City must be at least 2 characters long"
-                },
-                pincode: {
-                    required: "Please enter your pincode",
-                    digits: "Please enter a valid pincode",
-                    minlength: "Pincode must be 6 digits long",
-                    maxlength: "Pincode must be 6 digits long"
-                },
-                address: {
-                    required: "Please enter your address",
-                    minlength: "Address must be at least 10 characters long"
-                },
-                representative_name: {
-                    required: "Please enter the representative's name",
-                    minlength: "Representative's name must be at least 3 characters long"
-                }
-            },
-            submitHandler: function() {
-                return true;  // Validation passed, return true to submit the form
-            }
-        });
-            $.validator.addMethod("notEmptyOrWhitespace", function(value, element) {
-            return value.trim().length > 0; // Returns true if the trimmed value has a length greater than 0
-        });
+    <script>
+        // Function to validate the form
+        function validateForm(formName) {
+            var form = $('#' + formName);
 
-        // Check if form is valid before submitting
-        return form.valid();  // Return true if form is valid
-    }
-
-    // Function to handle the form submission
-    function submitForm(event, formName) {
-        event.preventDefault();  // Prevent default form submission
-
-        var form = document.getElementById(formName);
-        var submitButton = form.querySelector('button[type="submit"]');
-        submitButton.disabled = true;  // Disable the submit button to prevent multiple submissions
-        submitButton.innerHTML = 'Submitting...';
-
-        if (validateForm(formName)) {
-            var formData = new FormData(form);
-            
-            // Debugging: Log FormData content to check what is being sent
-            console.log("Form Data:");
-            for (var [key, value] of formData.entries()) {
-                console.log(key + ": " + value);
-            }
-
-            // Perform AJAX request to submit the form
-            $.ajax({
-                url: 'user-com-profile.php',  // The AJAX request path remains unchanged
-                type: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    console.log("Sending request to user-com-profile.php...");
-                },
-                success: function(response) {
-                    console.log("AJAX request sent successfully.");
-                    console.log('Raw Response:', response);
-        
-                    if (response.status === 'success') {
-                        form.reset();  // Reset form if successful
-                        window.location.href = response.redirect;  // Redirect to the new page
-                    } else {
-                        alert("Error: " + response.message);  // Alert the error message
-                        form.reset();  // Reset form if there is an error
+            // Initialize jQuery Validation
+            form.validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    phone: {
+                        required: true,
+                        // phoneUS: true 
+                    },
+                    birthday: {
+                        required: true,
+                        date: true
+                    },
+                    adhar_no: {
+                        required: true,
+                        digits: true,
+                        minlength: 12,
+                        maxlength: 12
+                    },
+                    state: {
+                        required: true,
+                        notEmptyOrWhitespace: true
+                    },
+                    city: {
+                        required: true,
+                        minlength: 2
+                    },
+                    pincode: {
+                        required: true,
+                        digits: true,
+                        minlength: 6,
+                        maxlength: 6
+                    },
+                    address: {
+                        required: true,
+                        minlength: 10
+                    },
+                    representative_name: {
+                        required: true,
+                        minlength: 3
                     }
-
-                    submitButton.disabled = false;  // Re-enable the submit button
-                    submitButton.innerHTML = 'Submit';  // Change button text back to 'Submit'
                 },
-                error: function(xhr, status, error) {
-                    console.log('Error response:', xhr.responseText); 
-                    alert("AJAX request failed: " + error);
-                    submitButton.disabled = false;  // Re-enable the submit button
-                    submitButton.innerHTML = 'Submit';  // Change button text back to 'Submit'
+                messages: {
+                    name: {
+                        required: "Please enter your full name",
+                        minlength: "Your name must be at least 3 characters long"
+                    },
+                    email: {
+                        required: "Please enter your email address",
+                        email: "Please enter a valid email address"
+                    },
+                    phone: {
+                        required: "Please enter your phone number",
+                        phoneUS: "Please enter a valid phone number" // Modify for international format if needed
+                    },
+                    birthday: {
+                        required: "Please select your birthday",
+                        date: "Please enter a valid date"
+                    },
+                    adhar_no: {
+                        required: "Please enter your Aadhar Number",
+                        digits: "Please enter a valid Aadhar Number",
+                        minlength: "Aadhar Number must be 12 digits long",
+                        maxlength: "Aadhar Number must be 12 digits long"
+                    },
+                    state: {
+                        required: "Please enter your state",
+                        notEmptyOrWhitespace: "Please Select a State"
+                    },
+                    city: {
+                        required: "Please enter your city",
+                        minlength: "City must be at least 2 characters long"
+                    },
+                    pincode: {
+                        required: "Please enter your pincode",
+                        digits: "Please enter a valid pincode",
+                        minlength: "Pincode must be 6 digits long",
+                        maxlength: "Pincode must be 6 digits long"
+                    },
+                    address: {
+                        required: "Please enter your address",
+                        minlength: "Address must be at least 10 characters long"
+                    },
+                    representative_name: {
+                        required: "Please enter the representative's name",
+                        minlength: "Representative's name must be at least 3 characters long"
+                    }
+                },
+                submitHandler: function() {
+                    return true; // Validation passed, return true to submit the form
                 }
             });
-        } else {
-            submitButton.disabled = false;  // Re-enable the submit button if validation fails
-            submitButton.innerHTML = 'Submit';  // Change button text back to 'Submit'
+            $.validator.addMethod("notEmptyOrWhitespace", function(value, element) {
+                return value.trim().length > 0; // Returns true if the trimmed value has a length greater than 0
+            });
+
+            // Check if form is valid before submitting
+            return form.valid(); // Return true if form is valid
         }
 
-        return false;  
-    }
-</script>
+        // Function to handle the form submission
+        function submitForm(event, formName) {
+            event.preventDefault(); // Prevent default form submission
+
+            var form = document.getElementById(formName);
+            var submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true; // Disable the submit button to prevent multiple submissions
+            submitButton.innerHTML = 'Submitting...';
+
+            if (validateForm(formName)) {
+                var formData = new FormData(form);
+
+                // Debugging: Log FormData content to check what is being sent
+                console.log("Form Data:");
+                for (var [key, value] of formData.entries()) {
+                    console.log(key + ": " + value);
+                }
+
+                // Perform AJAX request to submit the form
+                $.ajax({
+                    url: 'user-com-profile.php', // The AJAX request path remains unchanged
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        console.log("Sending request to user-com-profile.php...");
+                    },
+                    success: function(response) {
+                        console.log("AJAX request sent successfully.");
+                        console.log('Raw Response:', response);
+
+                        if (response.status === 'success') {
+                            form.reset(); // Reset form if successful
+                            window.location.href = response.redirect; // Redirect to the new page
+                        } else {
+                            alert("Error: " + response.message); // Alert the error message
+                            form.reset(); // Reset form if there is an error
+                        }
+
+                        submitButton.disabled = false; // Re-enable the submit button
+                        submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error response:', xhr.responseText);
+                        alert("AJAX request failed: " + error);
+                        submitButton.disabled = false; // Re-enable the submit button
+                        submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+                    }
+                });
+            } else {
+                submitButton.disabled = false; // Re-enable the submit button if validation fails
+                submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+            }
+
+            return false;
+        }
+    </script>
 
 
 

@@ -21,7 +21,7 @@ landing section start
   /* background-color: aqua; */
   width: 74%;
 }
-.cta button{
+.cta a{
   border-width: 0;
   outline: none;
   /* width: 140px;
@@ -35,7 +35,7 @@ landing section start
   font-size: 16px;
   transition: all 0.2s ease-in-out;
 }
-.cta button:hover{
+.cta a:hover{
   background-color: #f8931f;
 }
 .virtual-content span{
@@ -448,7 +448,7 @@ feature card section end
     font-size: 14px;
     line-height: 16px;
   }
-  .cta button{
+  .cta a{
     font-size: 14px;
   }
   .virtual-image> img{

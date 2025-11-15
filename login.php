@@ -2,10 +2,10 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start(); // Start the session if it hasn't started already
 }
-    include 'config/config.php';
-    include 'functions/bachatdaddyfunctions.php';
-    $common = new Common();
-    $industry=$common->getAllIdustry();
+include 'config/config.php';
+include 'functions/bachatdaddyfunctions.php';
+$common = new Common();
+$industry = $common->getAllIdustry();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,25 +58,12 @@ if (session_status() == PHP_SESSION_NONE) {
         <!--**********************************
             Header start ti-comment-alt
         ***********************************-->
-		<?php require ('include/header.php'); ?>
-		<!--**********************************
+        <?php require('include/header.php'); ?>
+        <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
         <!--Page Header Start-->
-        <!-- <section class="page-header">
-            <div class="page-header__bg" style="background-image: url(images/backgrounds/page-header-bg.jpg);">
-            </div>
-            <div class="container">
-                <div class="page-header__inner">
-                    <h2>Login</h2>
-                    <ul class="thm-breadcrumb list-unstyled">
-                        <li><a href="index.php">Home</a></li>
-                        <li><span class="icon-down-arrow"></span></li>
-                        <li>Login</li>
-                    </ul>
-                </div>
-            </div>
-        </section> -->
+
         <div class="section">
             <div class="login-container">
                 <div class="row login-row">
@@ -101,7 +88,7 @@ if (session_status() == PHP_SESSION_NONE) {
                                     <div class="form-group text-right">
                                         <a href="forget.php" class="forgot-password">Forgot Password?</a>
                                     </div>
-                                    <button type="submit" name="submit" class="thm-btn btn-p mb-3">Login</button>                
+                                    <button type="submit" name="submit" class="thm-btn btn-p mb-3">Login</button>
                                     <p class="d-flex justify-content-center">Don’t have an account? <a href="user.php" class="ml-1">&nbsp;Create</a></p>
                                 </form>
                             </div>
@@ -110,21 +97,21 @@ if (session_status() == PHP_SESSION_NONE) {
                 </div>
             </div>
         </div>
-          <!--**********************************
+        <!--**********************************
            footer start ti-comment-alt
         ***********************************-->
 
-		<?php require ('include/footer.php'); ?>
-        
-		<!--**********************************
+        <?php require('include/footer.php'); ?>
+
+        <!--**********************************
             footer end ti-comment-alt
         ***********************************-->
 
 
     </div><!-- /.page-wrapper -->
 
-    <?php require ('include/mobilefooter.php')?>
-    
+    <?php require('include/mobilefooter.php') ?>
+
     <script src="vendors/jquery/jquery-3.6.0.min.js"></script>
     <script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendors/jarallax/jarallax.min.js"></script>
@@ -144,104 +131,102 @@ if (session_status() == PHP_SESSION_NONE) {
     <script src="vendors/timepicker/timePicker.js"></script>
     <script src="vendors/circleType/jquery.circleType.js"></script>
     <script src="vendors/circleType/jquery.lettering.min.js"></script>
-    
-<script>
-       
-    function validateForm(formName) {
-        var form = $('#' + formName);
-        
-        // Initialize jQuery Validation
-        form.validate({
-            rules: {
-                userId: {
-                    required: true,  // User ID is required
+
+    <script>
+        function validateForm(formName) {
+            var form = $('#' + formName);
+
+            // Initialize jQuery Validation
+            form.validate({
+                rules: {
+                    userId: {
+                        required: true, // User ID is required
+                    },
+                    password: {
+                        required: true, // Password is required
+                    }
                 },
-                password: {
-                    required: true,  // Password is required
-                }
-            },
-            messages: {
-                userId: {
-                    required: "Please enter your User ID."  // Error message for User ID
+                messages: {
+                    userId: {
+                        required: "Please enter your User ID." // Error message for User ID
+                    },
+                    password: {
+                        required: "Please enter your password." // Error message for Password
+                    }
                 },
-                password: {
-                    required: "Please enter your password."  // Error message for Password
+                // Stop the form submission if validation fails
+                submitHandler: function() {
+                    return true; // Validation passed, return true to submit the form
                 }
-            },
-            // Stop the form submission if validation fails
-            submitHandler: function() {
-                return true;  // Validation passed, return true to submit the form
-            }
-        });
+            });
 
-        // Check if form is valid before submitting
-        return form.valid();  // Return true if form is valid
-    }
+            // Check if form is valid before submitting
+            return form.valid(); // Return true if form is valid
+        }
 
 
-    function submitForm(formName) {
-        var form = document.getElementById(formName);
-        
-        if (validateForm(formName)) {
-            var formData = new FormData(form);
-            
-            // Disable submit button to prevent multiple submissions
-            var submitButton = form.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            // submitButton.textContent = 'Submitting...';
-            
-            // Perform AJAX request to submit the form
-            $.ajax({
-                url: 'login-user.php',  // Update with the appropriate server-side script
-                type: 'POST',
-                data: formData,
-                contentType: false, 
-                processData: false,
-                beforeSend: function() {
+        function submitForm(formName) {
+            var form = document.getElementById(formName);
+
+            if (validateForm(formName)) {
+                var formData = new FormData(form);
+
+                // Disable submit button to prevent multiple submissions
+                var submitButton = form.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                // submitButton.textContent = 'Submitting...';
+
+                // Perform AJAX request to submit the form
+                $.ajax({
+                    url: 'login-user.php', // Update with the appropriate server-side script
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
                         console.log("Sending request to user.php...");
                     },
                     success: function(response) {
                         console.log("AJAX request sent successfully.");
                         console.log('Raw Response:', response);
-        
+
                         if (response.status === 'success') {
-                            form.reset(); 
+                            form.reset();
                             window.location.href = response.redirect;
                         } else {
                             alert("Error: " + response.message);
                             form.reset();
                         }
-        
+
                         submitButton.disabled = false;
-                        submitButton.innerHTML = 'Submit'; 
+                        submitButton.innerHTML = 'Submit';
                     },
                     error: function(xhr, status, error) {
-                        console.log('Error response:', xhr.responseText); 
+                        console.log('Error response:', xhr.responseText);
                         alert("AJAX request failed: " + error);
                         submitButton.disabled = false;
                         submitButton.innerHTML = 'Submit';
                     }
-            });
+                });
+            }
+            return false; // Prevent form from submitting normally
         }
-        return false;  // Prevent form from submitting normally
-    }
-
-</script>
+    </script>
     <script>
         window.onload = function() {
             const userRadio = document.getElementById('option1');
             const vendorRadio = document.getElementById('option2');
-            
+
             if (!userRadio.checked) {
                 userRadio.checked = true;
             }
-            
+
             userRadio.addEventListener('change', function() {
                 if (userRadio.checked) {
                     console.log('User selected');
                 }
             });
-            
+
             vendorRadio.addEventListener('change', function() {
                 if (vendorRadio.checked) {
                     console.log('Vendor selected');

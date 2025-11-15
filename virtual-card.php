@@ -3,9 +3,13 @@ session_start();
 
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
-
+include 'functions/authentication.php';
+$auth = new Authentication();
 $common = new Common();
 $industry = $common->getAllIdustry();
+$user = new User();
+
+$result = $user->getAllUsersDetails();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if user is logged in by checking session user_id
@@ -21,33 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Query user data
-    $sql = "SELECT * FROM users WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
-
-    // Required fields
-    $required = ["name", "email", "phone", "address", "password", "image", "adhar", "birthday", "anniversary", "state", "city", "pincode", "representative_name"];
-    $incomplete = false;
-    foreach ($required as $field) {
-        if (empty($user[$field])) {
-            $incomplete = true;
-            break;
-        }
-    }
-
-    if ($incomplete) {
-        // Redirect incomplete user to complete-profile.php
-        header("Location: complete-profile.php");
-        exit();
-    } else {
-        // If profile complete, show a message and keep showing the page below
-        $message = "Your profile is already complete!";
     }
 }
 ?>
@@ -67,10 +44,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
-    rel="stylesheet"
-/>
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+        rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
     <link
@@ -114,16 +90,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="virtual-content">
                     <p>
-                        Unlock more joy and savings—We brings you exclusive privileges at top hotels, restaurants, 
+                        Unlock more joy and savings—We brings you exclusive privileges at top hotels, restaurants,
                         and lifestyle spots, so you never have to choose between fun and smart spending.
                     </p>
                 </div>
                 <form action="" method="post">
                     <div class="cta">
-                        <button>
-                            Apply now
-                            <i class="ri-arrow-right-line"></i>
-                        </button>
+                        <?php
+
+                        if ($auth->Isloggedin() == true) { ?>
+                            <a href="apply-virtual-card.php"> Apply now <i class="ri-arrow-right-line"></i></a>
+
+                        <?php } else if ($auth->Isloggedin() == false) { ?>
+                            <a href="login.php"> Apply now <i class="ri-arrow-right-line"></i></a>
+                        <?php } ?>
                     </div>
                 </form>
                 <div class="virtual-image">
@@ -158,10 +138,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="feature1">
                 <h2>Experience smarter spending with india’s most rewarding <span>discount card</span></h2>
                 <p>
-                    Bachatdaddy discount card brings you effortless 
-                    savings at top waterparks, hotels, restaurants, and more with instant 
-                    discounts, verified partners, easy application 
-                    and customer support always ready, your smart card 
+                    Bachatdaddy discount card brings you effortless
+                    savings at top waterparks, hotels, restaurants, and more with instant
+                    discounts, verified partners, easy application
+                    and customer support always ready, your smart card
                     makes every spend simpler and more rewarding
                 </p>
             </div>
@@ -228,6 +208,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="vendors/circleType/jquery.circleType.js"></script>
     <script src="vendors/circleType/jquery.lettering.min.js"></script>
     <script src="js/bachat-daddy.js"></script>
+    <script>
+        function Needtologin() {
+            alert("You need to login")
+        }
+    </script>
 
 </body>
 

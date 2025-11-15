@@ -1,74 +1,89 @@
 <?php
 
-class Authentication {
+class Authentication
+{
 
 	private $email;
 	private $pass;
 	private $conn;
-	
-	public function userLogin($email,$pass) {
-	
+
+	public function userLogin($email, $pass)
+	{
+
 		$conn = new dbClass();
 		$this->conn = $conn;
 		$this->email = $email;
 		$this->pass = $pass;
-		
+
 		$result = $conn->getData("SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '$pass' ");
 		// var_dump($result);
-		if($result !=''){
+		if ($result != '') {
 			// var_dump($result);
-			
+
 			$_SESSION['USER_NAME'] = $result['name'];
 			$_SESSION['USERS_USER_ID'] = $result['id'];
 			$_SESSION['USER_Type'] = "user";
-			
+			$_SESSION['LOGIN'] = "true";
+
 			$_SESSION['USERS_USER_IP'] = $_SERVER['REMOTE_ADDR'];
-			
-			return true; 
-		
+
+			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public function vendorLogin($email,$pass) {
-	
+	public function Isloggedin() {
+		if(isset($_SESSION['USERS_USER_ID']) && !empty($_SESSION['USERS_USER_ID'])){
+		return true;
+		}
+
+		return false;
+	}
+
+
+
+	public function vendorLogin($email, $pass)
+	{
+
 		$conn = new dbClass();
 		$this->conn = $conn;
 		$this->email = $email;
 		$this->pass = $pass;
-		
+
 		$result = $conn->getData("SELECT * FROM `vendor` WHERE `email` = '$email' AND `password` = '$pass' ");
 		// var_dump($result);
-		if($result !=''){
+		if ($result != '') {
 			// var_dump($result);
-			
+
 			$_SESSION['Vendor_NAME'] = $result['name'];
 			$_SESSION['Vendor_ID'] = $result['id'];
 			$_SESSION['USER_Type'] = "vendor";
 			$_SESSION['Vendor_IP'] = $_SERVER['REMOTE_ADDR'];
-			
-			return true; 
-		
+
+			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public function checkSession() {
-        if (!isset($_SESSION['USERS_USER_ID']) || $_SESSION['USERS_USER_ID'] == '') {
-            header('Location: index.php');
-            exit();
-        }
-    }
-	public function checkVendorSession() {
-        if (!isset($_SESSION['Vendor_ID']) || $_SESSION['Vendor_ID'] == '') {
-            header('Location: login.php');
-            exit();
-        }
-    }
-	
-	public function SignOut() {
+	public function checkSession()
+	{
+		if (!isset($_SESSION['USERS_USER_ID']) || $_SESSION['USERS_USER_ID'] == '') {
+			header('Location: index.php');
+			exit();
+		}
+	}
+	public function checkVendorSession()
+	{
+		if (!isset($_SESSION['Vendor_ID']) || $_SESSION['Vendor_ID'] == '') {
+			header('Location: login.php');
+			exit();
+		}
+	}
+
+	public function SignOut()
+	{
 		unset($_SESSION['USERS_USER']);
 		unset($_SESSION['USERS_USER_ID']);
 
@@ -80,14 +95,14 @@ class Authentication {
 
 class ChangePassword
 {
-    private $db;
+	private $db;
 
-    public function __construct()
-    {
-        $this->db = new dbClass();
-    }
+	public function __construct()
+	{
+		$this->db = new dbClass();
+	}
 
-    public function changePassword($userId, $newPassword)
+	public function changePassword($userId, $newPassword)
 	{
 		$userId = (int) $userId;
 
@@ -119,7 +134,7 @@ class ChangePassword
 			$result = $this->db->getDataWithParams($query, $params);
 
 			if ($result && $result['password'] === $enteredPassword) {
-				return true; 
+				return true;
 			} else {
 				return false;
 			}
