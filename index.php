@@ -448,7 +448,7 @@ $subin = $common->getAllSubIn();
                                     owning one? Click below to unlock a world of opportunities.</p>
                             </div>
                             <div class="about-one__btn-box">
-                                <a href="contact.php" class="about-one__btn thm-btn join-btn">Apply Now</a>
+                                <a href="virtual-card.php" class="about-one__btn thm-btn join-btn">Apply Now</a>
                             </div>
                         </div>
                     </div>

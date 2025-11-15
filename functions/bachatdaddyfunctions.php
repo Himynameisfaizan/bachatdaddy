@@ -82,6 +82,7 @@
     
             return $stmt;
         }
+        
         function getAllUsersDetails()
         {
             $conn = new dbClass();
