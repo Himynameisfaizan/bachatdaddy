@@ -90,10 +90,10 @@ $subin = $common->getAllSubIn();
                         </p>
                     </div>
                     <div class="cta">
-                        <button type="button" onclick="moveSroll()">
+                        <a onclick="moveSroll()">
                             Connect with
                             <i class="ri-arrow-right-line"></i>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </section>

@@ -6,29 +6,10 @@ include 'functions/bachatdaddyfunctions.php';
 include 'functions/authentication.php';
 $auth = new Authentication();
 $common = new Common();
-$industry = $common->getAllIdustry();
 $user = new User();
 
-$result = $user->getAllUsersDetails();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if user is logged in by checking session user_id
-    if (!isset($_SESSION['user_id'])) {
-        // User is not logged in, redirect directly to profile completion
-        header("Location: complete-profile.php");
-        exit();
-    }
-
-    $user_id = $_SESSION['user_id'];
-    // Connect to database (adjust credentials accordingly)
-    $conn = new mysqli("localhost:3307", "root", "", "bachatdaddy_db");
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-}
+$result = $user->getUsersDetails($id);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <div>
+    <div id="main-container-apply">
         <?php include('include/header.php') ?>
 
         <!-- landing page start -->
@@ -98,12 +79,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="cta">
                         <?php
 
-                        if ($auth->Isloggedin() == true) { ?>
-                            <a href="apply-virtual-card.php"> Apply now <i class="ri-arrow-right-line"></i></a>
-
-                        <?php } else if ($auth->Isloggedin() == false) { ?>
+                        if ($auth->Isloggedin() == true) {
+                        ?>
+                            <a href="#" onclick="applyCard()"> Apply now <i class="ri-arrow-right-line"></i></a>
+                        <?php
+                        } else if ($auth->Isloggedin() == false) {
+                        ?>
                             <a href="login.php"> Apply now <i class="ri-arrow-right-line"></i></a>
-                        <?php } ?>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </form>
                 <div class="virtual-image">
@@ -184,6 +169,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </div>
         </section>
+
+        <section class="apply-section" id="card_apply">
+            <div class="apply-container">
+                <i class="ri-close-fill" style="float: right; cursor: pointer" onclick="closeIcon()"></i>
+                <h3>Apply Now! Get Your Discount</h3>
+                <form action="" class="apply-form">
+                    <div class="">
+                        <input type="email" name="" id="" placeholder="Email-Id">
+                    </div>
+                    <div class="">
+                        <input type="text" name="" id="" placeholder="Password">
+                    </div>
+                    <div class="apply-btn">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </section>
         <?php include('include/mobilefooter.php') ?>
         <?php include('include/footer.php') ?>
     </div>
@@ -211,6 +214,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         function Needtologin() {
             alert("You need to login")
+        }
+
+        const applyCard = () => {
+            let card_apply = document.getElementById("card_apply");
+            card_apply.style.visibility = "visible";
+            document.body.style.overflowY = "hidden";
+        }
+        const closeIcon = () => {
+            let card_apply = document.getElementById("card_apply");
+            card_apply.style.visibility = "hidden";
+            document.body.style.overflowY = "auto";
         }
     </script>
 

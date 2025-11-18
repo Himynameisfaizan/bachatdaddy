@@ -23,7 +23,6 @@ class User
     private $agreement;
     private $conndb;
 
-
     function addUsers($uname, $umobile, $uemail, $password)
     {
 
