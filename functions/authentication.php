@@ -11,19 +11,29 @@ class Authentication
 	{
 		$conn = new dbClass();
 
-		$result = $conn->getData("SELECT `email`, `password` FROM `users` WHERE `email` = '" . $email . "'"); // Remove [$email] – not used with this query
+		$email = trim($email);
 
-		// Check result is not empty and is an array with at least one row
-		if (!empty($result) && is_array($result) && isset($result[0])) {
-			$passUser = $result[0];
+		$result = $conn->getData("
+        SELECT id, email, password 
+        FROM users 
+        WHERE email = '" . $email . "'
+        LIMIT 1
+    ");
 
-			// For plain text password comparison:
-			if ($password === $passUser['password']) {
-				return true; // valid user
-			}
+		if (!$result || !isset($result[0])) {
+			return false;
 		}
-		return false; // user not found or password mismatch
+
+		$user = $result[0];
+
+		// If your password is hashed
+		if (password_verify($password, $user['password'])) {
+			return true;
+		}
+
+		return false;
 	}
+
 
 	public function userLogin($email, $pass)
 	{

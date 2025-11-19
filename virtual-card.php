@@ -12,7 +12,8 @@ $industry = $common->getAllIdustry();
 $auth = new Authentication();
 $errorMsg = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
@@ -202,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
                     <div class="">
                         <input type="password" name="password" id="password" placeholder="Password" required>
                     </div>
-                    <button  id="apply-btn" type="submit" name="submit">Submit</button>
+                    <button id="apply-btn" type="submit" name="submit">Submit</button>
                 </form>
             </div>
         </section>
