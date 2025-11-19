@@ -1,18 +1,20 @@
 /*---------------------------------------------------- 
 landing section start 
 ------------------------------------------------------*/
-.virtual-grid-two-part, .vendors-grid-content{
+.virtual-grid-two-part,
+.vendors-grid-content {
   display: flex;
   width: 100%;
   padding: 3rem 4rem 0 4rem;
-  justify-content: center ;
+  justify-content: center;
   text-align: center;
   align-items: center;
   flex-direction: column;
   gap: 2rem;
 }
 
-.virtual-content,.vendors-content{
+.virtual-content,
+.vendors-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,7 +23,7 @@ landing section start
   /* background-color: aqua; */
   width: 74%;
 }
-.cta a{
+.cta a {
   border-width: 0;
   outline: none;
   /* width: 140px;
@@ -36,16 +38,16 @@ landing section start
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
-.cta a:hover{
+.cta a:hover {
   background-color: #f8931f;
 }
-.virtual-content span{
+.virtual-content span {
   background-color: #ee8e21d3;
   padding: 1px;
   border-radius: 5px;
   box-shadow: 0 0 4px 0 #ee8d21a1;
 }
-.virtual-image{
+.virtual-image {
   max-width: 85%;
   width: 100%;
   display: flex;
@@ -56,19 +58,19 @@ landing section start
   position: relative;
   z-index: 2;
 }
-.virtual-image::after{
-    content: "";
-    position: absolute;
-    width: 30%;
-    height: 67%;
-    background-color: #f7b451;
-    z-index: -1;
-    filter: blur(50px);
-    top: 11%;
-    transform: rotate(-77deg);
-    left: 32%;
+.virtual-image::after {
+  content: "";
+  position: absolute;
+  width: 30%;
+  height: 67%;
+  background-color: #f7b451;
+  z-index: -1;
+  filter: blur(50px);
+  top: 11%;
+  transform: rotate(-77deg);
+  left: 32%;
 }
-.virtual-image::before{
+.virtual-image::before {
   content: "Hii! Welcome to Bachatdaddy";
   position: absolute;
   width: 30%;
@@ -87,7 +89,7 @@ landing section start
   align-items: center;
   font-size: 15px;
 }
-.virtual-image> img{
+.virtual-image > img {
   /* float: right; */
   width: auto;
   max-width: 100%;
@@ -95,7 +97,7 @@ landing section start
   object-fit: cover;
   transform: rotateX(29deg) rotateY(0deg) rotate(59deg);
 }
-.client{
+.client {
   background-color: #f1f1f1;
   box-shadow: 0 0 10px 0 #14111131;
   gap: 3px;
@@ -108,24 +110,25 @@ landing section start
   flex-direction: column;
   position: absolute;
 }
-.client.first{
+.client.first {
   top: 10%;
   right: 3%;
 }
-.client.secound{
+.client.secound {
   top: 0%;
   left: 6%;
 }
-.client.third{
+.client.third {
   top: 56%;
   right: 15%;
 }
-.client>img{
+.client > img {
   width: 85px;
   height: 50px;
   object-fit: cover;
 }
-.virtual-content h1, .vendors-content h1{
+.virtual-content h1,
+.vendors-content h1 {
   font-family: var(--bachat-daddy-font);
   font-weight: 500;
   font-size: 70px;
@@ -134,11 +137,11 @@ landing section start
   letter-spacing: -1px;
 }
 
-.virtual-content p{
+.virtual-content p {
   width: 80%;
   line-height: 20px;
 }
-.btn-to-connect button{
+.btn-to-connect button {
   border: none;
   border-radius: 4px;
   color: #fff !important;
@@ -151,16 +154,16 @@ landing section start
   z-index: 1;
 }
 
-.btn-to-connect button:hover{
+.btn-to-connect button:hover {
   color: #fff;
-  background-color: #0f0c0c !important;    
+  background-color: #0f0c0c !important;
 }
 
 /*---------------------------------------------------- 
 landing section end 
 ------------------------------------------------------*/
 
-.feature-card{
+.feature-card {
   width: 100%;
   /* background-color: red; */
   display: flex;
@@ -170,40 +173,39 @@ landing section end
   background-color: #f1f1f1;
 }
 
-
-.feature-card .feature1{
+.feature-card .feature1 {
   width: 40%;
   /* background-color: blue; */
   display: flex;
   flex-direction: column;
- }
+}
 
- .feature1 h2{
+.feature1 h2 {
   color: #000000;
   font-size: 35px;
   font-weight: bolder;
   line-height: 35px;
- }
-.feature1 h2 span{
-  background-image: linear-gradient(to right,#383838 , 10%,#ee8d21);
+}
+.feature1 h2 span {
+  background-image: linear-gradient(to right, #383838, 10%, #ee8d21);
   color: transparent;
   background-clip: text;
 }
- .feature1 p{
+.feature1 p {
   color: #353535;
   font-size: 16px;
   line-height: 20px;
   margin-top: 25px;
 }
 
-.feature-card .feature2{
+.feature-card .feature2 {
   width: 50%;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
   justify-content: start;
 }
-.feature2 .card-detail1{
+.feature2 .card-detail1 {
   background-color: #fff;
   width: 280px;
   /* height: 150px; */
@@ -214,45 +216,49 @@ landing section end
   flex-direction: column;
   gap: 10px;
 }
-.feature2 .card-detail1:nth-child(1){
+.feature2 .card-detail1:nth-child(1) {
   box-shadow: 0 0 10px 2px #ee8d21b0;
   transform: scale(1.07);
 }
-.feature2 .card-detail1:hover{
+.feature2 .card-detail1:hover {
   box-shadow: 0 0 10px 2px #ee8d21b0;
   transform: scale(1.07);
 }
 
- .feature2 .card-detail1 .icon{
+.feature2 .card-detail1 .icon {
   display: flex;
   justify-content: start;
   align-items: center;
- }
+}
 
- .feature2 .card-detail1 .icon h2{
+.feature2 .card-detail1 .icon h2 {
   font-size: 16px;
   margin-left: 15px;
- }
+}
 
- .feature2 .card-detail1 .desc{
+.feature2 .card-detail1 .desc {
   display: flex;
   align-items: center;
 }
 
-.vendorshome-bg{
-  background: linear-gradient(0deg,rgba(238, 141, 33, 0.2) 0%, rgb(255, 255, 255) 100%);
+.vendorshome-bg {
+  background: linear-gradient(
+    0deg,
+    rgba(238, 141, 33, 0.2) 0%,
+    rgb(255, 255, 255) 100%
+  );
 }
-.vendorshome-bg hr{
+.vendorshome-bg hr {
   margin: 2rem 0;
   color: #141111;
 }
-.feature2 .card-detail1 .desc h4{
+.feature2 .card-detail1 .desc h4 {
   font-size: 14px;
   font-weight: 400;
 }
 
-.vendors-content h1 .highlight{
-  background-image: linear-gradient(to right,#c7c7c7 , 64% ,#eb891a);
+.vendors-content h1 .highlight {
+  background-image: linear-gradient(to right, #c7c7c7, 64%, #eb891a);
   color: transparent;
   background-clip: text;
   text-shadow: 0 0 1px #f08b18b0;
@@ -263,57 +269,57 @@ feature card section end
 ------------------------------------------------------*/
 
 /* vendors benefits start */
-.vendors-benefits-section{
+.vendors-benefits-section {
   padding: 30px 0 0px 0;
   margin-top: 50px;
   position: relative;
   margin-bottom: 20px;
 }
-.vendors-benefits-section h2{
+.vendors-benefits-section h2 {
   text-align: center;
   color: #141111;
 }
-.vendors-benefits-container{
+.vendors-benefits-container {
   border-radius: 10px;
   margin-top: 24px !important;
-  display: grid; 
+  display: grid;
   gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
   grid-template-columns: repeat(3, 1fr);
 }
-.vendors-benefits-container .vendors-benefits-content{
+.vendors-benefits-container .vendors-benefits-content {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow:inset 5px 0px 0px  #ee8d21;
+  box-shadow: inset 5px 0px 0px #ee8d21;
   display: flex;
   flex-direction: column;
   gap: 14px;
   border: 1px solid #ee8d21b0;
   transition: 0.4s all ease-in-out;
 }
-.vendors-benefits-container .vendors-benefits-content:hover{
+.vendors-benefits-container .vendors-benefits-content:hover {
   box-shadow: inset 0 0 0 0px #ee8d21;
   transform: translateX(-5px);
 }
 .vendors-benefits-container .vendors-benefits-content h5,
-.our-work-content h5{
+.our-work-content h5 {
   font-size: 20px;
   color: #141111;
 }
 .vendors-benefits-container .vendors-benefits-content p,
 .our-work-content p,
-.vendors-benefits-content ul li{
+.vendors-benefits-content ul li {
   font-size: 16px;
 }
-.vendors-benefits-container .vendors-benefits-content img{
+.vendors-benefits-container .vendors-benefits-content img {
   width: 200px;
 }
 /* vendors benefits end */
 
 /* our work start */
-.our-work-container{
+.our-work-container {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
@@ -332,18 +338,18 @@ feature card section end
   border: 1px solid #ee8d21;
   transition: 0.4s all ease-in-out;
 }
-.our-work-content:hover{
+.our-work-content:hover {
   transform: scale(1.02);
 }
 /* our work end */
 
 /* accordian start */
-.accordian-container{
+.accordian-container {
   max-width: 800px;
   margin: 0 auto;
   margin-top: 24px;
 }
-.accordian-content{
+.accordian-content {
   border-radius: 10px;
   margin-top: 15px;
   max-height: 500px;
@@ -351,7 +357,7 @@ feature card section end
   background-color: #fffbfb;
   border: 1px solid #ee8d21;
 }
-.accordian-content .question{
+.accordian-content .question {
   background-color: #fffbfb;
   padding: 10px 20px;
   cursor: pointer;
@@ -376,7 +382,7 @@ feature card section end
 /* accordian end */
 
 /* location start */
-.location-container{
+.location-container {
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -384,10 +390,10 @@ feature card section end
   margin-bottom: 100px;
   gap: 20px;
 }
-.map{
+.map {
   flex-basis: 50%;
 }
-.contact-information{
+.contact-information {
   flex-basis: 50%;
   /* box-shadow: 0 0 2px 0 #ee8d21; */
   display: flex;
@@ -395,29 +401,29 @@ feature card section end
   justify-content: space-between;
   gap: 20px;
 }
-.contact-information p{
+.contact-information p {
   padding: 20px;
   box-shadow: 0 0 4px 0 #1411113b;
   border-radius: 10px;
   font-size: 16px;
 }
-.contact-information p a{
+.contact-information p a {
   color: #141111;
   transition: all 0.4s ease-in-out;
 }
-.contact-information p a:hover{
+.contact-information p a:hover {
   color: #ee8d21;
 }
 /* location end */
 
-/* apply-virtual-card start */
-body{
+/* virtual-card start */
+body {
   overflow-y: auto;
 }
-.main-container-apply{
+.main-container-apply {
   position: relative;
 }
-.apply-section{
+.apply-section {
   background-color: #f5f5f5;
   width: 100%;
   height: 100%;
@@ -440,7 +446,7 @@ body{
   opacity: 1;
   pointer-events: auto;
 }
-.apply-container{
+.apply-container {
   background-color: rgb(255, 255, 255);
   padding: 30px 32px;
   border-radius: 10px;
@@ -448,13 +454,13 @@ body{
   border: 1px solid #cfcfcf;
   box-shadow: 0 6px 10px 0 #17171736;
 }
-.apply-container .apply-form{
+.apply-container .apply-form {
   margin-top: 30px;
   display: flex;
   gap: 30px;
   flex-direction: column;
 }
-.apply-container .apply-form input{
+.apply-container .apply-form input {
   width: 100%;
   border-radius: 8px;
   outline: none;
@@ -463,12 +469,12 @@ body{
   border: 1px solid #cfcfcf;
   background-color: white;
 }
-.apply-container .apply-form input::placeholder{
+.apply-container .apply-form input::placeholder {
   font-size: 14px;
   color: #555555;
   font-weight: 500;
 }
-button#apply-btn{
+button#apply-btn {
   border-width: 0;
   outline: none;
   padding: 6px 30px;
@@ -477,64 +483,148 @@ button#apply-btn{
   color: white;
   border-radius: 20px;
   text-shadow: 0px 4px 8px #fff5f5ff;
-  box-shadow: inset 0 2px 0px #ffb35d,
-   inset 1px 0px 0px #ffb35d,
-   inset -1px 0px 0px #ffb35d,
-   inset 0px -2px 0px #ffb35d;
-   text-align: center;
+  box-shadow: inset 0 2px 0px #ffb35d, inset 1px 0px 0px #ffb35d,
+    inset -1px 0px 0px #ffb35d, inset 0px -2px 0px #ffb35d;
+  text-align: center;
 }
+/*virtual-card end */
+
+/* apply-virtual-card start */
+.main-detail-container {
+  padding: 50px;
+  background-color: #f5f5f5;
+}
+.complete-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+
+  /* padding: 30px 30px; */
+}
+.basic-detail-container {
+  /* background-color: orchid; */
+  flex-basis: 30%;
+  padding: 20px 20px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.096);
+  display: flex;
+  gap: 14px;
+  flex-direction: column;
+  font-weight: 500;
+  background-color: white;
+  border-radius: 10px;
+  height: fit-content;
+}
+.basic-detail-container > div span:nth-child(1) {
+  background-color: #ee8d21;
+  color: #f5f5f5;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 50px;
+}
+.other-detail-container {
+  /* background-color: aquamarine; */
+  flex-basis: auto;
+  width: 100%;
+}
+.other-detail-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.other-detail-container form > div {
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.096);
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px 20px;
+}
+.other-detail-container form > div:nth-child(1) {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.other-detail-container form > div:nth-child(2) {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+}
+.other-detail-container form input{
+  outline: none;
+  border-width: 0;
+  width: 100%;
+}
+
+.other-detail-container form .inputIcon {
+  width: 100%;
+  outline: none;
+  border-width: 0px;
+  background-color: white;
+  display: flex;
+  border: 1px solid #c8c8c8;
+  border-radius: 6px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4px 8px 4px 4px;
+  gap: 5px;
+}
+.other-detail-container form .inputIcon i{
+  border-right: 1px solid #c8c8c8;
+  padding: 0 4px;
+  font-size: 14px;
+}
+.other-detail-container form .user-field label {
+  font-size: 14px;
+}
+
 /* apply-virtual-card end */
 
-
-
-
-@media (max-width: 1205px) and (min-width: 766px){
-  .feature2 .card-detail1{
+@media (max-width: 1205px) and (min-width: 766px) {
+  .feature2 .card-detail1 {
     width: 100%;
   }
   .virtual-content h1,
-  .vendors-content h1{
+  .vendors-content h1 {
     font-size: 55px;
     line-height: 55px;
   }
   .virtual-content p,
-  .vendors-content p{
+  .vendors-content p {
     font-size: 16px;
     line-height: 18px;
   }
-  .vendors-benefits-section{
+  .vendors-benefits-section {
     padding: 20px 16px 0px 16px;
     margin-top: 30px;
     margin-bottom: 10px;
   }
 }
-@media (max-width: 767px){
+@media (max-width: 767px) {
   .virtual-grid-two-part,
-  .vendors-grid-content{
+  .vendors-grid-content {
     padding: 2.5rem 2rem 0 2rem;
     gap: 1rem;
   }
-  .virtual-content{
+  .virtual-content {
     width: 100%;
   }
   .virtual-content h1,
-  .vendors-content h1{
+  .vendors-content h1 {
     font-size: 40px;
     line-height: 40px;
   }
   .virtual-content p,
-  .vendors-content p{
+  .vendors-content p {
     font-size: 14px;
     line-height: 16px;
   }
-  .cta a{
+  .cta a {
     font-size: 14px;
   }
-  .virtual-image> img{
+  .virtual-image > img {
     height: 80%;
     max-width: 80%;
   }
-  .virtual-image::before{
+  .virtual-image::before {
     width: 56%;
     height: 12%;
     box-shadow: 0px 0px 2px 0px rgb(255, 255, 255);
@@ -542,95 +632,93 @@ button#apply-btn{
     top: 32%;
     font-size: 14px;
   }
-  .client{
+  .client {
     padding: 8px 10px;
     font-size: 12px;
   }
-  .client h6{
+  .client h6 {
     font-size: 14px;
   }
-  .client.secound{
+  .client.secound {
     top: 10%;
     left: 3%;
   }
-  .client.first{
+  .client.first {
     display: none;
   }
-  .client.third{
+  .client.third {
     top: 61%;
     right: 2%;
   }
-  .feature-card{
+  .feature-card {
     flex-direction: column;
     padding: 30px 16px;
-    gap: 16px
+    gap: 16px;
   }
   .feature-card .feature1,
-  .feature-card .feature2{
+  .feature-card .feature2 {
     width: 100%;
   }
-  .feature-card .feature2{
-    gap: 16px
+  .feature-card .feature2 {
+    gap: 16px;
   }
-  .feature2 .card-detail1{
+  .feature2 .card-detail1 {
     width: 100%;
   }
-  .feature2 .card-detail1:hover{
+  .feature2 .card-detail1:hover {
     transform: scale(1.01);
   }
-  .feature2 .card-detail1:nth-child(1){
+  .feature2 .card-detail1:nth-child(1) {
     transform: scale(1.01);
   }
-  .feature1 h2{
+  .feature1 h2 {
     font-size: 20px;
     line-height: 20px;
   }
-  .feature1 p{
+  .feature1 p {
     margin-top: 14px;
     font-size: 14px;
   }
-  .vendors-benefits-section{
+  .vendors-benefits-section {
     padding: 10px 14px 0px 14px;
     margin-top: 20px;
     margin-bottom: 10px;
   }
-  .vendors-benefits-section h2{
+  .vendors-benefits-section h2 {
     font-size: 20px;
   }
   .vendors-benefits-container,
-  .our-work-container{
+  .our-work-container {
     grid-template-columns: repeat(2, 1fr);
     margin-top: 18px !important;
     gap: 10px;
   }
   .vendors-benefits-content,
-  .our-work-content{
+  .our-work-content {
     padding: 10px;
   }
   .vendors-benefits-container .vendors-benefits-content h5,
-  .our-work-content h5{
+  .our-work-content h5 {
     font-size: 16px;
   }
   .vendors-benefits-container .vendors-benefits-content p,
   .vendors-benefits-content ul li,
-  .our-work-content p{
+  .our-work-content p {
     font-size: 14px;
   }
-  .accordian-content .question{
+  .accordian-content .question {
     font-size: 14px;
     padding: 8px 14px;
   }
-  .accordian-content .answer{
+  .accordian-content .answer {
     font-size: 14px;
   }
-  .location-container{
+  .location-container {
     flex-direction: column;
     gap: 10px;
   }
-  .contact-information p{
+  .contact-information p {
     padding: 10px;
     font-size: 14px;
   }
 }
-
-

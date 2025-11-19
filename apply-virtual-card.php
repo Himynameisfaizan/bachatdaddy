@@ -1,6 +1,14 @@
 <?php
+session_start();
 
+include 'config/config.php';
+include 'functions/bachatdaddyfunctions.php';
+include 'functions/authentication.php';
 
+$dbclass = new dbClass();
+$common = new Common();
+
+$industry = $common->getAllIdustry();
 
 ?>
 
@@ -53,7 +61,105 @@
 </head>
 
 <body>
-    <h1>apply virtual card</h1>
+    <?php include('include/header.php') ?>
+
+    <section class="main-detail-container">
+        <div class="complete-detail-container">
+            <div class="basic-detail-container">
+                <div class="">
+                    <span>1</span>
+                    <span>Basic Detail</span>
+                </div>
+                <div class="">
+                    <span>2</span>
+                    <span>Complete Detail</span>
+                </div>
+            </div>
+            <div class="other-detail-container">
+                <form action="">
+                    <div class="">
+                        <div class="user-field">
+                            <label for="fullName">Full Name<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-user-3-line"></i>
+                                <input type="text" name="" id="fullName" required>
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="emailId">Email-id<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-mail-line"></i>
+                                <input type="email" name="" id="emailId" required>
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="contactNo">Contact no.<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-phone-line"></i>
+                                <input type="number" name="" id="contactNo" required>
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="contactNo">DOB<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-cake-2-line"></i>
+                                <input type="date" name="" id="contactNo" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="user-field">
+                            <label for="adhar">Aadhar no.</label>
+                            <div class="inputIcon">
+                                <i class="ri-id-card-line"></i>
+                                <input type="text" name="" id="adhar" placeholder="">
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="address">Current Address<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-map-pin-user-line"></i>
+                                <input type="text" name="" id="address" required placeholder="">
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="pincode">Pincode<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-map-pin-3-line"></i>
+                                <input type="number" name="" id="pincode" required placeholder="">
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="state">State<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-signal-tower-line"></i>
+                                <input type="text" name="" id="state" required placeholder="">
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="state">City<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-building-line"></i>
+                                <input type="text" name="" id="city" required placeholder="">
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="representative">Representative Name<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-shield-user-line"></i>
+                                <input type="text" name="" id="representative" required placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="apply-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <?php require('include/footer.php'); ?>
+    <?php require('include/mobilefooter.php') ?>
 </body>
 
 </html>
