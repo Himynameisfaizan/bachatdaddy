@@ -4,11 +4,29 @@ session_start();
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
 include 'functions/authentication.php';
-$auth = new Authentication();
-$common = new Common();
-$user = new User();
 
-$result = $user->getUsersDetails($id);
+$dbclass = new dbClass();
+$common = new Common();
+
+$industry = $common->getAllIdustry();
+$auth = new Authentication();
+$errorMsg = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
+
+    $userFound = $auth->validateUserByEmailPassword($email, $password);
+
+    if ($userFound) {
+        // User authenticated, you can set session or redirect
+        $_SESSION['user_email'] = $email;
+        header("Location: apply-virtual-card.php");
+        exit;
+    } else {
+        $errorMsg = "Invalid email or password.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -174,21 +192,22 @@ $result = $user->getUsersDetails($id);
             <div class="apply-container">
                 <i class="ri-close-fill" style="float: right; cursor: pointer" onclick="closeIcon()"></i>
                 <h3>Apply Now! Get Your Discount</h3>
-                <form action="" class="apply-form">
+                <?php if (!empty($errorMsg)) : ?>
+                    <div style="color: red; margin-bottom: 10px;"><?= htmlspecialchars($errorMsg) ?></div>
+                <?php endif; ?>
+                <form action="" method="POST" class="apply-form">
                     <div class="">
-                        <input type="email" name="" id="" placeholder="Email-Id">
+                        <input type="email" name="email" id="email" placeholder="Email-Id" required>
                     </div>
                     <div class="">
-                        <input type="text" name="" id="" placeholder="Password">
+                        <input type="password" name="password" id="password" placeholder="Password" required>
                     </div>
-                    <div class="apply-btn">
-                        <button type="submit">Submit</button>
-                    </div>
+                    <button  id="apply-btn" type="submit" name="submit">Submit</button>
                 </form>
             </div>
         </section>
-        <?php include('include/mobilefooter.php') ?>
-        <?php include('include/footer.php') ?>
+        <?php require('include/footer.php'); ?>
+        <?php require('include/mobilefooter.php') ?>
     </div>
 
     <script src="vendors/jquery/jquery-3.6.0.min.js"></script>
@@ -218,12 +237,12 @@ $result = $user->getUsersDetails($id);
 
         const applyCard = () => {
             let card_apply = document.getElementById("card_apply");
-            card_apply.style.visibility = "visible";
             document.body.style.overflowY = "hidden";
+            card_apply.classList.add("visible");
         }
         const closeIcon = () => {
             let card_apply = document.getElementById("card_apply");
-            card_apply.style.visibility = "hidden";
+            card_apply.classList.remove("visible");
             document.body.style.overflowY = "auto";
         }
     </script>

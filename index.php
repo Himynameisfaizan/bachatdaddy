@@ -8,6 +8,8 @@ include 'functions/bachatdaddyfunctions.php';
 $common = new Common();
 $industry = $common->getAllIdustry();
 $subin = $common->getAllSubIn();
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

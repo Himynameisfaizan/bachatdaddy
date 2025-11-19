@@ -7,6 +7,24 @@ class Authentication
 	private $pass;
 	private $conn;
 
+	public function validateUserByEmailPassword($email, $password)
+	{
+		$conn = new dbClass();
+
+		$result = $conn->getData("SELECT `email`, `password` FROM `users` WHERE `email` = '" . $email . "'"); // Remove [$email] – not used with this query
+
+		// Check result is not empty and is an array with at least one row
+		if (!empty($result) && is_array($result) && isset($result[0])) {
+			$passUser = $result[0];
+
+			// For plain text password comparison:
+			if ($password === $passUser['password']) {
+				return true; // valid user
+			}
+		}
+		return false; // user not found or password mismatch
+	}
+
 	public function userLogin($email, $pass)
 	{
 
@@ -33,9 +51,10 @@ class Authentication
 		}
 	}
 
-	public function Isloggedin() {
-		if(isset($_SESSION['USERS_USER_ID']) && !empty($_SESSION['USERS_USER_ID'])){
-		return true;
+	public function Isloggedin()
+	{
+		if (isset($_SESSION['USERS_USER_ID']) && !empty($_SESSION['USERS_USER_ID'])) {
+			return true;
 		}
 
 		return false;

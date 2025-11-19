@@ -53,22 +53,7 @@
 </head>
 
 <body>
-    <section class="apply-section">
-        <div class="apply-container">
-            <h3>Apply Now! Get Your Discount</h3>
-            <form action="" class="apply-form">
-                <div class="">
-                    <input type="email" name="" id="" placeholder="Email-Id">
-                </div>
-                <div class="">
-                    <input type="number" name="" id="" placeholder="Phone number">
-                </div>
-                <div class="apply-btn">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
-    </section>
+    <h1>apply virtual card</h1>
 </body>
 
 </html>
