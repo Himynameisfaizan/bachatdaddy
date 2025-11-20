@@ -163,7 +163,7 @@ $auth->checkSession();
                                             <div class="form-group">
                                                 <label for="state">State</label>
                                                 <select class="form-control" name="state" id="state">
-                                                    <option value="<?php echo $userdetail['state']; ?>" selected><?php echo $userdetail['state']; ?></option>
+                                                    <option value="<?php echo $userdetail['state']; ?>" selected>   </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -193,7 +193,6 @@ $auth->checkSession();
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -426,7 +425,7 @@ $auth->checkSession();
                 var formData = new FormData(form);
 
                 // Debugging: Log FormData content to check what is being sent
-                console.log("Form Data:");
+                // console.log("Form Data:");
                 for (var [key, value] of formData.entries()) {
                     console.log(key + ": " + value);
                 }
@@ -439,11 +438,11 @@ $auth->checkSession();
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
-                        console.log("Sending request to user-com-profile.php...");
+                        // console.log("Sending request to user-com-profile.php...");
                     },
                     success: function(response) {
-                        console.log("AJAX request sent successfully.");
-                        console.log('Raw Response:', response);
+                        // console.log("AJAX request sent successfully.");
+                        // console.log('Raw Response:', response);
 
                         if (response.status === 'success') {
                             form.reset(); // Reset form if successful
@@ -457,7 +456,7 @@ $auth->checkSession();
                         submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
                     },
                     error: function(xhr, status, error) {
-                        console.log('Error response:', xhr.responseText);
+                        // console.log('Error response:', xhr.responseText);
                         alert("AJAX request failed: " + error);
                         submitButton.disabled = false; // Re-enable the submit button
                         submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'

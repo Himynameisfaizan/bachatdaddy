@@ -7,7 +7,9 @@ include 'functions/authentication.php';
 
 $dbclass = new dbClass();
 $common = new Common();
+$user = new User();
 
+$userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
 $industry = $common->getAllIdustry();
 
 ?>
@@ -58,6 +60,14 @@ $industry = $common->getAllIdustry();
     <link rel="stylesheet" href="css/bachat-daddy.css">
     <link rel="stylesheet" href="css/virtual-card-vendors.css">
     <link rel="stylesheet" href="css/bachat-daddy-responsive.css">
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery Validation Plugin -->
+    <script src="https://cdn.rawgit.com/jzaefferer/jquery-validation/1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="js/bachat-daddy.js"></script>
+
 </head>
 
 <body>
@@ -80,34 +90,34 @@ $industry = $common->getAllIdustry();
                 </a>
             </div>
             <div class="other-detail-container" id="otherDetail">
-                <form action="">
+                <form action="" id="profileForm"  method="post" onsubmit="return submitForm(event, 'profileForm');">
                     <div class="">
-                        <div class="user-field" >
+                        <div class="user-field">
                             <label for="fullName">Full Name<span>*</span></label>
                             <div class="inputIcon" tabindex="0">
                                 <i class="ri-user-3-line"></i>
-                                <input type="text" name="" id="fullName" required>
+                                <input type="text" name="name" value="<?= $userdetail['name']; ?>" id="name" required>
                             </div>
                         </div>
                         <div class="user-field">
                             <label for="emailId">Email-id<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-mail-line"></i>
-                                <input type="email" name="" id="emailId" required>
+                                <input type="email" value="<?= $userdetail['email']; ?>" name="email" id="email" required>
                             </div>
                         </div>
                         <div class="user-field">
                             <label for="contactNo">Contact no.<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-phone-line"></i>
-                                <input type="number" name="" id="contactNo" required>
+                                <input type="number" value="<?= $userdetail['phone']; ?>" name="phone" id="phone" required>
                             </div>
                         </div>
                         <div class="user-field">
                             <label for="contactNo">DOB<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-cake-2-line"></i>
-                                <input type="date" name="" id="contactNo" required>
+                                <input type="date" value="<?= $userdetail['birthday'] ?? ''; ?>" name="birthday" id="birthday" required>
                             </div>
                         </div>
                     </div>
@@ -117,46 +127,67 @@ $industry = $common->getAllIdustry();
                             <label for="adhar">Aadhar no.</label>
                             <div class="inputIcon">
                                 <i class="ri-id-card-line"></i>
-                                <input type="text" name="" id="adhar" placeholder="">
+                                <input type="text" value="<?= $userdetail['adhar'] ?? ''; ?>" name="adhar_no" id="adhar_no" placeholder="">
                             </div>
                         </div>
                         <div class="user-field">
                             <label for="address">Current Address<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-map-pin-user-line"></i>
-                                <input type="text" name="" id="address" required placeholder="">
+                                <textarea type="text" value="" name="address" id="address" required placeholder=""><?= $userdetail['address'] ?? ''; ?></textarea>
                             </div>
                         </div>
                         <div class="user-field">
                             <label for="pincode">Pincode<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-map-pin-3-line"></i>
-                                <input type="number" name="" id="pincode" required placeholder="">
+                                <input type="number" value="<?= $userdetail['pincode'] ?? ''; ?>" name="pincode" id="pincode" required placeholder="">
                             </div>
                         </div>
                         <div class="user-field">
                             <label for="state">State<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-signal-tower-line"></i>
-                                <input type="text" name="" id="state" required placeholder="">
+                                <select class="" name="state" id="state">
+                                    <option value="<?php echo $userdetail['state']; ?>" selected>
+                                        <?php echo $userdetail['state']; ?>
+                                    </option>
+                                </select>
+                                <!-- <input type="text" name="" id="state" required placeholder=""> -->
                             </div>
                         </div>
                         <div class="user-field">
                             <label for="state">City<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-building-line"></i>
-                                <input type="text" name="" id="city" required placeholder="">
+                                <input type="text" value="<?= $userdetail['city'] ?? ''; ?>" name="city" id="city" required placeholder="">
                             </div>
                         </div>
                         <div class="user-field">
                             <label for="representative">Representative Name<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-shield-user-line"></i>
-                                <input type="text" name="" id="representative" required placeholder="">
+                                <input type="text" name="representative_name" value="<?= $userdetail['representative_name'] ?? ''; ?>" id="representative_name" required placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="user-field">
+                            <label for="representative">Upload Image</label>
+                            <div class="inputIcon">
+                                <i class="ri-image-ai-line"></i>
+                                <input type="file" name="image" id="image" type="file" accept="image/*">
+                            </div>
+                        </div>
+                        <div class="user-field">
+                            <label for="contactNo">Anniversary</label>
+                            <div class="inputIcon">
+                                <i class="ri-diamond-ring-line"></i>
+                                <input type="date" value="<?= $userdetail['anniversary'] ?? ''; ?>" name="anniversary" id="anniversary">
                             </div>
                         </div>
                     </div>
-                    <button id="apply-btn">Submit</button>
+                    <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
+                    <button name="submit" type="submit" id="submitButton">Submit</button>
                 </form>
             </div>
         </div>
@@ -164,6 +195,201 @@ $industry = $common->getAllIdustry();
 
     <?php require('include/footer.php'); ?>
     <?php require('include/mobilefooter.php') ?>
+<script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendors/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="vendors/jquery-ui/jquery-ui.js"></script>
+
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="vendors/swiper/swiper.min.js"></script>
+    <script src="vendors/jquery-appear/jquery.appear.min.js"></script>
+    <script src="vendors/jquery-magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js"></script>
+    <script src="vendors/wow/wow.js"></script>
+    <script src="vendors/jarallax/jarallax.min.js"></script>
+
+    <script src="vendors/odometer/odometer.min.js"></script>
+    <script src="vendors/wnumb/wNumb.min.js"></script>
+    <script src="vendors/circleType/jquery.lettering.min.js"></script>
+    <script src="vendors/circleType/jquery.circleType.js"></script>
+    <script src="vendors/jquery-circle-progress/jquery.circle-progress.min.js"></script>
+
+    <script src="vendors/isotope/isotope.js"></script>
+    <script src="vendors/timepicker/timePicker.js"></script>
+    <script src="js/state.js"></script>
+
+
+
+    <script>
+        // Function to validate the form
+        function validateForm(formName) {
+            var form = $('#' + formName);
+
+            // Initialize jQuery Validation
+            form.validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    phone: {
+                        required: true,
+                        // phoneUS: true 
+                    },
+                    birthday: {
+                        required: true,
+                        date: true
+                    },
+                    adhar_no: {
+                        required: false,
+                        digits: true,
+                        minlength: 12,
+                        maxlength: 12
+                    },
+                    state: {
+                        required: true,
+                        notEmptyOrWhitespace: true
+                    },
+                    city: {
+                        required: true,
+                        minlength: 2
+                    },
+                    pincode: {
+                        required: true,
+                        digits: true,
+                        minlength: 6,
+                        maxlength: 6
+                    },
+                    address: {
+                        required: true,
+                        minlength: 10
+                    },
+                    representative_name: {
+                        required: true,
+                        minlength: 3
+                    }
+                },
+                messages: {
+                    name: {
+                        required: "Please enter your full name",
+                        minlength: "Your name must be at least 3 characters long"
+                    },
+                    email: {
+                        required: "Please enter your email address",
+                        email: "Please enter a valid email address"
+                    },
+                    phone: {
+                        required: "Please enter your phone number",
+                        phoneUS: "Please enter a valid phone number" // Modify for international format if needed
+                    },
+                    birthday: {
+                        required: "Please select your birthday",
+                        date: "Please enter a valid date"
+                    },
+                    adhar_no: {
+                        required: "Please enter your Aadhar Number",
+                        digits: "Please enter a valid Aadhar Number",
+                        minlength: "Aadhar Number must be 12 digits long",
+                        maxlength: "Aadhar Number must be 12 digits long"
+                    },
+                    state: {
+                        required: "Please enter your state",
+                        notEmptyOrWhitespace: "Please Select a State"
+                    },
+                    city: {
+                        required: "Please enter your city",
+                        minlength: "City must be at least 2 characters long"
+                    },
+                    pincode: {
+                        required: "Please enter your pincode",
+                        digits: "Please enter a valid pincode",
+                        minlength: "Pincode must be 6 digits long",
+                        maxlength: "Pincode must be 6 digits long"
+                    },
+                    address: {
+                        required: "Please enter your address",
+                        minlength: "Address must be at least 10 characters long"
+                    },
+                    representative_name: {
+                        required: "Please enter the representative's name",
+                        minlength: "Representative's name must be at least 3 characters long"
+                    }
+                },
+                submitHandler: function() {
+                    return true; // Validation passed, return true to submit the form
+                }
+            });
+            $.validator.addMethod("notEmptyOrWhitespace", function(value, element) {
+                return value.trim().length > 0; // Returns true if the trimmed value has a length greater than 0
+            });
+
+            // Check if form is valid before submitting
+            return form.valid(); // Return true if form is valid
+        }
+
+        // Function to handle the form submission
+        function submitForm(event, formName) {
+            event.preventDefault(); // Prevent default form submission
+
+            var form = document.getElementById(formName);
+            var submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true; // Disable the submit button to prevent multiple submissions
+            submitButton.innerHTML = 'Submitting...';
+
+            if (validateForm(formName)) {
+                var formData = new FormData(form);
+
+                // Debugging: Log FormData content to check what is being sent
+                // console.log("Form Data:");
+                for (var [key, value] of formData.entries()) {
+                    console.log(key + ": " + value);
+                }
+
+                // Perform AJAX request to submit the form
+                $.ajax({
+                    url: 'user-com-profile.php', // The AJAX request path remains unchanged
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        // console.log("Sending request to user-com-profile.php...");
+                    },
+                    success: function(response) {
+                        // console.log("AJAX request sent successfully.");
+                        // console.log('Raw Response:', response);
+
+                        if (response.status === 'success') {
+                            form.reset(); // Reset form if successful
+                            window.location.href = response.redirect; // Redirect to the new page
+                        } else {
+                            alert("Error: " + response.message); // Alert the error message
+                            form.reset(); // Reset form if there is an error
+                        }
+
+                        submitButton.disabled = false; // Re-enable the submit button
+                        submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+                    },
+                    error: function(xhr, status, error) {
+                        // console.log('Error response:', xhr.responseText);
+                        alert("AJAX request failed: " + error);
+                        submitButton.disabled = false; // Re-enable the submit button
+                        submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+                    }
+                });
+            } else {
+                submitButton.disabled = false; // Re-enable the submit button if validation fails
+                submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+            }
+
+            return false;
+        }
+    </script>
+
+
 </body>
 
 </html>
