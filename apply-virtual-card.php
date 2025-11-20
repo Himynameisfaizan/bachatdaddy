@@ -65,22 +65,26 @@ $industry = $common->getAllIdustry();
 
     <section class="main-detail-container">
         <div class="complete-detail-container">
-            <div class="basic-detail-container">
-                <div class="">
-                    <span>1</span>
-                    <span>Basic Detail</span>
-                </div>
-                <div class="">
-                    <span>2</span>
-                    <span>Complete Detail</span>
-                </div>
+            <div class="basic-detail-container" id="basicDetail">
+                <a href="#basicDetail">
+                    <div class="">
+                        <span><i class="ri-list-indefinite"></i></span>
+                        <span>Basic Detail</span>
+                    </div>
+                </a>
+                <a href="#otherDetail">
+                    <div class="">
+                        <span><i class="ri-organization-chart"></i></span>
+                        <span>Complete Detail</span>
+                    </div>
+                </a>
             </div>
-            <div class="other-detail-container">
+            <div class="other-detail-container" id="otherDetail">
                 <form action="">
                     <div class="">
-                        <div class="user-field">
+                        <div class="user-field" >
                             <label for="fullName">Full Name<span>*</span></label>
-                            <div class="inputIcon">
+                            <div class="inputIcon" tabindex="0">
                                 <i class="ri-user-3-line"></i>
                                 <input type="text" name="" id="fullName" required>
                             </div>

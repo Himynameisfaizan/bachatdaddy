@@ -505,7 +505,7 @@ button#apply-btn {
 .basic-detail-container {
   /* background-color: orchid; */
   flex-basis: 30%;
-  padding: 20px 20px;
+  padding: 5px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.096);
   display: flex;
   gap: 14px;
@@ -514,13 +514,31 @@ button#apply-btn {
   background-color: white;
   border-radius: 10px;
   height: fit-content;
+  position: sticky;
+  top: 2px;
 }
-.basic-detail-container > div span:nth-child(1) {
+.basic-detail-container >a{
+  color: #141111;
+}
+.basic-detail-container >a  div{
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+.basic-detail-container >a div:hover{
   background-color: #ee8d21;
-  color: #f5f5f5;
+  color: white;
+}
+.basic-detail-container >a div span:nth-child(1) {
+  /* background-color: #ee8d21; */
+  color: #ee8d21;
   font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 50px;
+  font-size: 16px;
+  transition: 0.2s ease;
+  margin-right: 4px;
+}
+.basic-detail-container >a div:hover span:nth-child(1){
+  color: white;
 }
 .other-detail-container {
   /* background-color: aquamarine; */
@@ -545,15 +563,23 @@ button#apply-btn {
 }
 .other-detail-container form > div:nth-child(2) {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+.other-detail-container form > div:nth-child(2) > .user-field:has(label[for="pincode"]),
+.other-detail-container form > div:nth-child(2) > .user-field:has(label[for="state"]),
+.other-detail-container form > div:nth-child(2) > .user-field:has(label[for="city"]) {
+  grid-column: span 1;
+}
+.other-detail-container form > div:nth-child(2) > .user-field:not(:has(label[for="pincode"])):not(:has(label[for="state"])):not(:has(label[for="city"])) {
+  grid-column: span 3;
 }
 .other-detail-container form input{
   outline: none;
   border-width: 0;
   width: 100%;
+  font-size: 16px;
 }
-
 .other-detail-container form .inputIcon {
   width: 100%;
   outline: none;
@@ -574,8 +600,17 @@ button#apply-btn {
 }
 .other-detail-container form .user-field label {
   font-size: 14px;
+  font-weight: 500;
 }
-
+.other-detail-container form .user-field label span{
+  color: red;
+}
+.inputIcon:focus-within {
+  outline: 2px solid #ee8d21;
+  outline-offset: 4px;
+  box-shadow:  0px 0px 6px #c8c8c8;
+  border: 1px solid #ee8d21;
+}
 /* apply-virtual-card end */
 
 @media (max-width: 1205px) and (min-width: 766px) {
