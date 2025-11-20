@@ -52,6 +52,9 @@ class dbClass
 		return $this->conn;
 	}
 
+	
+
+
 
 	public function getDbName()
 	{

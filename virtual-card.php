@@ -7,26 +7,33 @@ include 'functions/authentication.php';
 
 $dbclass = new dbClass();
 $common = new Common();
-
 $industry = $common->getAllIdustry();
 $auth = new Authentication();
 $errorMsg = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
+
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    $userFound = $auth->validateUserByEmailPassword($email, $password);
+    $sql = "SELECT * FROM users WHERE email = :email AND password = :password ";
 
-    if ($userFound) {
-        // User authenticated, you can set session or redirect
-        $_SESSION['user_email'] = $email;
+    $params = [
+        ':email' => $email,
+        ':password' => $password
+    ];
+    $row = $dbclass->getDataWithParams($sql, $params);
+    if ($row) {
         header("Location: apply-virtual-card.php");
-        exit;
     } else {
-        $errorMsg = "Invalid email or password.";
-    }
+        $_SESSION['LOGIN'] = "false";
+        $errorMsg = "Invalid email or password."; ?>
+        <script>
+            alert("Please enter right email and password");
+        </script>
+
+
+<?php  }
 }
 ?>
 
@@ -196,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <?php if (!empty($errorMsg)) : ?>
                     <div style="color: red; margin-bottom: 10px;"><?= htmlspecialchars($errorMsg) ?></div>
                 <?php endif; ?>
-                <form action="" method="POST" class="apply-form">
+                <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" class="apply-form">
                     <div class="">
                         <input type="email" name="email" id="email" placeholder="Email-Id" required>
                     </div>
