@@ -34,6 +34,10 @@ $auth->checkSession();
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+        rel="stylesheet"
+    />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
@@ -101,106 +105,105 @@ $auth->checkSession();
             </div>
         </section> -->
 
-        <div class="section pt-75 pb-75">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="andro_auth-wrapper d-flex">
-                            <div class="andro_auth-form form-1 w-100">
-                                <h2><?php echo !empty($userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></h2>
-                                <form id="profileForm" method="post" onsubmit="return submitForm(event, 'profileForm');">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="image">Profile Image</label>
-                                                <input type="file" class="form-control" placeholder="Profile Image" name="image" id="image" accept="image/*">
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="name">Full Name</label>
-                                                <input type="text" class="form-control" value="<?= $userdetail['name']; ?>" placeholder="Full Name" name="name" id="name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input type="email" class="form-control" value="<?= $userdetail['email']; ?>" placeholder="Email" name="email" id="email">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="phone">Phone Number</label>
-                                                <input type="tel" class="form-control" value="<?= $userdetail['phone']; ?>" placeholder="Phone Number" name="phone" id="phone">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="adhar_no">Aadhar Number</label>
-                                                <input type="text" class="form-control" value="<?= $userdetail['adhar'] ?? ''; ?>" placeholder="Aadhar Number" name="adhar_no" id="adhar_no">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="representative_name">Representative's Name</label>
-                                                <input type="text" class="form-control" value="<?= $userdetail['representative_name'] ?? ''; ?>" placeholder="Representative's Name" name="representative_name" id="representative_name">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="birthday">Birthday</label>
-                                                <input type="date" class="form-control" value="<?= $userdetail['birthday'] ?? ''; ?>" name="birthday" id="birthday">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="anniversary">Anniversary</label>
-                                                <input type="date" class="form-control" value="<?= $userdetail['anniversary'] ?? ''; ?>" name="anniversary" id="anniversary">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="state">State</label>
-                                                <select class="form-control" name="state" id="state">
-                                                    <option value="<?php echo $userdetail['state']; ?>" selected>   </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="city">City</label>
-                                                <input type="text" class="form-control" value="<?= $userdetail['city'] ?? ''; ?>" placeholder="City" name="city" id="city">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="pincode">Pincode</label>
-                                                <input type="text" class="form-control" value="<?= $userdetail['pincode'] ?? ''; ?>" placeholder="Pincode" name="pincode" id="pincode">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="address">Address</label>
-                                                <textarea class="form-control" placeholder="Address" name="address" id="address" rows="3"><?= $userdetail['address'] ?? ''; ?></textarea>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-12 text-center">
-                                            <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
-                                            <button type="submit" name="submit" class="thm-btn btn-p mb-3" id="submitButton">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
+        <section class="main-profile-container">
+            <div class="complete-profile-container">
+                <h2 class="text-center"><?php echo !empty($userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></h2>
+                <form id="profileForm" method="post" onsubmit="return submitForm(event, 'profileForm');">
+                    <div class="form-inputs">
+                        <div class="input-fields">
+                            <label for="image">Profile Image<span>*</span></label>
+                            <div class="">
+                                <i class="ri-image-ai-line"></i>
+                                <input type="file" class="" required name="image" id="image" accept="image/*">
                             </div>
                         </div>
+                        <div class="input-fields">
+                            <label for="name">Full Name<span>*</span></label>
+                            <div class="">
+                                <i class="ri-user-3-line"></i>
+                                <input type="text" class="" value="<?= $userdetail['name']; ?>" required name="name" id="name">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="email">Email<span>*</span></label>
+                            <div class="">
+                                <i class="ri-mail-line"></i>
+                                <input type="email" class="" value="<?= $userdetail['email']; ?>" required name="email" id="email">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="phone">Phone Number<span>*</span></label>
+                            <div class="">
+                                <i class="ri-phone-line"></i>
+                                <input type="tel" class="" value="<?= $userdetail['phone']; ?>" required name="phone" id="phone">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="adhar_no">Aadhar Number</label>
+                            <div class="">
+                                <i class="ri-id-card-line"></i>
+                                <input type="text" class="" value="<?= $userdetail['adhar'] ?? ''; ?>" name="adhar_no" id="adhar_no">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="representative_name">Representative's Name<span>*</span></label>
+                            <div class="">
+                                <i class="ri-shield-user-line"></i>
+                                <input type="text" class="" value="<?= $userdetail['representative_name'] ?? ''; ?>" required name="representative_name" id="representative_name">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="birthday">DOB<span>*</span></label>
+                            <div class="">
+                                <i class="ri-cake-2-line"></i>
+                                <input type="date" class="" required value="<?= $userdetail['birthday'] ?? ''; ?>" name="birthday" id="birthday">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="anniversary">Anniversary</label>
+                            <div class="">
+                                <i class="ri-diamond-ring-line"></i>
+                                <input type="date" class="" value="<?= $userdetail['anniversary'] ?? ''; ?>" name="anniversary" id="anniversary">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="state">State<span>*</span></label>
+                            <div class="">
+                                <i class="ri-signal-tower-line"></i>
+                                <select class="" name="state" id="state" required>
+                                    <option value="<?php echo $userdetail['state']; ?>" selected> </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="city">City<span>*</span></label>
+                            <div class="">
+                                <i class="ri-building-line"></i>
+                                <input type="text" class="" value="<?= $userdetail['city'] ?? ''; ?>" required name="city" id="city">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="pincode">Pincode<span>*</span></label>
+                            <div class="">
+                                <i class="ri-map-pin-3-line"></i>
+                                <input type="text" class="" value="<?= $userdetail['pincode'] ?? ''; ?>" required name="pincode" id="pincode">
+                            </div>
+                        </div>
+                        <div class="input-fields">
+                            <label for="address">Current Address<span>*</span></label>
+                            <div class="">
+                                <i class="ri-map-pin-user-line"></i>
+                                <textarea class="" required name="address" id="address" rows="3"><?= $userdetail['address'] ?? ''; ?></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-end">
+                            <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
+                            <button  type="submit" name="submit" class="thm-btn btn-p mb-3" id="submitButton">Submit</button>
+                        </div>
                     </div>
-                </div>
+                </form> 
             </div>
-        </div>
-
-
+        </section>
         <!--**********************************
            footer start ti-comment-alt
         ***********************************-->

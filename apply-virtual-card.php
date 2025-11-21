@@ -12,6 +12,26 @@ $user = new User();
 $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
 $industry = $common->getAllIdustry();
 
+function isFieldEmpty($value)
+{
+    return empty($value) || $value === null || $value === '';
+}
+
+// Check each field individually
+$disableFields = [
+    'name' => !isFieldEmpty($userdetail['name']),
+    'email' => !isFieldEmpty($userdetail['email']),
+    'phone' => !isFieldEmpty($userdetail['phone']),
+    'birthday' => !isFieldEmpty($userdetail['birthday'] ?? ''),
+    'adhar' => !isFieldEmpty($userdetail['adhar'] ?? ''),
+    'address' => !isFieldEmpty($userdetail['address'] ?? ''),
+    'pincode' => !isFieldEmpty($userdetail['pincode'] ?? ''),
+    'state' => !isFieldEmpty($userdetail['state'] ?? ''),
+    'city' => !isFieldEmpty($userdetail['city'] ?? ''),
+    'representative_name' => !isFieldEmpty($userdetail['representative_name'] ?? ''),
+    'image' => !isFieldEmpty($userdetail['image'] ?? ''),
+    'anniversary' => !isFieldEmpty($userdetail['anniversary'] ?? '')
+];
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +81,7 @@ $industry = $common->getAllIdustry();
     <link rel="stylesheet" href="css/virtual-card-vendors.css">
     <link rel="stylesheet" href="css/bachat-daddy-responsive.css">
 
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- jQuery Validation Plugin -->
@@ -90,34 +110,42 @@ $industry = $common->getAllIdustry();
                 </a>
             </div>
             <div class="other-detail-container" id="otherDetail">
-                <form action="" id="profileForm"  method="post" onsubmit="return submitForm(event, 'profileForm');">
+                <!-- New form -->
+                <form action="" id="profileForm" method="post" onsubmit="return submitForm(event, 'profileForm');">
                     <div class="">
                         <div class="user-field">
                             <label for="fullName">Full Name<span>*</span></label>
                             <div class="inputIcon" tabindex="0">
                                 <i class="ri-user-3-line"></i>
-                                <input type="text" name="name" value="<?= $userdetail['name']; ?>" id="name" required>
+                                <input type="text" name="name" value="<?= $userdetail['name']; ?>" id="name"
+                                    <?= $disableFields['name'] ? 'readonly' : ''; ?> required>
                             </div>
                         </div>
+
                         <div class="user-field">
                             <label for="emailId">Email-id<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-mail-line"></i>
-                                <input type="email" value="<?= $userdetail['email']; ?>" name="email" id="email" required>
+                                <input type="email" value="<?= $userdetail['email']; ?>" name="email" id="email"
+                                    <?= $disableFields['email'] ? 'readonly' : ''; ?> required>
                             </div>
                         </div>
+
                         <div class="user-field">
                             <label for="contactNo">Contact no.<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-phone-line"></i>
-                                <input type="number" value="<?= $userdetail['phone']; ?>" name="phone" id="phone" required>
+                                <input type="number" value="<?= $userdetail['phone']; ?>" name="phone" id="phone"
+                                    <?= $disableFields['phone'] ? 'readonly' : ''; ?> required>
                             </div>
                         </div>
+
                         <div class="user-field">
                             <label for="contactNo">DOB<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-cake-2-line"></i>
-                                <input type="date" value="<?= $userdetail['birthday'] ?? ''; ?>" name="birthday" id="birthday" required>
+                                <input type="date" value="<?= $userdetail['birthday'] ?? ''; ?>" name="birthday" id="birthday"
+                                    <?= $disableFields['birthday'] ? 'readonly' : ''; ?> required>
                             </div>
                         </div>
                     </div>
@@ -127,75 +155,93 @@ $industry = $common->getAllIdustry();
                             <label for="adhar">Aadhar no.</label>
                             <div class="inputIcon">
                                 <i class="ri-id-card-line"></i>
-                                <input type="text" value="<?= $userdetail['adhar'] ?? ''; ?>" name="adhar_no" id="adhar_no" placeholder="">
-                            </div>
-                        </div>
-                        <div class="user-field">
-                            <label for="address">Current Address<span>*</span></label>
-                            <div class="inputIcon">
-                                <i class="ri-map-pin-user-line"></i>
-                                <textarea type="text" value="" name="address" id="address" required placeholder=""><?= $userdetail['address'] ?? ''; ?></textarea>
-                            </div>
-                        </div>
-                        <div class="user-field">
-                            <label for="pincode">Pincode<span>*</span></label>
-                            <div class="inputIcon">
-                                <i class="ri-map-pin-3-line"></i>
-                                <input type="number" value="<?= $userdetail['pincode'] ?? ''; ?>" name="pincode" id="pincode" required placeholder="">
-                            </div>
-                        </div>
-                        <div class="user-field">
-                            <label for="state">State<span>*</span></label>
-                            <div class="inputIcon">
-                                <i class="ri-signal-tower-line"></i>
-                                <select class="" name="state" id="state">
-                                    <option value="<?php echo $userdetail['state']; ?>" selected>
-                                        <?php echo $userdetail['state']; ?>
-                                    </option>
-                                </select>
-                                <!-- <input type="text" name="" id="state" required placeholder=""> -->
-                            </div>
-                        </div>
-                        <div class="user-field">
-                            <label for="state">City<span>*</span></label>
-                            <div class="inputIcon">
-                                <i class="ri-building-line"></i>
-                                <input type="text" value="<?= $userdetail['city'] ?? ''; ?>" name="city" id="city" required placeholder="">
-                            </div>
-                        </div>
-                        <div class="user-field">
-                            <label for="representative">Representative Name<span>*</span></label>
-                            <div class="inputIcon">
-                                <i class="ri-shield-user-line"></i>
-                                <input type="text" name="representative_name" value="<?= $userdetail['representative_name'] ?? ''; ?>" id="representative_name" required placeholder="">
+                                <input type="text" value="<?= $userdetail['adhar'] ?? ''; ?>" name="adhar_no" id="adhar_no"
+                                    <?= $disableFields['adhar'] ? 'readonly' : ''; ?> placeholder="">
                             </div>
                         </div>
 
                         <div class="user-field">
-                            <label for="representative">Upload Image</label>
+                            <label for="address">Current Address<span>*</span></label>
                             <div class="inputIcon">
-                                <i class="ri-image-ai-line"></i>
-                                <input type="file" name="image" id="image" type="file" accept="image/*">
+                                <i class="ri-map-pin-user-line"></i>
+                                <textarea name="address" id="address"
+                                    <?= $disableFields['address'] ? 'readonly' : ''; ?> required placeholder=""><?= $userdetail['address'] ?? ''; ?></textarea>
                             </div>
                         </div>
+
+                        <div class="user-field">
+                            <label for="pincode">Pincode<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-map-pin-3-line"></i>
+                                <input type="number" value="<?= $userdetail['pincode'] ?? ''; ?>" name="pincode" id="pincode"
+                                    <?= $disableFields['pincode'] ? 'readonly' : ''; ?> required placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="user-field">
+                            <label for="state">State<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-signal-tower-line"></i>
+                                <select name="state" id="state"
+                                    <?= $disableFields['state'] ? 'disabled' : ''; ?>>
+                                    <option value="<?php echo $userdetail['state'] ?? ''; ?>" selected>
+                                        <?php echo $userdetail['state'] ?? 'Select State'; ?>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="user-field">
+                            <label for="state">City<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-building-line"></i>
+                                <input type="text" value="<?= $userdetail['city'] ?? ''; ?>" name="city" id="city"
+                                    <?= $disableFields['city'] ? 'readonly' : ''; ?> required placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="user-field">
+                            <label for="representative">Representative Name<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-shield-user-line"></i>
+                                <input type="text" name="representative_name" value="<?= $userdetail['representative_name'] ?? ''; ?>"
+                                    id="representative_name" <?= $disableFields['representative_name'] ? 'readonly' : ''; ?> required placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="user-field">
+                            <label for="representative">Upload Image<span>*</span></label>
+                            <div class="inputIcon">
+                                <i class="ri-image-ai-line"></i>
+                                <input type="file" name="image" id="image" accept="image/*"
+                                    <?= $disableFields['image'] ? 'disabled' : ''; ?>>
+                            </div>
+                        </div>
+
                         <div class="user-field">
                             <label for="contactNo">Anniversary</label>
                             <div class="inputIcon">
                                 <i class="ri-diamond-ring-line"></i>
-                                <input type="date" value="<?= $userdetail['anniversary'] ?? ''; ?>" name="anniversary" id="anniversary">
+                                <input type="date" value="<?= $userdetail['anniversary'] ?? ''; ?>" name="anniversary"
+                                    id="anniversary" <?= $disableFields['anniversary'] ? 'readonly' : ''; ?>>
                             </div>
                         </div>
                     </div>
+
                     <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
+
                     <button name="submit" type="submit" id="submitButton">Submit</button>
                 </form>
+
+
+                <!-- New form -->
             </div>
         </div>
     </section>
 
     <?php require('include/footer.php'); ?>
     <?php require('include/mobilefooter.php') ?>
-<script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendors/bootstrap-select/js/bootstrap-select.min.js"></script>
     <script src="vendors/jquery-ui/jquery-ui.js"></script>
 
@@ -216,8 +262,6 @@ $industry = $common->getAllIdustry();
     <script src="vendors/isotope/isotope.js"></script>
     <script src="vendors/timepicker/timePicker.js"></script>
     <script src="js/state.js"></script>
-
-
 
     <script>
         // Function to validate the form

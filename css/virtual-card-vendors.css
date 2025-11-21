@@ -593,7 +593,7 @@ button#apply-btn {
   align-items: center;
   justify-content: flex-start;
   padding: 4px 8px 4px 4px;
-  gap: 5px;
+  gap: 6px;
 }
 .other-detail-container form .inputIcon i{
   border-right: 1px solid #c8c8c8;
@@ -626,6 +626,54 @@ button#submitButton {
     inset -1px 0px 0px #ffb35d, inset 0px -2px 0px #ffb35d;
   text-align: center;
 }
+
+
+
+/******************************
+*******************************/
+/* Readonly input styling */
+/* Readonly field styling - shows it has data and is protected */
+input[readonly],
+textarea[readonly] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+input[readonly]:focus,
+textarea[readonly]:focus {
+    border-color: #ddd;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Disabled select field */
+select[disabled] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+input[type="file"][disabled] {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+/* Enabled fields - normal styling */
+input:not([readonly]),
+textarea:not([readonly]),
+select:not([disabled]) {
+    background-color: white;
+    cursor: text;
+    border: 1px solid #ccc;
+}
+
+
+
+/******************************
+*******************************/
 /* apply-virtual-card end */
 
 @media (max-width: 1205px) and (min-width: 766px) {

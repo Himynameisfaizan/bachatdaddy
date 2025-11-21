@@ -8,24 +8,20 @@ include 'functions/authentication.php';
 $dbclass = new dbClass();
 $common = new Common();
 $industry = $common->getAllIdustry();
+$user = new User();
 $auth = new Authentication();
 $errorMsg = '';
+
+$userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    $sql = "SELECT * FROM users WHERE email = :email AND password = :password ";
-
-    $params = [
-        ':email' => $email,
-        ':password' => $password
-    ];
-    $row = $dbclass->getDataWithParams($sql, $params);
-    if ($row) {
+    if($userdetail['email'] === $email && $userdetail['password'] === $password){
         header("Location: apply-virtual-card.php");
-    } else {
+    }else {
         $_SESSION['LOGIN'] = "false";
         $errorMsg = "Invalid email or password."; ?>
         <script>
@@ -34,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 <?php  }
+
+ 
 }
 ?>
 

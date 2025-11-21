@@ -27,13 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $result = $auth->userLogin($userId, $password);
             if ($result === true) {
                 $result = $conn->getData("SELECT * FROM `users` WHERE `email` = '$userId' AND `password` = '$password' ");
-
-                $adhar = $result['adhar'];
-                if ($adhar != null) {
-                    $response = array('status' => 'success', 'message' => 'Login successful', 'redirect' => 'index.php');
-                } else {
-                    $response = array('status' => 'success', 'message' => 'Login successful', 'redirect' => 'complete-profile.php');
-                }
+                
+                $response = array('status' => 'success', 'message' => 'Login successful', 'redirect' => 'index.php');
             } else {
                 $response = array('status' => 'error', 'message' => 'Invalid credentials. Please try again.');
             }
@@ -42,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($result === true) {
                 // $response = array('status' => 'success', 'message' => 'Login successful', 'redirect' => 'users-list.php');
                 $response = array('status' => 'success', 'message' => 'Login successful', 'redirect' => 'vendorshome.php');
-
             } else {
                 $response = array('status' => 'error', 'message' => 'Invalid credentials. Please try again.');
             }

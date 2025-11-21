@@ -17550,6 +17550,67 @@ label.error {
   text-align: justify !important;
 }
 
+
+/* complete profile start */
+.main-profile-container{
+  padding: 50px;
+  background-color: #f5f5f5; 
+}
+.complete-profile-container{
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.096);
+
+}
+.complete-profile-container h2{
+  color: #ee8d21;
+}
+.complete-profile-container form{
+  margin-top: 20px;
+}
+.form-inputs{
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.form-inputs .input-fields:not(:has(label[for='birthday'])):not(:has(label[for="anniversary"])):not(:has(label[for="name"])):not(:has(label[for="email"])):not(:has(label[for="state"])):not(:has(label[for="city"])){
+  grid-column: span 2;
+}
+.form-inputs .input-fields label{
+  font-size: 14px;
+  font-weight: 500;
+}
+.form-inputs .input-fields label span{
+  color: red;
+}
+.form-inputs .input-fields div{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  border: 1px solid #c8c8c8;
+  border-radius: 6px;
+  padding: 4px 8px 4px 4px;
+}
+.form-inputs .input-fields div i{
+  border-right: 1px solid #c8c8c8;
+  padding: 0 4px;
+  font-size: 14px;
+}
+.form-inputs .input-fields div input,
+.form-inputs .input-fields div select,
+.form-inputs .input-fields div textarea{
+  width: 100%;
+  outline: none;
+  border-width: 0;
+  font-size: 16px;
+}
+
+/* complete profile end */
+
 /* -------------------------------------
 Recreate why choose us start
 ---------------------------------------- */
