@@ -12,15 +12,16 @@ $user = new User();
 $auth = new Authentication();
 $errorMsg = '';
 
-$userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
 
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
     if($userdetail['email'] === $email && $userdetail['password'] === $password){
+        $_SESSION['CAN_ACCESS_APPLY_CARD'] = true;
         header("Location: apply-virtual-card.php");
+        exit();
     }else {
         $_SESSION['LOGIN'] = "false";
         $errorMsg = "Invalid email or password."; ?>
@@ -202,6 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div style="color: red; margin-bottom: 10px;"><?= htmlspecialchars($errorMsg) ?></div>
                 <?php endif; ?>
                 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" class="apply-form">
+                    <input type="hidden" name="from_virtual_card" value="1">
                     <div class="">
                         <input type="email" name="email" id="email" placeholder="Email-Id" required>
                     </div>

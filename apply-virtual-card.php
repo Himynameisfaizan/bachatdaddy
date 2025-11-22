@@ -1,9 +1,17 @@
 <?php
 session_start();
 
+// if (!isset($_SESSION['CAN_ACCESS_APPLY_CARD'])) {
+//     header('Location: virtual-card.php');
+//     exit();
+// }
+
+// Clear the flag so direct revisits are blocked
+unset($_SESSION['CAN_ACCESS_APPLY_CARD']);
+
+include 'functions/authentication.php';
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
-include 'functions/authentication.php';
 
 $dbclass = new dbClass();
 $common = new Common();
@@ -50,7 +58,8 @@ $disableFields = [
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
-        rel="stylesheet" />
+        rel="stylesheet" 
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
     <link
@@ -94,6 +103,7 @@ $disableFields = [
     <?php include('include/header.php') ?>
 
     <section class="main-detail-container">
+        <h2>One More Step to Get Your<br><span style="color: #ee8d21;"> Discount Card</span></h2>
         <div class="complete-detail-container">
             <div class="basic-detail-container" id="basicDetail">
                 <a href="#basicDetail">
@@ -229,11 +239,8 @@ $disableFields = [
                     </div>
 
                     <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
-
                     <button name="submit" type="submit" id="submitButton">Submit</button>
                 </form>
-
-
                 <!-- New form -->
             </div>
         </div>
