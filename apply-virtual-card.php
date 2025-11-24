@@ -58,8 +58,7 @@ $disableFields = [
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
-        rel="stylesheet" 
-    />
+        rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
     <link
@@ -246,6 +245,28 @@ $disableFields = [
         </div>
     </section>
 
+    <!-- OTP Verficiation form -->
+    <section class="otp-main-container">
+        <div class="otp-form">
+            <form action="">
+                <p>One-Time Password. Valid for 60 secounds</p>
+                <div class="otp-field">
+                    <input type="number" maxlength="1" name="" id="" class="digit">
+                    <input type="number" maxlength="1" name="" id="" class="digit">
+                    <input type="number" maxlength="1" name="" id="" class="digit">
+                    <input type="number" maxlength="1" name="" id="" class="digit">
+                    <input type="number" maxlength="1" name="" id="" class="digit">
+                    <input type="number" maxlength="1" name="" id="" class="digit">
+                </div>
+                <div class="otpmsg">Please enter the one-time password sent to your mail</div>
+                <button>
+                    Submit
+                </button>
+            </form>
+        </div>
+    </section>
+    <!-- OTP Verficiation form -->
+
     <?php require('include/footer.php'); ?>
     <?php require('include/mobilefooter.php') ?>
     <script src="vendors/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -269,6 +290,7 @@ $disableFields = [
     <script src="vendors/isotope/isotope.js"></script>
     <script src="vendors/timepicker/timePicker.js"></script>
     <script src="js/state.js"></script>
+    <script src="js/apply-virtual-card.js"></script>
 
     <script>
         // Function to validate the form
