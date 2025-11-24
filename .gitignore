@@ -1,2 +1,4 @@
 # Ignore environment .env file
 .env
+composer.json
+composer.lock
