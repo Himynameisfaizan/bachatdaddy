@@ -8,6 +8,9 @@ use PHPMailer\PHPMailer\Exception;
 require 'phpmailer/src/Exception.php';
 require 'phpmailer/src/PhpMailer.php';
 require 'phpmailer/src/SMTP.php';
+require __DIR__ . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
@@ -15,15 +18,15 @@ $mail = new PHPMailer(true);
 try {
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->isSMTP();                        //Send using SMTP
+    $mail->Host       = $_ENV['SMTP_HOST'];                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = '01sanjana.doitcreation@gmail.com';                     //SMTP username
-    $mail->Password   = 'iupu qkzw mwbd louq';                               //SMTP password
+    $mail->Username   = $_ENV['SMTP_USERNAME'];                     //SMTP username
+    $mail->Password   = $_ENV['SMTP_PASSWORD'];                               //SMTP password
     // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;         // for live website       //Enable implicit TLS encryption
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // for localhost website  //Enable implicit TLS encryption
+    $mail->SMTPSecure = $_ENV['SMTP_SMTPSECURE'];         // for localhost website  //Enable implicit TLS encryption
     // $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-    $mail->Port       =  587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+    $mail->Port       =  $_ENV['SMTP_PORT'];                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
     $mail->setFrom('01sanjana.doitcreation@gmail.com', 'Bachatdaddy');
@@ -54,3 +57,4 @@ try {
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+?>
