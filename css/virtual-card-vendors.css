@@ -691,6 +691,9 @@ select:not([disabled]) {
 }
 
 /* OTP form start */
+body{
+  overflow-y: auto;
+}
 .otp-main-container{
   background-color: rgba(0, 0, 0, 0.719);
   backdrop-filter: blur(2px);
@@ -705,6 +708,7 @@ select:not([disabled]) {
   justify-content: center;
   align-items: center;
   visibility: hidden;
+  transition: visibility 0.5s ease-out;
 }
 .otp-form{
   background-color: white;
@@ -718,7 +722,6 @@ select:not([disabled]) {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  
   gap: 6px;
 }
 .otp-form form button{

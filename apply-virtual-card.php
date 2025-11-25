@@ -219,7 +219,7 @@ $disableFields = [
                         </div>
 
                         <div class="user-field">
-                            <label for="representative">Upload Image<span>*</span></label>
+                            <label for="image">Upload Image<span>*</span></label>
                             <div class="inputIcon">
                                 <i class="ri-image-ai-line"></i>
                                 <input type="file" name="image" id="image" accept="image/*"
@@ -246,9 +246,9 @@ $disableFields = [
     </section>
 
     <!-- OTP Verficiation form -->
-    <section class="otp-main-container">
+    <section class="otp-main-container" id="otp_parent">
         <div class="otp-form">
-            <form action="">
+            <form action="" id="otpForm">
                 <p>One-Time Password. Valid for 60 secounds</p>
                 <div class="otp-field">
                     <input type="number" maxlength="1" name="" id="" class="digit">
@@ -403,7 +403,6 @@ $disableFields = [
             return form.valid(); // Return true if form is valid
         }
 
-        // Function to handle the form submission
         function submitForm(event, formName) {
             event.preventDefault(); // Prevent default form submission
 
@@ -415,51 +414,112 @@ $disableFields = [
             if (validateForm(formName)) {
                 var formData = new FormData(form);
 
-                // Debugging: Log FormData content to check what is being sent
-                // console.log("Form Data:");
-                for (var [key, value] of formData.entries()) {
-                    console.log(key + ": " + value);
-                }
-
-                // Perform AJAX request to submit the form
                 $.ajax({
-                    url: 'user-com-profile.php', // The AJAX request path remains unchanged
+                    url: 'user-com-profile.php',
                     type: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
-                    beforeSend: function() {
-                        // console.log("Sending request to user-com-profile.php...");
-                    },
                     success: function(response) {
-                        // console.log("AJAX request sent successfully.");
-                        // console.log('Raw Response:', response);
-
                         if (response.status === 'success') {
                             form.reset(); // Reset form if successful
-                            window.location.href = response.redirect; // Redirect to the new page
+
+                            // Show OTP popup instead of redirect
+                            document.getElementById('otp_parent').style.visibility = 'visible';
+                            document.body.style.overflowY = "hidden";
+                            window.scroll({
+                                top: 0,
+                                behavior: 'smooth',
+                            })
+
+                            // Optional: Disable form submission button after successful submit to avoid duplicates
+                            submitButton.disabled = true;
+                            submitButton.innerHTML = 'Sending OTP...';
+
+                            // Trigger OTP sendmail backend call, assuming you have an endpoint sendmail.php
+                            $.ajax({
+                                url: 'sendmail.php',
+                                type: 'POST',
+                                data: {
+                                    email: formData.get('email')
+                                },
+                                success: function(otpResponse) {
+                                    if (otpResponse.status !== 'success') {
+                                        alert('Failed to send OTP. Please try again.');
+                                    } else {
+                                        alert('OTP sent successfully!');
+                                    }
+                                    submitButton.disabled = false;
+                                    submitButton.innerHTML = 'Submit';
+                                },
+                                error: function() {
+                                    alert('Error sending OTP. Please try again.');
+                                    submitButton.disabled = false;
+                                    submitButton.innerHTML = 'Submit';
+                                }
+                            });
                         } else {
                             alert("Error: " + response.message); // Alert the error message
-                            form.reset(); // Reset form if there is an error
                         }
-
                         submitButton.disabled = false; // Re-enable the submit button
-                        submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+                        submitButton.innerHTML = 'Submit'; // Reset button text
                     },
                     error: function(xhr, status, error) {
-                        // console.log('Error response:', xhr.responseText);
                         alert("AJAX request failed: " + error);
                         submitButton.disabled = false; // Re-enable the submit button
-                        submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+                        submitButton.innerHTML = 'Submit'; // Reset button text
                     }
                 });
             } else {
-                submitButton.disabled = false; // Re-enable the submit button if validation fails
-                submitButton.innerHTML = 'Submit'; // Change button text back to 'Submit'
+                submitButton.disabled = false; // Re-enable the submit button when form invalid
+                submitButton.innerHTML = 'Submit'; // Reset button text
             }
-
             return false;
         }
+
+        // Verfiy otp 
+        document.getElementById('otpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect OTP digits from inputs with class 'digit'
+            let otpDigits = document.querySelectorAll('.otp-field .digit');
+            let otp = '';
+            otpDigits.forEach(input => {
+                otp += input.value.trim();
+            });
+            console.log(otp);
+            
+            if (otp.length !== 6) {
+                alert('Please enter the complete 6-digit OTP');
+                return;
+            }
+
+            // Now make AJAX call to verify this OTP string
+            $.ajax({
+                url: 'verifyotp.php',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    otp: otp
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert(response.message);
+                        document.getElementById('otp_parent').style.display = 'none'; // Hide popup
+                        // Further actions on success
+                        document.body.style.overflowY = "auto";
+                        header("Location: Thanku.php")
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function() {
+                    alert('Error verifying OTP. Please try again.');
+                }
+            });
+
+        });
+        // Verfiy otp 
     </script>
 
 
