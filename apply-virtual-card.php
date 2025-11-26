@@ -219,11 +219,12 @@ $disableFields = [
                         </div>
 
                         <div class="user-field">
-                            <label for="image">Upload Image<span>*</span></label>
+                            <label for="image">Upload Image</label>
                             <div class="inputIcon">
                                 <i class="ri-image-ai-line"></i>
                                 <input type="file" name="image" id="image" accept="image/*"
                                     <?= $disableFields['image'] ? 'disabled' : ''; ?>>
+                                <input type="hidden" id="existingImage" value="1764066739-c5d97785-a75f-4a18-8b29-917aff3700d2.png">
                             </div>
                         </div>
 
@@ -238,7 +239,7 @@ $disableFields = [
                     </div>
 
                     <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
-                    <button name="submit" type="submit" id="submitButton">Submit</button>
+                    <button name="submit" type="submit" id="submitButton">Get OTP</button>
                 </form>
                 <!-- New form -->
             </div>
@@ -298,6 +299,7 @@ $disableFields = [
             var form = $('#' + formName);
 
             // Initialize jQuery Validation
+
             form.validate({
                 rules: {
                     name: {
@@ -343,7 +345,7 @@ $disableFields = [
                     representative_name: {
                         required: true,
                         minlength: 3
-                    }
+                    },
                 },
                 messages: {
                     name: {
@@ -395,6 +397,7 @@ $disableFields = [
                     return true; // Validation passed, return true to submit the form
                 }
             });
+
             $.validator.addMethod("notEmptyOrWhitespace", function(value, element) {
                 return value.trim().length > 0; // Returns true if the trimmed value has a length greater than 0
             });
@@ -412,6 +415,14 @@ $disableFields = [
             submitButton.innerHTML = 'Submitting...';
 
             if (validateForm(formName)) {
+
+                if (!$('#existingImage').val().trim() && $('#image').get(0).files.length === 0) {
+                    alert('Please upload an image.');
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Submit';
+                    return false;
+                }
+
                 var formData = new FormData(form);
 
                 $.ajax({
@@ -474,6 +485,10 @@ $disableFields = [
                 submitButton.disabled = false; // Re-enable the submit button when form invalid
                 submitButton.innerHTML = 'Submit'; // Reset button text
             }
+            console.log('existingImage:', $('#existingImage').val());
+            console.log('image input files length:', $('#image').get(0).files.length);
+            console.log('Checking image requirement:', !$('#existingImage').val().trim() && $('#image').get(0).files.length === 0);
+
             return false;
         }
 
@@ -488,7 +503,7 @@ $disableFields = [
                 otp += input.value.trim();
             });
             console.log(otp);
-            
+
             if (otp.length !== 6) {
                 alert('Please enter the complete 6-digit OTP');
                 return;
@@ -508,7 +523,7 @@ $disableFields = [
                         document.getElementById('otp_parent').style.display = 'none'; // Hide popup
                         // Further actions on success
                         document.body.style.overflowY = "auto";
-                        header("Location: Thanku.php")
+                        window.location.href = 'Thanku.php';
                     } else {
                         alert(response.message);
                     }

@@ -59,19 +59,21 @@
 <?php
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 header('Content-Type: application/json');
 
 $response = array();
 
-// Assuming dbClass and User class are correctly set up.
 $conn = new dbClass();
 $user = new User();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if image is uploaded
-    $image = isset($_FILES['image']['name']) ? time() . "-" . $_FILES['image']['name'] : "";
+    session_start(); // Make sure session is started
+    $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
 
-    // Gather other form data
     $id = isset($_POST['id']) ? trim($_POST['id']) : '';
     $birthday = isset($_POST['birthday']) ? trim($_POST['birthday']) : '';
     $anniversary = isset($_POST['anniversary']) ? trim($_POST['anniversary']) : '';
@@ -82,46 +84,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adhar = isset($_POST['adhar_no']) ? trim($_POST['adhar_no']) : '';
     $representative_name = isset($_POST['representative_name']) ? trim($_POST['representative_name']) : '';
 
-    // Handle file upload if image is selected
-    if (!empty($image)) {
+    $image = '';
+
+    if (isset($_FILES['image']) && !empty($_FILES['image']['name'])) {
+        $image = time() . "-" . $_FILES['image']['name'];
         $imagetmp = $_FILES['image']['tmp_name'];
         $dest = "bachatdaddy@1357admin/adminuploads/images/users/" . $image;
 
-        // Check if all required fields are filled
-        if (empty($birthday) || empty($state) || empty($city) || empty($pincode) || empty($address) || empty($representative_name) || empty($adhar)) {
+        if (!move_uploaded_file($imagetmp, $dest)) {
             $response['status'] = 'error';
-            $response['message'] = 'Please fill in all required fields.';
-        } else {
-            // Add user data including the image
-            $result = $user->addUserById($id, $adhar, $birthday, $anniversary, $state, $city, $pincode, $address, $representative_name, $image);
-
-            // Check result and handle image upload
-            if ($result === true) {
-                // Move the uploaded file to the desired directory
-                if (move_uploaded_file($imagetmp, $dest)) {
-                    $response['status'] = 'success';
-                    $response['message'] = 'Form submitted successfully!';
-                    $response['redirect'] = 'index.php';
-                } else {
-                    $response['status'] = 'error';
-                    $response['message'] = 'Error in uploading the image.';
-                }
-            } else {
-                $response['status'] = 'error';
-                $response['message'] = 'Problem in SQL execution.';
-            }
+            $response['message'] = 'Error uploading the image.';
+            echo json_encode($response);
+            exit;
         }
     } else {
+        // No new image uploaded, use existing image
+        $image = $userdetail['image'] ?? '';
+    }
+
+    // // Validate required fields EXCEPT image
+    // if (empty($birthday) || empty($state) || empty($city) || empty($pincode) || empty($address) || empty($representative_name) || empty($adhar)) {
+    //     $response['status'] = 'error';
+    //     $response['message'] = 'Please fill in all required fields.';
+    //     echo json_encode($response);
+    //     exit;
+    // }
+
+    // Save/update user info
+    $result = $user->addUserById($id, $adhar, $birthday, $anniversary, $state, $city, $pincode, $address, $representative_name, $image);
+
+    if ($result === true) {
+        $response['status'] = 'success';
+        $response['message'] = 'Form submitted successfully!';
+        $response['redirect'] = 'index.php';
+    } else {
         $response['status'] = 'error';
-        $response['message'] = 'No image uploaded.';
+        $response['message'] = 'Problem in SQL execution.';
     }
 } else {
     $response['status'] = 'error';
     $response['message'] = 'Invalid request method.';
 }
 
-// Output the response as JSON
 echo json_encode($response);
 exit;
 ?>
+
 
