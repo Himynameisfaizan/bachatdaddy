@@ -46,7 +46,7 @@
     </section>
     <script>
         let randNum = document.getElementById("randNum");
-        let rand = Math.round(Math.random(1000000, 999999) * 10000000000)
+        let rand = Math.round(Math.random(1000000, 999999) * 1000000000000);
         randNum.innerHTML = rand;
     </script>
     <script>
