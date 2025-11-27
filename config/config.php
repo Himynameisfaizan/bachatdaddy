@@ -54,8 +54,6 @@ class dbClass
 
 	
 
-
-
 	public function getDbName()
 	{
 		return $this->dbname;

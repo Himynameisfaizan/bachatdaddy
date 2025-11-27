@@ -1,4 +1,5 @@
 <?php
+        
         class User{
         private $ID;
         private $uname;
@@ -22,7 +23,6 @@
         private $agreement;
         private $conndb;
 
-        
         function addUsers($uname, $umobile, $uemail, $cname, $cmobile, $cemail, 
         $rmname, $area, $pincode, $city, $state, $zone, 
         $accountno, $ifsc, $bankname, $add_proof, $pan_proof, 
@@ -134,10 +134,7 @@
 
     }
 
-
-
-
-
+    
     class Industry{
 
         private $conndb;

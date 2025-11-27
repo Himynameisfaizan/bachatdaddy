@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-// if (!isset($_SESSION['CAN_ACCESS_APPLY_CARD'])) {
-//     header('Location: virtual-card.php');
-//     exit();
-// }
+if (!isset($_SESSION['CAN_ACCESS_APPLY_CARD'])) {
+    header('Location: virtual-card.php');
+    exit();
+}
 
 // Clear the flag so direct revisits are blocked
 unset($_SESSION['CAN_ACCESS_APPLY_CARD']);
@@ -523,6 +523,9 @@ $disableFields = [
                         document.getElementById('otp_parent').style.display = 'none'; // Hide popup
                         // Further actions on success
                         document.body.style.overflowY = "auto";
+                        <?php 
+                        $_SESSION["ACCESS_THANKU_PAGE"] = true;
+                        ?>
                         window.location.href = 'Thanku.php';
                     } else {
                         alert(response.message);
@@ -536,8 +539,6 @@ $disableFields = [
         });
         // Verfiy otp 
     </script>
-
-
 </body>
 
 </html>
