@@ -104,7 +104,6 @@ $auth->checkSession();
                 </div>
             </div>
         </section> -->
-
         <section class="main-profile-container">
             <div class="complete-profile-container">
                 <h2 class="text-center"><?php echo !empty($userdetail['adhar']) ? 'Edit Profile'  : 'Complete Profile'; ?></h2>

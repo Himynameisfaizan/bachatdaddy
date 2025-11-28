@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    if($userdetail['email'] === $email && $userdetail['password'] === $password){
+    if ($userdetail['email'] === $email && $userdetail['password'] === $password) {
         $_SESSION['CAN_ACCESS_APPLY_CARD'] = true;
         header("Location: apply-virtual-card.php");
         exit();
-    }else {
+    } else {
         $_SESSION['LOGIN'] = "false";
         $errorMsg = "Invalid email or password."; ?>
         <script>
@@ -31,8 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <?php  }
-
- 
 }
 ?>
 
@@ -103,14 +101,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <form action="" method="post">
                     <div class="cta">
                         <?php
-
-                        if ($auth->Isloggedin() == true) {
+                        if (isset($auth) && method_exists($auth, 'Isloggedin') && $auth->Isloggedin()) {
                         ?>
-                            <a href="#" onclick="applyCard()"> Apply now <i class="ri-arrow-right-line"></i></a>
+                            <a href="#" onclick="applyCard()">Apply now <i class="ri-arrow-right-line"></i></a>
                         <?php
-                        } else if ($auth->Isloggedin() == false) {
+                        } else {
                         ?>
-                            <a href="login.php"> Apply now <i class="ri-arrow-right-line"></i></a>
+                            <a href="login.php">Apply now <i class="ri-arrow-right-line"></i></a>
                         <?php
                         }
                         ?>

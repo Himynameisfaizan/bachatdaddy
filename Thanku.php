@@ -31,7 +31,7 @@ function generateCardNumber()
 // Function to check if uniqueNum exists in DB using your dbClass getDataWithParams
 function isUniqueNumExists($db, $num)
 {
-    $query = "SELECT COUNT(*) as count FROM cardNumber WHERE uniqueNum = :num";
+    $query = "SELECT COUNT(*) as count FROM cardnumber WHERE uniqueNum = :num";
     $params = [':num' => $num];
     $result = $db->getDataWithParams($query, $params);
     return $result['count'] > 0;
