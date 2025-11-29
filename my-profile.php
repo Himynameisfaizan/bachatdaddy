@@ -12,9 +12,6 @@ $user = new User();
 $userdata = $user->getUsersDetails($id);
 $auth = new Authentication();
 $auth->checkSession();
-if ($userdata['adhar'] == null) {
-    header('Location: complete-profile.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +25,11 @@ if ($userdata['adhar'] == null) {
     <meta name="description" content="BACHATDADDY">
 
     <!-- fonts -->
+
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+    rel="stylesheet"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -73,86 +75,74 @@ if ($userdata['adhar'] == null) {
             Header end ti-comment-alt
         ***********************************-->
 
-
-        <!--Page Header Start-->
-        <section class="page-header">
-            <div class="page-header__bg" style="background-image: url(images/backgrounds/bg-what.jpg);
-            opacity: 0.1;">
-            </div>
-
-            <div class="container">
-                <div class="page-header__inner page-header__inner-color">
-                    <h2>My Profile</h2>
-                    <ul class="thm-breadcrumb list-unstyled">
-                        <li><a href="index.php">Home</a></li>
-                        <li><span class="icon-down-arrow"></span></li>
-                        <li>My Profile</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
         <!--Profile Start-->
         <section class="team-details">
             <div class="container">
                 <div class="team-details__inner">
-                    <div class="row">
-                        <div class="col-xl-5 col-lg-5">
-                            <div class="team-details__left">
-                                <div class="team-details__img">
-                                    <img src="<?php echo !empty($userdata['image']) ? 'bachatdaddy@1357admin/adminuploads/images/users/' . $userdata['image'] : 'images/services/male-avatar.jpg'; ?>" alt="">
+                    <div class="row dashboard-row">
+                        <div class="col-12">
+                            <h4 class="dashboard-heading">Welcome to <span><?php echo $userdata['name'];?></span></h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-5">
+                                <div class="team-details__left">
+                                    <div class="team-details__img">
+                                        <img src="<?php echo !empty($userdata['image']) ? 'bachatdaddy@1357admin/adminuploads/images/users/' . $userdata['image'] : 'images/services/male-avatar.jpg'; ?>" alt="">
+    
+                                    </div>
 
-                                </div>
-                                <div class="team-details__contact-box">
-                                    <ul class="team-details__contact-list list-unstyled">
-                                        <li>
-                                            <div class="icon">
-                                                <span class="icon-envelope"></span>
-                                            </div>
-                                            <p><a href="complete-profile.php">Edit Profile</a></p>
-                                        </li>
-                                        <li>
-                                            <div class="icon">
-                                                <span class="icon-telephone"></span>
-                                            </div>
-                                            <p><a href="change-current-password.php">Change Password</a></p>
-                                        </li>
-                                        <li>
-                                            <div class="icon">
-                                                <span class="icon-location11"></span>
-                                            </div>
-                                            <p><a href="signout.php">Logout</a></p>
-                                        </li>
-                                    </ul>
+                                    <div class="team-details__contact-box">
+                                        <ul class="team-details__contact-list list-unstyled">
+                                            <li>
+                                                <div class="icon">
+                                                    <i class="ri-file-edit-line"></i>
+                                                </div>
+                                                <p><a href="complete-profile.php">Edit Profile</a></p>
+                                            </li>
+                                            <li>
+                                                <div class="icon">
+                                                    <i class="ri-edit-2-line"></i>
+                                                </div>
+                                                <p><a href="change-current-password.php">Change Password</a></p>
+                                            </li>
+                                            <li>
+                                                <div class="icon">
+                                                    <i class="ri-shut-down-line"></i>
+                                                </div>
+                                                <p><a href="signout.php">Logout</a></p>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-7 col-lg-7">
-                            <div class="team-details__right">
-                                <h3 class="team-details__title-1"><?php echo $userdata['name']; ?></h3>
-                                <div class="d-block d-md-flex gap-2 mt-2">
-                                    <p class="key">Email :</p>
-                                    <p class="value"><?php echo $userdata['email']; ?></p>
-                                </div>
-                                <div class="d-block d-sm-flex gap-2 mt-2">
-                                    <p class="key">Contact No :</p>
-                                    <p class="value"><?php echo $userdata['phone']; ?></p>
-                                </div>
-                                <div class="d-block d-sm-flex gap-2 mt-2">
-                                    <p class="key">Aadhar No :</p>
-                                    <p class="value"><?php echo $userdata['adhar']; ?></p>
-                                </div>
-                                <div class="d-block d-sm-flex gap-2 mt-2">
-                                    <p class="key">Date of birth :</p>
-                                    <p class="value"><?php echo $userdata['birthday']; ?></p>
-                                </div>
-                                <div class="d-block d-sm-flex gap-2 mt-2">
-                                    <p class="key">Anniversary :</p>
-                                    <p class="value"><?php echo $userdata['anniversary']; ?></p>
-                                </div>
-                                <div class="d-block d-sm-flex gap-2 mt-2">
-                                    <p class="key">Address :</p>
-                                    <p class="value"><?php echo $userdata['address'] . ", " . $userdata['city'] . ", " . $userdata['pincode'] . ", " . $userdata['state']; ?></p>
+                            
+                            <div class="col-xl-6 col-lg-7 dashboard-detail">
+                                <div class="team-details__right">
+                                    <!-- <h3 class="team-details__title-1"><?php echo $userdata['name']; ?></h3> -->
+                                    <div class="d-block d-md-flex gap-2 ">
+                                        <p class="key">Email :</p>
+                                        <p class="value"><?php echo $userdata['email']; ?></p>
+                                    </div>
+                                    <div class="d-block d-sm-flex gap-2 ">
+                                        <p class="key">Contact No :</p>
+                                        <p class="value"><?php echo $userdata['phone']; ?></p>
+                                    </div>
+                                    <div class="d-block d-sm-flex gap-2 ">
+                                        <p class="key">Aadhar No :</p>
+                                        <p class="value"><?php echo $userdata['adhar']; ?></p>
+                                    </div>
+                                    <div class="d-block d-sm-flex gap-2 ">
+                                        <p class="key">Date of birth :</p>
+                                        <p class="value"><?php echo $userdata['birthday']; ?></p>
+                                    </div>
+                                    <div class="d-block d-sm-flex gap-2 ">
+                                        <p class="key">Anniversary :</p>
+                                        <p class="value"><?php echo $userdata['anniversary']; ?></p>
+                                    </div>
+                                    <div class="d-block d-sm-flex gap-2 ">
+                                        <p class="key">Address :</p>
+                                        <p class="value"><?php echo $userdata['address'] . ", " . $userdata['city'] . ", " . $userdata['pincode'] . ", " . $userdata['state']; ?></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -160,6 +150,8 @@ if ($userdata['adhar'] == null) {
                 </div>
             </div>
         </section>
+
+
         <!--Profile End-->
 
         <!--**********************************

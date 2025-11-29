@@ -431,6 +431,7 @@ $disableFields = [
                     data: formData,
                     contentType: false,
                     processData: false,
+                    dataType: 'json',
                     success: function(response) {
                         if (response.status === 'success') {
                             form.reset(); // Reset form if successful
@@ -485,10 +486,6 @@ $disableFields = [
                 submitButton.disabled = false; // Re-enable the submit button when form invalid
                 submitButton.innerHTML = 'Submit'; // Reset button text
             }
-            console.log('existingImage:', $('#existingImage').val());
-            console.log('image input files length:', $('#image').get(0).files.length);
-            console.log('Checking image requirement:', !$('#existingImage').val().trim() && $('#image').get(0).files.length === 0);
-
             return false;
         }
 

@@ -18,11 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
 
-    if ($userdetail['email'] === $email && $userdetail['password'] === $password) {
+    if($userdetail['email'] === $email && $userdetail['password'] === $password){
         $_SESSION['CAN_ACCESS_APPLY_CARD'] = true;
         header("Location: apply-virtual-card.php");
         exit();
-    } else {
+    }else {
         $_SESSION['LOGIN'] = "false";
         $errorMsg = "Invalid email or password."; ?>
         <script>
@@ -31,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <?php  }
+
+ 
 }
 ?>
 
@@ -114,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </form>
                 <div class="virtual-image">
-                    <img src="images/AdobeExpress.png" alt="">
+                    <img src="images/AdobeExpress.png" alt="virtual card">
                     <div class="client first">
                         <h6>
                             <span><i class="ri-user-3-fill"></i></span>
@@ -134,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <span><i class="ri-user-3-fill"></i></span>
                             Sunny Gautam
                         </h6>
-                        <img src="./images/rating.png" alt="">
+                        <img src="./images/rating.png" alt="rating">
                     </div>
                 </div>
             </div>
