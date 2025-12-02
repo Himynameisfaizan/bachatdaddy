@@ -523,7 +523,7 @@ $disableFields = [
                         <?php 
                         $_SESSION["ACCESS_THANKU_PAGE"] = true;
                         ?>
-                        window.location.href = 'Thanku.php';
+                        window.location.replace("Thanku.php");
                     } else {
                         alert(response.message);
                     }

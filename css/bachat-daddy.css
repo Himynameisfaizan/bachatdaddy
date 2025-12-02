@@ -12863,13 +12863,13 @@ border-radius: 10%;
 .vendor-column-width {
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  gap: 40px;
 }
 
 .vendor-profile-details {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
-  margin-top: 20px;
 }
 
 .vendor-profile-details ul li {
@@ -12879,13 +12879,13 @@ border-radius: 10%;
   padding-left: 3px;
 }
 .vendor-info {
-  margin-top: 20px;
+  width: 100%;
 }
 .vendor-info ul {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 4px;
   padding: 15px 0;
 }
 .vendor-info ul li {
@@ -12927,14 +12927,13 @@ border-radius: 10%;
 .vendor-first-column {
   background-color: white;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
-  padding: 25px 25px;
+  /* padding: 25px 25px; */
   border-radius: 10px;
 }
 
 .team-details {
   position: relative;
   display: block;
-  /* background-color: #f1f1f1; */
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px 0;
@@ -12972,8 +12971,8 @@ border-radius: 10%;
 .team-details__left {
   position: relative;
   display: flex;
+  gap: 28px;
   flex-direction: column;
-  gap: 40px;
   align-items: center;
   padding: 30px 20px;
   border-radius: var(--bachat-daddy-bdr-radius);
@@ -13093,6 +13092,7 @@ border-radius: 10%;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 30px 10px;
 }
 
 .team-details__title-1 {
@@ -13220,6 +13220,116 @@ border-radius: 10%;
 
 /*--------------------------------------------------------------
 # News Page
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Vendora page start
+--------------------------------------------------------------*/
+.vendors-offer{
+  max-width: 1250px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+.vendors-content{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.vendors-content h4{
+  text-align: center;
+  font-size: 30px;
+  color: var(--bachat-daddy-black);
+}
+.vendors-detail{
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0px 1px 12px 0px rgba(16, 24, 40, 0.322);
+  overflow: hidden;
+  width: 300px;
+}
+.vendors-detail-container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.vendors-detail img{
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+}
+.offer-details{
+  padding: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+.offer-details div:nth-child(3){
+  grid-column: 2 span;
+}
+.flat_discount {
+  text-align: right;
+}
+.offer-details .flat_discount span{
+  background-color: #ee8d21;
+  padding: 5px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f1f1f1;
+}
+.offer-details .offer_name{
+  font-weight: 500;
+  font-size: 18px;
+}
+.offer-details .address{
+  font-size: 500;
+  color: #747474;
+  font-size: 16px;
+}
+.offer-details .mobile-number a{
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #141111;
+}
+.offer-details .expiry-date{
+  text-align: right;
+}
+.offer-details .expiry-date{
+  font-size: 14px;
+  font-weight: 500;
+}
+.vendors-main-conditon{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  height: 30%;
+  width: 34%;
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
+}
+.vendors-main-conditon .condition-content{
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+.vendors-main-conditon h5 i{
+  float: right;
+  cursor: pointer;
+}
+.condition-question{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+/*--------------------------------------------------------------
+# Vendora page end
 --------------------------------------------------------------*/
 .news-page {
   position: relative;

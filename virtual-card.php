@@ -1,4 +1,7 @@
 <?php
+
+use Dotenv\Parser\Value;
+
 session_start();
 
 include 'config/config.php';
@@ -14,10 +17,9 @@ $errorMsg = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
-
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-
+    
     if($userdetail['email'] === $email && $userdetail['password'] === $password){
         $_SESSION['CAN_ACCESS_APPLY_CARD'] = true;
         header("Location: apply-virtual-card.php");
@@ -102,6 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <form action="" method="post">
                     <div class="cta">
+                        <?php
+                            // if () {
+                            //     # code...
+                            // }
+                        ?>
                         <?php
                         if (isset($auth) && method_exists($auth, 'Isloggedin') && $auth->Isloggedin()) {
                         ?>

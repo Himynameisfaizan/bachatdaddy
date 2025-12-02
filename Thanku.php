@@ -13,6 +13,11 @@ $user = new User();
 
 $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
 
+if (!isset($_SESSION["ACCESS_THANKU_PAGE"])) {
+    header("Location: #");
+}
+unset($_SESSION['ACCESS_THANKU_PAGE']);
+
 if (!isset($userdetail['email'])) {
     header('Location: login.php'); // redirect if user not logged in
     exit;
@@ -25,7 +30,11 @@ $db = new dbClass();
 // Function to generate a 10-digit unique number
 function generateCardNumber()
 {
-    return random_int(100000000000, 999999999999);
+    $randNum = (random_int(100000000000, 999999999999)) + (microtime(true) * 1000);
+    $numAsString = (string)$randNum;
+    $getTwelveDigit = substr($numAsString, 0, 12);
+    $twelveDigitInt = (int)$getTwelveDigit;
+    return $twelveDigitInt;
 }
 
 // Function to check if uniqueNum exists in DB using your dbClass getDataWithParams
@@ -59,22 +68,6 @@ if (!isset($_SESSION['uniqueNum'])) {
 // Displaying unique card number to user
 // echo "Your card number is: " . htmlspecialchars($uniqueNum);
 ?>
-<script>
-    <?php
-    // if (!isset($_SESSION["ACCESS_THANKU_PAGE"])) {
-    //     header("Location: pagenotfound.php");
-    // }
-    ?>
-    if (window.location.pathname.split("/").pop() === 'Thanku.php') {
-        <?php
-        $_SESSION["ACCESS_THANKU_PAGE"] = true;
-        ?>
-    } else {
-        <?php
-        unset($_SESSION["ACCESS_THANKU_PAGE"]);
-        ?>
-    }
-</script>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,15 +115,6 @@ if (!isset($_SESSION['uniqueNum'])) {
             </div>
         </div>
     </section>
-    <script>
-        console.log(window.location.pathname.split("/").pop() === 'Thanku.php');
-
-        history.pushState(null, "", location.href);
-        window.addEventListener("popstate", function() {
-            window.location.replace("index.php");
-        });
-    </script>
-
 </body>
 
 </html>
