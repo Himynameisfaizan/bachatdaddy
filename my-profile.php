@@ -266,7 +266,7 @@ function truncateText($text, $limit = 10)
         <!-- Vendors Benefits end -->
 
         <!-- Vendors Condition start - DYNAMIC DATA -->
-        <div class="info-main-container" id="informationContainer" style="display: none;">
+        <div class="info-main-container" id="informationContainer">
             <div class="vendors-main-conditon" id="vendorsCondition">
                 <div class="">
                     <h5>Offers Detail <i class="ri-close-fill" onclick="closePopUp()" id="closeIcon"></i></h5>
@@ -320,14 +320,14 @@ function truncateText($text, $limit = 10)
                         <?php endif; ?>
 
                         <div class="question">Email:
-                            <span><?php echo $popup_vendor_data ? htmlspecialchars($popup_vendor_data['email']) : ''; ?></span>
+                            <a href="mailto:<?php echo htmlspecialchars($popup_vendor_data['email']); ?>"><?php echo $popup_vendor_data ? htmlspecialchars($popup_vendor_data['email']) : ''; ?></a>
                         </div>
 
                         <div class="question">Contact Number:
                             <?php if ($popup_vendor_data && !empty($popup_vendor_data['mobiles'])): ?>
                                 <?php $mobiles = explode(',', $popup_vendor_data['mobiles']); ?>
                                 <?php foreach ($mobiles as $mobile): ?>
-                                    <span><?php echo htmlspecialchars(trim($mobile)); ?></span>
+                                    <a href="tel:<?php echo htmlspecialchars(trim($mobile)); ?>"><?php echo htmlspecialchars(trim($mobile)); ?></a>
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <span>+91</span>

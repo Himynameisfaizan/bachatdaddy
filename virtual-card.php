@@ -15,16 +15,19 @@ $user = new User();
 $auth = new Authentication();
 $errorMsg = '';
 
+$query  = "SELECT userEmail FROM cardnumber";
+$cardRow = $dbclass->getAllData($query);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
-    
-    if($userdetail['email'] === $email && $userdetail['password'] === $password){
+
+    if ($userdetail['email'] === $email && $userdetail['password'] === $password) {
         $_SESSION['CAN_ACCESS_APPLY_CARD'] = true;
         header("Location: apply-virtual-card.php");
         exit();
-    }else {
+    } else {
         $_SESSION['LOGIN'] = "false";
         $errorMsg = "Invalid email or password."; ?>
         <script>
@@ -33,8 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 <?php  }
-
- 
 }
 ?>
 
@@ -101,14 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         Unlock more joy and savings—We brings you exclusive privileges at top hotels, restaurants,
                         and lifestyle spots, so you never have to choose between fun and smart spending.
                     </p>
-                </div>
+                </div>*
                 <form action="" method="post">
                     <div class="cta">
-                        <?php
-                            // if () {
-                            //     # code...
-                            // }
-                        ?>
                         <?php
                         if (isset($auth) && method_exists($auth, 'Isloggedin') && $auth->Isloggedin()) {
                         ?>
@@ -116,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php
                         } else {
                         ?>
-                            <a href="login.php">Apply now <i class="ri-arrow-right-line"></i></a>
+                            <a href="login.php">Login <i class="ri-arrow-right-line"></i></a>
                         <?php
                         }
                         ?>

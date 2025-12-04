@@ -1,76 +1,98 @@
 <?php
-
 session_start();
-
 
 include 'functions/authentication.php';
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
 
 $dbclass = new dbClass();
-$common = new Common();
-$user = new User();
+$common  = new Common();
+$user    = new User();
 
 $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
-
-if (!isset($_SESSION["ACCESS_THANKU_PAGE"])) {
-    header("Location: #");
-}
-unset($_SESSION['ACCESS_THANKU_PAGE']);
 
 if (!isset($userdetail['email'])) {
     header('Location: login.php'); // redirect if user not logged in
     exit;
 }
 
-$userEmail = $userdetail['email'];
+$userEmails = $userdetail['email'];
 
 $db = new dbClass();
 
-// Function to generate a 10-digit unique number
+// Function to generate a 12‑digit unique number
 function generateCardNumber()
 {
-    $randNum = (random_int(100000000000, 999999999999)) + (microtime(true) * 1000);
-    $numAsString = (string)$randNum;
+    $randNum       = (random_int(100000000000, 999999999999)) + (microtime(true) * 1000);
+    $numAsString   = (string) $randNum;
     $getTwelveDigit = substr($numAsString, 0, 12);
-    $twelveDigitInt = (int)$getTwelveDigit;
+    $twelveDigitInt = (int) $getTwelveDigit;
     return $twelveDigitInt;
 }
 
-// Function to check if uniqueNum exists in DB using your dbClass getDataWithParams
+// Check if uniqueNum exists in DB
 function isUniqueNumExists($db, $num)
 {
-    $query = "SELECT COUNT(*) as count FROM cardnumber WHERE uniqueNum = :num";
+    $query  = "SELECT COUNT(*) AS count FROM cardnumber WHERE uniqueNum = :num";
     $params = [':num' => $num];
     $result = $db->getDataWithParams($query, $params);
     return $result['count'] > 0;
 }
 
+// Check if this email already has a card
+function hasCardAlready($db, $email)
+{
+    $query  = "SELECT COUNT(*) AS cnt FROM cardnumber WHERE userEmail = :email";
+    $params = [':email' => $email];
+    $row    = $db->getDataWithParams($query, $params);
+    return $row['cnt'] > 0;
+}
+
+// MAIN LOGIC
 if (!isset($_SESSION['uniqueNum'])) {
-    // Generate unique number and check in DB for uniqueness
+
+    // If email already applied, redirect with message
+    if (hasCardAlready($db, $userEmails)) {
+        $_SESSION['msg'] = "You have already applied for a card.";
+        header("Location: my-profile.php");
+        exit;
+    }
+
+    // Generate unique card number
     do {
-        $uniqueNum = generateCardNumber(12);
+        $uniqueNum = generateCardNumber();
     } while (isUniqueNumExists($db, $uniqueNum));
 
-    // Insert uniqueNum and userEmail in DB using executeStatement with params
-    $insertQuery = "INSERT INTO cardNumber (uniqueNum, userEmail) VALUES (:uniqueNum, :userEmail)";
-    $insertParams = [':uniqueNum' => $uniqueNum, ':userEmail' => $userEmail];
-    if ($db->executeStatement($insertQuery, $insertParams)) {
+    // Insert uniqueNum and userEmail
+    try {
+        $insertQuery  = "INSERT INTO cardnumber (uniqueNum, userEmail) VALUES (:uniqueNum, :userEmail)";
+        $insertParams = [
+            ':uniqueNum' => $uniqueNum,
+            ':userEmail' => $userEmails
+        ];
+        $db->executeStatement($insertQuery, $insertParams);
+
         $_SESSION['uniqueNum'] = $uniqueNum; // Save uniqueNum in session
-    } else {
-        die('Error saving unique number. Please try again.');
+    } catch (PDOException $e) {
+        // Handle duplicate entry just in case race condition happens
+        if (!empty($e->errorInfo[1]) && $e->errorInfo[1] == 1062) {
+            $_SESSION['msg'] = "You have already applied for a card.";
+            header("Location: my-profile.php");
+            exit;
+        }
+
+        // Any other DB error: show generic message
+        die('Database error. Please try again later.');
     }
+
 } else {
     // Use existing uniqueNum from session
     $uniqueNum = $_SESSION['uniqueNum'];
 }
 
-// Displaying unique card number to user
-// echo "Your card number is: " . htmlspecialchars($uniqueNum);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,13 +102,8 @@ if (!isset($_SESSION['uniqueNum'])) {
     <link rel="stylesheet" href="css/thanku.css">
     <link rel="icon" type="image/png" sizes="50x50" href="images/resources/Asset 3.png">
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
-        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
-        rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
     <link
@@ -116,5 +133,4 @@ if (!isset($_SESSION['uniqueNum'])) {
         </div>
     </section>
 </body>
-
 </html>

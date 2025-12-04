@@ -13256,12 +13256,14 @@ border-radius: 10%;
   height: 250px;
   object-fit: cover;
   width: 100%;
+  cursor: pointer;
 }
 .offer-details{
   padding: 14px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 6px;
+  cursor: pointer;
 }
 .offer-details div:nth-child(3){
   grid-column: 2 span;
@@ -13312,7 +13314,7 @@ border-radius: 10%;
 .vendors-main-conditon{
   background-color: #fff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  height: 26%;
+  height: 24%;
   width: 80%;
   padding: 20px 20px 40px 20px;
   border-radius: 10px;
@@ -13343,8 +13345,9 @@ border-radius: 10%;
 .question{
   font-weight: 600;
 }
-.question span{
+.question a{
   font-weight: 500;
+  color: #141111;
 }
 .vendors-main-conditon .condition-content{
   height: 100%;

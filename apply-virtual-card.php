@@ -499,7 +499,6 @@ $disableFields = [
             otpDigits.forEach(input => {
                 otp += input.value.trim();
             });
-            console.log(otp);
 
             if (otp.length !== 6) {
                 alert('Please enter the complete 6-digit OTP');
@@ -520,9 +519,6 @@ $disableFields = [
                         document.getElementById('otp_parent').style.display = 'none'; // Hide popup
                         // Further actions on success
                         document.body.style.overflowY = "auto";
-                        <?php 
-                        $_SESSION["ACCESS_THANKU_PAGE"] = true;
-                        ?>
                         window.location.replace("Thanku.php");
                     } else {
                         alert(response.message);
@@ -532,7 +528,6 @@ $disableFields = [
                     alert('Error verifying OTP. Please try again.');
                 }
             });
-
         });
         // Verfiy otp 
     </script>
