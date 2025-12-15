@@ -52,7 +52,7 @@ class dbClass
 		return $this->conn;
 	}
 
-	
+
 
 	public function getDbName()
 	{
@@ -158,7 +158,19 @@ class dbClass
 			$statement->bindParam($key, $value);
 		}
 
-		return $statement->execute();
+		// return $statement->execute();
+		$success = $statement->execute();
+
+		if (!$success) {
+			$errorInfo = $statement->errorInfo();
+			file_put_contents(
+				__DIR__ . '/db_error.log',
+				date('H:i:s') . " SQL ERROR: {$errorInfo[2]} | QUERY: {$query}\n",
+				FILE_APPEND
+			);
+		}
+
+		return $success;
 	}
 
 	public function executeUpdateWithRowCount($query, $params = [])

@@ -250,7 +250,7 @@ $disableFields = [
     <section class="otp-main-container" id="otp_parent">
         <div class="otp-form">
             <form action="" id="otpForm">
-                <p>One-Time Password. Valid for 60 secounds</p>
+                <p>One-Time Password. Valid for 90 secounds</p>
                 <div class="otp-field">
                     <input type="number" maxlength="1" name="" id="" class="digit">
                     <input type="number" maxlength="1" name="" id="" class="digit">
@@ -452,10 +452,16 @@ $disableFields = [
                             $.ajax({
                                 url: 'sendmail.php',
                                 type: 'POST',
+                                dataType: "json",
                                 data: {
                                     email: formData.get('email')
                                 },
+                                headers: {
+                                    'Connection': 'keep-alive'
+                                },
                                 success: function(otpResponse) {
+                                    console.log(otpResponse);
+
                                     if (otpResponse.status !== 'success') {
                                         alert('Failed to send OTP. Please try again.');
                                     } else {
@@ -463,6 +469,21 @@ $disableFields = [
                                     }
                                     submitButton.disabled = false;
                                     submitButton.innerHTML = 'Submit';
+                                    // After showing OTP popup (in success callback of profile form)
+                                    let timeLeft = 90;
+                                    const timerDisplay = document.querySelector('.otpmsg');
+                                    const timerInterval = setInterval(() => {
+                                        timeLeft--;
+                                        timerDisplay.textContent = `Please enter the one-time password sent to your mail (${timeLeft}s)`;
+
+                                        if (timeLeft <= 0) {
+                                            clearInterval(timerInterval);
+                                            document.getElementById('otp_parent').style.display = 'none';
+                                            document.body.style.overflowY = 'auto';
+                                            alert('OTP expired! Please submit form again.');
+                                        }
+                                    }, 1000);
+
                                 },
                                 error: function() {
                                     alert('Error sending OTP. Please try again.');

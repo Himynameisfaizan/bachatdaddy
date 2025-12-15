@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['CAN_ACCESS_THANKU_PAGE'])){
+    header('Location: index.php');
+    exit();
+}
 include 'functions/authentication.php';
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
@@ -9,87 +13,83 @@ $dbclass = new dbClass();
 $common  = new Common();
 $user    = new User();
 
-$userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
 
-if (!isset($userdetail['email'])) {
-    header('Location: login.php'); // redirect if user not logged in
+/* 1) Logged-in user details */
+$userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID'] ?? null);
+
+if (empty($userdetail) || empty($userdetail['email'])) {
+    header('Location: login.php');
     exit;
 }
 
-$userEmails = $userdetail['email'];
+$userEmail = $userdetail['email'];
 
+/* 2) DB helper object */
 $db = new dbClass();
 
-// Function to generate a 12‑digit unique number
-function generateCardNumber()
+/* 3) 12 digit random number (string) */
+function generateCardNumber(): string
 {
-    $randNum       = (random_int(100000000000, 999999999999)) + (microtime(true) * 1000);
-    $numAsString   = (string) $randNum;
-    $getTwelveDigit = substr($numAsString, 0, 12);
-    $twelveDigitInt = (int) $getTwelveDigit;
-    return $twelveDigitInt;
+    // 0–999999999999 -> pad to 12 digits (leading zeros allowed)
+    return str_pad((string)mt_rand(0, 999999999999), 12, '0', STR_PAD_LEFT);
 }
 
-// Check if uniqueNum exists in DB
-function isUniqueNumExists($db, $num)
+/* 4) Check if this number already exists */
+function cardNumberExists(dbClass $db, string $num): bool
 {
-    $query  = "SELECT COUNT(*) AS count FROM cardnumber WHERE uniqueNum = :num";
+    $sql    = "SELECT COUNT(*) AS cnt FROM cardnumber WHERE uniqueNum = :num";
     $params = [':num' => $num];
-    $result = $db->getDataWithParams($query, $params);
-    return $result['count'] > 0;
+    $row    = $db->getDataWithParams($sql, $params);
+    return !empty($row['cnt']) && $row['cnt'] > 0;
 }
 
-// Check if this email already has a card
-function hasCardAlready($db, $email)
+/* 5) Check if this email already has a card */
+function emailHasCard(dbClass $db, string $email): bool
 {
-    $query  = "SELECT COUNT(*) AS cnt FROM cardnumber WHERE userEmail = :email";
+    $sql    = "SELECT COUNT(*) AS cnt FROM cardnumber WHERE userEmail = :email";
     $params = [':email' => $email];
-    $row    = $db->getDataWithParams($query, $params);
-    return $row['cnt'] > 0;
+    $row    = $db->getDataWithParams($sql, $params);
+    return !empty($row['cnt']) && $row['cnt'] > 0;
 }
 
-// MAIN LOGIC
+/* 6) Main logic – run once */
 if (!isset($_SESSION['uniqueNum'])) {
 
-    // If email already applied, redirect with message
-    if (hasCardAlready($db, $userEmails)) {
+    // If email already has a card, redirect
+    if (emailHasCard($db, $userEmail)) {
         $_SESSION['msg'] = "You have already applied for a card.";
         header("Location: my-profile.php");
         exit;
     }
 
-    // Generate unique card number
+    // Generate unique 12 digit number
     do {
         $uniqueNum = generateCardNumber();
-    } while (isUniqueNumExists($db, $uniqueNum));
+    } while (cardNumberExists($db, $uniqueNum));
 
-    // Insert uniqueNum and userEmail
-    try {
-        $insertQuery  = "INSERT INTO cardnumber (uniqueNum, userEmail) VALUES (:uniqueNum, :userEmail)";
-        $insertParams = [
-            ':uniqueNum' => $uniqueNum,
-            ':userEmail' => $userEmails
-        ];
-        $db->executeStatement($insertQuery, $insertParams);
+    // Insert into DB
+    $sql    = "INSERT INTO cardnumber (userEmail, uniqueNum)
+               VALUES (:email, :uniqueNum)";
+    $params = [
+        ':email'     => $userEmail,
+        ':uniqueNum' => $uniqueNum
+    ];
 
-        $_SESSION['uniqueNum'] = $uniqueNum; // Save uniqueNum in session
-    } catch (PDOException $e) {
-        // Handle duplicate entry just in case race condition happens
-        if (!empty($e->errorInfo[1]) && $e->errorInfo[1] == 1062) {
-            $_SESSION['msg'] = "You have already applied for a card.";
-            header("Location: my-profile.php");
-            exit;
-        }
+    $ok = $db->executeStatement($sql, $params);
 
-        // Any other DB error: show generic message
+    if ($ok) {
+        // Save so refresh doesn't insert again
+        $_SESSION['uniqueNum'] = $uniqueNum;
+    } else {
+        // Optional: simple debug
+        // file_put_contents(__DIR__.'/card_debug.log', date('H:i:s')." INSERT FAILED\n", FILE_APPEND);
         die('Database error. Please try again later.');
     }
 
 } else {
-    // Use existing uniqueNum from session
+    // Already created in this session
     $uniqueNum = $_SESSION['uniqueNum'];
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +104,7 @@ if (!isset($_SESSION['uniqueNum'])) {
 
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"

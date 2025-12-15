@@ -17,6 +17,15 @@ $errorMsg = '';
 
 $query  = "SELECT userEmail FROM cardnumber";
 $cardRow = $dbclass->getAllData($query);
+$cardEmails = array_column($cardRow, 'userEmail'); // Extract all emails from cardnumber table
+$currentUserEmail = null;
+$hasCard = false;
+
+if (isset($auth) && method_exists($auth, 'Isloggedin') && $auth->Isloggedin()) {
+    $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
+    $currentUserEmail = $userdetail['email'];
+    $hasCard = in_array($currentUserEmail, $cardEmails);
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userdetail = $user->getUsersDetails($_SESSION['USERS_USER_ID']);
@@ -102,20 +111,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         Unlock more joy and savings—We brings you exclusive privileges at top hotels, restaurants,
                         and lifestyle spots, so you never have to choose between fun and smart spending.
                     </p>
-                </div>*
+                </div>
                 <form action="" method="post">
                     <div class="cta">
-                        <?php
-                        if (isset($auth) && method_exists($auth, 'Isloggedin') && $auth->Isloggedin()) {
-                        ?>
+                        <?php if ($hasCard) { ?>
+                            <a href="my-profile.php">Show card <i class="ri-arrow-right-line"></i></a>
+                        <?php } elseif (isset($auth) && method_exists($auth, 'Isloggedin') && $auth->Isloggedin()) { ?>
                             <a href="#" onclick="applyCard()">Apply now <i class="ri-arrow-right-line"></i></a>
-                        <?php
-                        } else {
-                        ?>
-                            <a href="login.php">Login <i class="ri-arrow-right-line"></i></a>
-                        <?php
-                        }
-                        ?>
+                        <?php } else { ?>
+                            <a href="login.php">Apply now <i class="ri-arrow-right-line"></i></a>
+                        <?php } ?>
                     </div>
                 </form>
                 <div class="virtual-image">
