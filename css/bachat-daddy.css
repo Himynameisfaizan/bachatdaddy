@@ -13301,6 +13301,25 @@ border-radius: 10%;
   font-size: 14px;
   font-weight: 500;
 }
+.vendor-offer-details .mobile-email{
+  display: flex;
+  justify-content: space-between;
+}
+.vendor-offer-details{
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.vendor-offer-details .mobile-email a,
+.vendor-offer-details .expiry-date {
+  color: #141111;
+  font-size: 14px;
+}
+.vendor-offer-details .offer-edit{
+  display: flex;
+  justify-content: space-between;
+}
 .info-main-container{
   background-color: #01348731;
   width: 100%;
@@ -17546,8 +17565,8 @@ label.error {
 }
 
 .section-1 {
-  padding-top: 75px;
-  padding-bottom: 75px;
+  padding-top: 50px;
+  padding-bottom: 30px;
 }
 
 .main-table {
@@ -17556,28 +17575,37 @@ label.error {
 }
 
 .card-table {
-  width: 95%;
+  width: 75%;
   border-collapse: collapse;
 }
 
 .table-header {
-  background-color: #d5102a;
-  color: #ffffff;
+  background-color: #ee8d21;
+  color: #fff;
 }
 
 .table-cell {
-  border: 1px solid #000;
+  border: 1px solid #e7e7e7;
   padding: 10px;
   text-align: center;
 }
 
 .table-cell-1 {
-  border: 1px solid #000 !important;
+  border-right: 1px solid #e7e7e7 !important;
+  border-bottom: 1px solid #e7e7e7 !important;
+  padding: 6px 0;
 }
 
 .header-cell {
-  font-weight: bold;
-  text-align: left;
+  text-align: center;
+  font-weight: 500;
+}
+.user-list{
+  padding: 50px 0 0 0;
+}
+.user-list h3{
+  text-align: center;
+  color: #000000;
 }
 
 .valid-status {
@@ -17593,19 +17621,23 @@ label.error {
   text-align: center;
   padding: 5px;
 }
-
+.btn-1 i{
+  font-size: 6px;
+  color: green;
+}
 .btn-1 {
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  margin-top: 6px;
   font-weight: 400;
   line-height: 1;
-  color: #ffffff;
-  background-color: green;
+  color: #000000;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
   border: none !important;
-  width: 50%;
-  margin: 5px 35px 5px;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   border-radius: 0.25rem;

@@ -18,11 +18,11 @@
                 <li><a href="login.php" class=" thm-btn-2   ">Login</a></li>
                 <li>
                     <i class="fa fa-envelope"></i>
-                    <a href="mailto:rahulpaul.190492@gmail.com">daddybachat@gmail.com</a>
+                    <a href="mailto:bachatdaddy@bachatdaddy.com">bachatdaddy@bachatdaddy.com</a>
                 </li>
                 <li>
                     <i class="fa fa-phone-alt"></i>
-                    <a href="tel:+91-9793944469">+91-9793944469</a>
+                    <a href="tel:9889769886">+91-9889769886</a>
                 </li>
             </ul><!-- /.mobile-nav__contact -->
             <div class="mobile-nav__top">

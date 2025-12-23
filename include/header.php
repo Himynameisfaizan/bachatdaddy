@@ -23,7 +23,7 @@ if (!isset($_SESSION)) {
                                         <i class="icon-envelope"></i>
                                     </div>
                                     <div class="text">
-                                        <p><a href="mailto:support@bachatdaddy.com">support@bachatdaddy.com</a></p>
+                                        <p><a href="mailto:bachatdaddy@bachatdaddy.com">bachatdaddy@bachatdaddy.com</a></p>
                                     </div>
                                 </li>
                                

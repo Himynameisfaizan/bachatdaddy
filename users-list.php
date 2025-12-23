@@ -8,7 +8,7 @@
     $common = new Common();
     $industry=$common->getAllIdustry();
     $user = new User();
-    $userdata=$user->getAllUsersDetails();
+    $userdata=$user->getCardHolderData();
     $auth = new Authentication();
     $auth->checkVendorSession();
 ?>
@@ -28,6 +28,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+        rel="stylesheet"
+    />
 
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
@@ -63,25 +67,13 @@
         <!--**********************************
             Header start ti-comment-alt
         ***********************************-->
-		<?php require ('include/header.php'); ?>
+		<?php require ('include/vendor_header.php'); ?>
 		<!--**********************************
             Header end ti-comment-alt
         ***********************************-->
-        <!--Page Header Start-->
-        <section class="page-header">
-            <div class="page-header__bg" style="background-image: url(images/backgrounds/page-header-bg.jpg);">
-            </div>
-            <div class="container">
-                <div class="page-header__inner">
-                    <h2>User Details</h2>
-                    <ul class="thm-breadcrumb list-unstyled">
-                        <li><a href="index.php">Home</a></li>
-                        <li><span class="icon-down-arrow"></span></li>
-                        
-                        <li>User Details</li>
-                    </ul>
-                </div>
-            </div>
+
+        <section class="user-list">
+            <h3>Bachatdaddy Card Holder List</h3>
         </section>
 
         <div class="section-1">
@@ -94,10 +86,10 @@
                                     <tbody>
                                    
                                         <tr class="table-header">
-                                            <th class="table-cell header-cell"><strong>Sr. No.</strong></th>
-                                            <th class="table-cell header-cell">Card Holder Name</th>
-                                            <th class="table-cell header-cell">Card Number</th>
-                                            <th class="table-cell header-cell">Status</th>
+                                            <th class="table-cell header-cell"><b>Sr. No.</b></th>
+                                            <th class="table-cell header-cell"><b>Card Holder Name</b></th>
+                                            <th class="table-cell header-cell"><b>Card Number</b></th>
+                                            <th class="table-cell header-cell"><b>Status</b></th>
                                         </tr>
                                    
                                     <?php
@@ -105,10 +97,10 @@
                                         foreach($userdata as $row):
                                     ?>
                                         <tr class="table-cell-1">
-                                            <th class="table-cell header-cell"><strong><?php echo $i++;?></strong></th>
-                                            <th class="table-cell header-cell"><?php echo $row['name'];?></th>
-                                            <td class="table-cell">1234 5678 9101 1121</td>
-                                            <td class="btn-1 table-cell-1 ">Valid</td>
+                                            <th class="table-cell header-cell"><?php echo $i++;?></th>
+                                            <th class="table-cell header-cell"><?php echo $row['userName'];?></th>
+                                            <td class="table-cell header-cell"><?php echo $row['uniqueNum']?></td>
+                                            <td class="btn-1 table-cell header-cell"><i class="ri-circle-fill"></i>Valid</td>
                                         </tr>
                                         <?php endforeach; ?>
                                         
@@ -122,19 +114,6 @@
             </div>
         </div>
         
-
-
-        <!--**********************************
-           footer start ti-comment-alt
-        ***********************************-->
-        
-		
-		<?php require ('include/footer.php'); ?>
-		<!--**********************************
-            footer end ti-comment-alt
-        ***********************************-->
-
-
     </div><!-- /.page-wrapper -->
 
 

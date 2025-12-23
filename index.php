@@ -285,16 +285,16 @@ $subin = $common->getAllSubIn();
                             <div class="section-title__tagline-box">
                                 <p class="section-title__tagline">ABOUT US</p>
                             </div>
-                            <h2 class="section-title__title">Your Gateway For Exclusive Discounts</h2>
+                            <h2 class="section-title__title">Your Gateway to Exclusive Discounts</h2>
                         </div>
-                        <p class="about-one__text"> Bachat Daddy was born with a simple idea —<b> to make everyday
+                        <p class="about-one__text"> Bachatdaddy was born with a simple idea —<b> to make everyday
                                 expenses more affordable for everyone. </b>We noticed that people love going out to
                             hotels, restaurants, pubs, and resorts, but high prices often stop them from enjoying
                             freely. That’s why we decided to create a smart solution the Bachat Daddy Privilege
                             Card.</p>
 
                         <p class="wow fadeIn animated section-title__tagline mt-4 mb-2 text-start">Our Mission</p>
-                        <p class="about-one__text">Our mission is clear — to help people save more while enjoying the
+                        <p class="about-one__text">Our mission is simple — to help people save more while enjoying the
                             best services. <b>We partner with top hotels, restaurants, pubs, and lifestyle businesses
                                 to bring you exclusive discounts and privileges</b> with Bachatdaddy, you don’t have to
                             compromise between fun and savings.</p>

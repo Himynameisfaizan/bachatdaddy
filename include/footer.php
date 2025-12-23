@@ -101,8 +101,7 @@
                                             </div>
                                             <div class="content">
                                                 <h3>Email</h3>
-                                                <p><a href="mailto:daddybachat@gmail.com">daddybachat@gmail.com</a></p>
-                                            
+                                                <p><a href="mailto:bachatdaddy@bachatdaddy.com">bachatdaddy@bachatdaddy.com</a></p>
                                             </div>
                                         </div>
                                     </li>

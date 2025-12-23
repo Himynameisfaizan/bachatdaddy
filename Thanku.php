@@ -23,6 +23,7 @@ if (empty($userdetail) || empty($userdetail['email'])) {
 }
 
 $userEmail = $userdetail['email'];
+$userName = $userdetail['name'];
 
 /* 2) DB helper object */
 $db = new dbClass();
@@ -68,11 +69,12 @@ if (!isset($_SESSION['uniqueNum'])) {
     } while (cardNumberExists($db, $uniqueNum));
 
     // Insert into DB
-    $sql    = "INSERT INTO cardnumber (userEmail, uniqueNum)
-               VALUES (:email, :uniqueNum)";
+    $sql    = "INSERT INTO cardnumber (userEmail, uniqueNum, userName)
+               VALUES (:email, :uniqueNum, :userName)";
     $params = [
         ':email'     => $userEmail,
-        ':uniqueNum' => $uniqueNum
+        ':uniqueNum' => $uniqueNum,
+        ':userName' => $userName
     ];
 
     $ok = $db->executeStatement($sql, $params);

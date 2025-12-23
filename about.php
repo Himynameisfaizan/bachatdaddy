@@ -176,16 +176,15 @@ $industry = $common->getAllIdustry();
                         <div class="col-xl-6 wow fadeIn our-story"  data-wow-delay="100ms"
                             data-wow-duration="600ms">
                             <div class="our-story-mission">
-                                <img src="images/icons/open-book-book-svgrepo-com.svg" alt="">
-                                <p class="section-title__tagline">Our Story</p>
+                                <img src="images/icons/vision-svgrepo-com.svg" alt="">
+                                <p class="section-title__tagline">Our Vision</p>
                             </div>
                             <p class="text-justify mt-2 mt-lg-4 about-para">
-                                Bachat Daddy was born with a simple idea — to 
-                                make everyday experiences more affordable for everyone. 
-                                We noticed that people love going out to hotels, restaurants, 
-                                pubs, and resorts, but high prices often stop them from enjoying 
-                                freely. That’s when we decided to create a smart 
-                                solution: the Bachat Daddy Privilege Card.
+                                Our vision is to build a smart saving culture in India, 
+                                where saving money becomes a part of everyday life. 
+                                We aim to help every customer save more with every purchase, 
+                                while enabling businesses to connect with genuine 
+                                customers—without spending heavily on marketing.
                             </p>
                         </div>
                         <div class="col-xl-6 wow fadeIn" data-wow-delay="100ms"
@@ -195,7 +194,7 @@ $industry = $common->getAllIdustry();
                                 <p class="section-title__tagline">Our Mission</p>
                             </div>
                             <p class="text-justify mt-2 mt-lg-4 about-para">
-                                At BACHAT DADDY, our goal is to bridge the gap between top brands 
+                                At Bachatdaddy, our goal is to bridge the gap between top brands 
                                 and value-conscious customers through a trusted 
                                 privilege network that benefits everyone. Customers get to 
                                 save more, while brands build loyal and repeat customers.

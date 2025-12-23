@@ -92,6 +92,14 @@ class User
         return $stmt;
     }
 
+    function getCardHolderData()
+    {
+        $conn = new dbClass();
+        $stmt = $conn->getAllData("SELECT * FROM `cardnumber` Order by `id` Desc");
+
+        return $stmt;
+    }
+
     function addUserById($id, $adhar, $birthday, $anniversary, $state, $city, $pincode, $address, $representative_name, $image)
     {
         $conn = new dbClass();
@@ -208,6 +216,70 @@ class Vendor
 {
 
     private $conndb;
+
+
+    public function getImagesByOfferIds(array $offerIds)
+    {
+        if (empty($offerIds)) {
+            return [];
+        }
+
+        $conn = new dbClass();
+
+        // Simple: direct string with IN clause
+        $idList = implode(',', array_map('intval', $offerIds));
+
+        $sql = "SELECT offer_id, image 
+            FROM vendor_images 
+            WHERE offer_id IN ($idList)";
+
+        return $conn->getAllData($sql);
+    }
+
+    public function getMobilesByOfferIds(array $offerIds)
+    {
+        if (empty($offerIds)) {
+            return [];
+        }
+        $conn = new dbClass();
+        $idList = implode(',', array_map('intval', $offerIds));
+        $sql = "SELECT offer_id, mobile 
+        FROM vendermobile WHERE offer_id IN ($idList)";
+        return $conn->getAllData($sql);
+    }
+
+    public function getEmailsByOfferIds(array $offerIds)
+    {
+        if (empty($offerIds)) {
+            return [];
+        }
+        $conn = new dbClass();
+        $idList = implode(',', array_map('intval', $offerIds));
+        $sql = "SELECT offer_id, email FROM venderemail WHERE offer_id IN ($idList)";
+        return $conn->getAllData($sql);
+    }
+
+    public function getSconditionsByOfferIds(array $offerIds)
+    {
+        if (empty($offerIds)) {
+            return [];
+        }
+        $conn = new dbClass();
+        $idList = implode(',', array_map('intval', $offerIds));
+        $sql = "SELECT offer_id, `condition` FROM venderscondition WHERE offer_id IN ($idList)";
+        return $conn->getAllData($sql);
+    }
+
+    public function getGconditionsByOfferIds(array $offerIds)
+    {
+        if (empty($offerIds)) {
+            return [];
+        }
+        $conn = new dbClass();
+        $idList = implode(',', array_map('intval', $offerIds));
+        $sql = "SELECT offer_id, `condition` FROM vendergcondition WHERE offer_id IN ($idList)";
+        return $conn->getAllData($sql);
+    }
 
 
     public function getAllVendors()

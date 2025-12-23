@@ -2,6 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
 ?>
 
 <header class="main-header-three">
@@ -32,17 +33,18 @@ if (!isset($_SESSION)) {
                         
                         <div class="main-header-four__top-right">
                             <ul class="list-unstyled main-header-four__top-menu">
-                            <?php if (isset($_SESSION['USERS_Type']) && $_SESSION['USERS_Type'] == "vendor") {?>
-                                <li><a href="users-list.php" class=" thm-btn mb-1  ">Users</a></li>
+                            <?php if (isset($_SESSION['USER_Type']) && $_SESSION['USER_Type'] == "vendor") {?>
+                                <li><a href="users-list.php" class=" thm-btn mb-1  ">Users Detail</a></li>
                             <?php }?>
                             <?php if (isset($_SESSION['USERS_USER_ID'])) { ?>
                                 <li><a href="my-profile.php" class="thm-btn mb-1">Profile</a></li>
                             <?php } elseif (isset($_SESSION['Vendor_ID'])) { ?>
-                                <li><a href="vendor-profile.php" class="thm-btn mb-1">Profile</a></li>
+                                <li><a href="vendor-profile.php?id=<?= base64_encode($_SESSION['Vendor_ID']);?>"
+                                 class="thm-btn mb-1">Profile</a></li>
                             <?php } else { ?>
                                 <li><a href="login.php" class="thm-btn mb-1">Login</a></li>
                             <?php } ?>
-
+ 
                             </ul>
                             <div class="main-header-three__top-social">
                                 <a href="#"><i class="fab fa-twitter"></i></a>
@@ -54,6 +56,7 @@ if (!isset($_SESSION)) {
                     </div>
                 </div>
             </div>
+
             <nav class="main-menu main-menu-three ">
                 <div class="main-menu-three__wrapper py-">
                     <div class="container">
@@ -66,7 +69,7 @@ if (!isset($_SESSION)) {
                                 <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
                                 <ul class="main-menu__list">
                                     <li>
-                                        <a href="index.php">Home</a>
+                                        <a href="vendorshome.php">Home</a>
                                     </li>
                                     <li>
                                         <a href="about.php">About</a>
@@ -100,11 +103,6 @@ if (!isset($_SESSION)) {
                                     <!-- <li>
                                         <a href="what-we-do.php">What We Do</a>
                                     </li> -->
-
-                                    <li>
-                                        <a href="virtual-card.php">Get Card</a>
-                                    </li>
-                                    
                                     <li>
                                         <a href="contact.php">Contact Us</a>
                                     </li>
