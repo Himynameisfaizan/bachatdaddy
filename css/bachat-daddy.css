@@ -9849,30 +9849,22 @@ Redesign end
   /* background-color: red; */
 }
 
-.portfolio-three__single::after{
-position: absolute;
-top: 0%;
-content: "";
-width: 250px;
-height: 30vh;
-border-radius: 10%;
- border-image: linear-gradient(
-    to top,
-    #00000000 0%,
-    #ee8e2150 100%
-  ) 1;
+.portfolio-three__single::after {
+  position: absolute;
+  top: 0%;
+  content: "";
+  width: 250px;
+  height: 30vh;
+  border-radius: 10%;
+  border-image: linear-gradient(to top, #00000000 0%, #ee8e2150 100%) 1;
   border-width: 2px;
   border-style: solid;
   opacity: 0;
   transition: opacity 0.4s;
 }
 
-.portfolio-three__single:hover::after{
- border-image: linear-gradient(
-    to top,
-    #00000000 0%,
-    #ee8e2150 100%
-  ) 1;
+.portfolio-three__single:hover::after {
+  border-image: linear-gradient(to top, #00000000 0%, #ee8e2150 100%) 1;
   opacity: 1;
 }
 
@@ -9918,7 +9910,6 @@ border-radius: 10%;
   transition: 0.5s;
 }
 
-
 .portfolio-three__content h3 {
   position: absolute;
   bottom: 5%;
@@ -9942,7 +9933,6 @@ border-radius: 10%;
   /* margin-left: 10px; */
   transition: 0.5s;
 }
-
 
 /*--------------------------------------------------------------
 # CTA Three
@@ -12938,19 +12928,19 @@ border-radius: 10%;
   margin: 0 auto;
   padding: 20px 0;
 }
-.dashboard-row{
+.dashboard-row {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 40px;
 }
-.dashboard-heading{
+.dashboard-heading {
   text-align: center;
   font-size: 30px;
   color: var(--bachat-daddy-black);
 }
-.dashboard-heading span{
+.dashboard-heading span {
   text-transform: capitalize;
   color: #ee8d21;
 }
@@ -13101,7 +13091,7 @@ border-radius: 10%;
   line-height: 46px;
 }
 
-.dashboard-detail{
+.dashboard-detail {
   background-color: white;
   padding: 30px 20px;
   box-shadow: 0 0 12px 0 rgb(3 3 3 / 28%);
@@ -13225,53 +13215,53 @@ border-radius: 10%;
 /*--------------------------------------------------------------
 # Vendora page start
 --------------------------------------------------------------*/
-.vendors-offer{
+.vendors-offer {
   max-width: 1250px;
   margin: 0 auto;
   margin-bottom: 50px;
 }
-.vendors-content{
+.vendors-content {
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
-.vendors-content h4{
+.vendors-content h4 {
   text-align: center;
   font-size: 30px;
   color: var(--bachat-daddy-black);
 }
-.vendors-detail{
+.vendors-detail {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 1px 12px 0px rgba(16, 24, 40, 0.322);
   overflow: hidden;
   width: 300px;
 }
-.vendors-detail-container{
+.vendors-detail-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
 }
-.vendors-detail img{
+.vendors-detail img {
   height: 250px;
   object-fit: cover;
   width: 100%;
   cursor: pointer;
 }
-.offer-details{
+.offer-details {
   padding: 14px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 6px;
   cursor: pointer;
 }
-.offer-details div:nth-child(3){
+.offer-details div:nth-child(3) {
   grid-column: 2 span;
 }
 .flat_discount {
   text-align: right;
 }
-.offer-details .flat_discount span{
+.offer-details .flat_discount span {
   background-color: #ee8d21;
   padding: 5px;
   border-radius: 50px;
@@ -13279,33 +13269,33 @@ border-radius: 10%;
   font-weight: 600;
   color: #f1f1f1;
 }
-.offer-details .offer_name{
+.offer-details .offer_name {
   font-weight: 500;
   font-size: 18px;
 }
-.offer-details .address{
+.offer-details .address {
   font-size: 500;
   color: #747474;
   font-size: 16px;
 }
-.offer-details .mobile-number a{
+.offer-details .mobile-number a {
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   color: #141111;
 }
-.offer-details .expiry-date{
+.offer-details .expiry-date {
   text-align: right;
 }
-.offer-details .expiry-date{
+.offer-details .expiry-date {
   font-size: 14px;
   font-weight: 500;
 }
-.vendor-offer-details .mobile-email{
+.vendor-offer-details .mobile-email {
   display: flex;
   justify-content: space-between;
 }
-.vendor-offer-details{
+.vendor-offer-details {
   padding: 16px 12px;
   display: flex;
   flex-direction: column;
@@ -13316,11 +13306,11 @@ border-radius: 10%;
   color: #141111;
   font-size: 14px;
 }
-.vendor-offer-details .offer-edit{
+.vendor-offer-details .offer-edit {
   display: flex;
   justify-content: space-between;
 }
-.info-main-container{
+.info-main-container {
   background-color: #01348731;
   width: 100%;
   height: 100%;
@@ -13330,7 +13320,7 @@ border-radius: 10%;
   z-index: 999;
   display: none;
 }
-.vendors-main-conditon{
+.vendors-main-conditon {
   background-color: #fff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   height: 24%;
@@ -13343,42 +13333,42 @@ border-radius: 10%;
   transform: translate(-50%, -50%);
   overflow-y: scroll;
 }
-.vendors-content-image{
+.vendors-content-image {
   display: flex;
   gap: 30px;
 }
-.vendors-content-image>div{
+.vendors-content-image > div {
   flex-basis: 50%;
 }
-.vendors-content-image .vendors-image{
+.vendors-content-image .vendors-image {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
-.vendors-content-image .vendors-image img{
+.vendors-content-image .vendors-image img {
   width: 100%;
   height: 340px;
   object-fit: cover;
   border-radius: 4px;
 }
-.question{
+.question {
   font-weight: 600;
 }
-.question a{
+.question a {
   font-weight: 500;
   color: #141111;
 }
-.vendors-main-conditon .condition-content{
+.vendors-main-conditon .condition-content {
   height: 100%;
   display: flex;
   gap: 20px;
   flex-direction: column;
 }
-.vendors-main-conditon h5 i{
+.vendors-main-conditon h5 i {
   float: right;
   cursor: pointer;
 }
-.condition-question{
+.condition-question {
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -17577,6 +17567,7 @@ label.error {
 .card-table {
   width: 75%;
   border-collapse: collapse;
+  box-shadow: 0 1px 6px 0 #00000034;
 }
 
 .table-header {
@@ -17600,10 +17591,10 @@ label.error {
   text-align: center;
   font-weight: 500;
 }
-.user-list{
+.user-list {
   padding: 50px 0 0 0;
 }
-.user-list h3{
+.user-list h3 {
   text-align: center;
   color: #000000;
 }
@@ -17621,7 +17612,7 @@ label.error {
   text-align: center;
   padding: 5px;
 }
-.btn-1 i{
+.btn-1 i {
   font-size: 6px;
   color: green;
 }
@@ -17689,7 +17680,6 @@ label.error {
 }
 
 .key {
-
   font-weight: 600;
 }
 
@@ -17770,43 +17760,46 @@ label.error {
   text-align: justify !important;
 }
 
-
 /* complete profile start */
-.main-profile-container{
+.main-profile-container {
   padding: 50px;
-  background-color: #f5f5f5; 
+  background-color: #f5f5f5;
 }
-.complete-profile-container{
+.complete-profile-container {
   max-width: 800px;
   margin: 0 auto;
   background-color: white;
   padding: 20px 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.096);
-
 }
-.complete-profile-container h2{
+.complete-profile-container h2 {
   color: #ee8d21;
 }
-.complete-profile-container form{
+.complete-profile-container form {
   margin-top: 20px;
 }
-.form-inputs{
+.form-inputs {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(2, 1fr);
 }
-.form-inputs .input-fields:not(:has(label[for='birthday'])):not(:has(label[for="anniversary"])):not(:has(label[for="name"])):not(:has(label[for="email"])):not(:has(label[for="state"])):not(:has(label[for="city"])){
+.form-inputs
+  .input-fields:not(:has(label[for="birthday"])):not(
+    :has(label[for="anniversary"])
+  ):not(:has(label[for="name"])):not(:has(label[for="email"])):not(
+    :has(label[for="state"])
+  ):not(:has(label[for="city"])) {
   grid-column: span 2;
 }
-.form-inputs .input-fields label{
+.form-inputs .input-fields label {
   font-size: 14px;
   font-weight: 500;
 }
-.form-inputs .input-fields label span{
+.form-inputs .input-fields label span {
   color: red;
 }
-.form-inputs .input-fields div{
+.form-inputs .input-fields div {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -17815,14 +17808,14 @@ label.error {
   border-radius: 6px;
   padding: 4px 8px 4px 4px;
 }
-.form-inputs .input-fields div i{
+.form-inputs .input-fields div i {
   border-right: 1px solid #c8c8c8;
   padding: 0 4px;
   font-size: 14px;
 }
 .form-inputs .input-fields div input,
 .form-inputs .input-fields div select,
-.form-inputs .input-fields div textarea{
+.form-inputs .input-fields div textarea {
   width: 100%;
   outline: none;
   border-width: 0;
@@ -17888,3 +17881,138 @@ Recreate why choose us end
 /*-----------------------------------------
  Brand logo end
 -------------------------------------------*/
+
+/*---------------------------------------------
+ coupan-verfiy start
+------------------------------------------------*/
+.verify-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 15px;
+}
+
+.verify-card {
+  max-width: 900px;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+}
+
+.verify-sidebar {
+  background: linear-gradient(135deg, #ff9a43, #ff6b3d);
+  color: #fff;
+  padding: 30px 25px;
+}
+
+.verify-sidebar h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.verify-sidebar p {
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.verify-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  margin-bottom: 18px;
+}
+
+.verify-badge span.icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  color: #ff7b3d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.verify-main {
+  padding: 28px 30px;
+}
+
+.verify-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.verify-subtitle {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.form-control {
+  border-radius: 10px;
+  border-color: #e0e3eb;
+  font-size: 0.9rem;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.15rem rgba(255, 123, 61, 0.25);
+  border-color: #ff7b3d;
+}
+
+.icon-input {
+  position: relative;
+}
+
+.icon-input .input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b0b4c0;
+  font-size: 14px;
+}
+
+.icon-input .form-control {
+  padding-left: 34px;
+}
+
+.coupon-input {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.btn-verify {
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: linear-gradient(135deg, #ff9a43, #ff6b3d);
+  border: none;
+}
+
+.btn-verify:hover {
+  filter: brightness(0.97);
+}
+
+.verify-hint {
+  font-size: 0.8rem;
+  color: #98a0b3;
+}
+/*---------------------------------------------
+ coupan-verfiy end
+------------------------------------------------*/

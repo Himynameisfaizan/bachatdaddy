@@ -1,16 +1,18 @@
 <?php
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-    include 'config/config.php';
-    include 'functions/bachatdaddyfunctions.php';
-    include 'functions/authentication.php';
-    $common = new Common();
-    $industry=$common->getAllIdustry();
-    $user = new User();
-    $userdata=$user->getCardHolderData();
-    $auth = new Authentication();
-    $auth->checkVendorSession();
+if (!isset($_SESSION)) {
+    session_start();
+}
+include 'config/config.php';
+include 'functions/bachatdaddyfunctions.php';
+include 'functions/authentication.php';
+$common = new Common();
+$industry = $common->getAllIdustry();
+$user = new User();
+$userdata = $user->getCardHolderData();
+$auth = new Authentication();
+$auth->checkVendorSession();
+
+$db = new dbClass();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +32,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link
         href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
-        rel="stylesheet"
-    />
+        rel="stylesheet" />
 
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
@@ -67,8 +68,8 @@
         <!--**********************************
             Header start ti-comment-alt
         ***********************************-->
-		<?php require ('include/vendor_header.php'); ?>
-		<!--**********************************
+        <?php require('include/vendor_header.php'); ?>
+        <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
@@ -84,27 +85,31 @@
                             <td align="center">
                                 <table class="card-table">
                                     <tbody>
-                                   
+
                                         <tr class="table-header">
                                             <th class="table-cell header-cell"><b>Sr. No.</b></th>
                                             <th class="table-cell header-cell"><b>Card Holder Name</b></th>
                                             <th class="table-cell header-cell"><b>Card Number</b></th>
+                                            <th class="table-cell header-cell"><b>Coupon Count</b></th>
                                             <th class="table-cell header-cell"><b>Status</b></th>
                                         </tr>
-                                   
-                                    <?php
-                                        $i=1;
-                                        foreach($userdata as $row):
-                                    ?>
-                                        <tr class="table-cell-1">
-                                            <th class="table-cell header-cell"><?php echo $i++;?></th>
-                                            <th class="table-cell header-cell"><?php echo $row['userName'];?></th>
-                                            <td class="table-cell header-cell"><?php echo $row['uniqueNum']?></td>
-                                            <td class="btn-1 table-cell header-cell"><i class="ri-circle-fill"></i>Valid</td>
-                                        </tr>
+                                        <?php
+                                        $i = 1;
+                                        foreach ($userdata as $row):
+                                            $sqlCouponCount = "SELECT COUNT(*) as coupon_count FROM user_coupons WHERE cardnumber_id = :card_id AND is_used = 0";
+                                            $paramsCouponCount = [':card_id' => $row['id']];
+                                            $couponCountResult = $db->getDataWithParams($sqlCouponCount, $paramsCouponCount);
+                                            $couponCount = $couponCountResult['coupon_count'] ?? 0;
+                                        ?>
+
+                                            <tr class="table-cell-1">
+                                                <th class="table-cell header-cell"><?php echo $i++; ?></th>
+                                                <th class="table-cell header-cell text-capitalize"><?php echo $row['userName']; ?></th>
+                                                <td class="table-cell header-cell"><?php echo $row['uniqueNum'] ?></td>
+                                                <td class="table-cell header-cell"><?php echo $couponCount; ?></td>
+                                                <td class="btn-1 table-cell header-cell"><i class="ri-circle-fill"></i>Valid</td>
+                                            </tr>
                                         <?php endforeach; ?>
-                                        
-                                        
                                     </tbody>
                                 </table>
                             </td>
@@ -113,7 +118,6 @@
                 </table>
             </div>
         </div>
-        
     </div><!-- /.page-wrapper -->
 
 

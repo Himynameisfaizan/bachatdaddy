@@ -6,8 +6,8 @@ include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
 include 'functions/authentication.php';
 
-$common = new Common();
-$db     = new dbClass();
+$common   = new Common();
+$db       = new dbClass();
 $industry = $common->getAllIdustry();
 $id       = $_SESSION['USERS_USER_ID'];
 $user     = new User();
@@ -15,62 +15,53 @@ $userdata = $user->getUsersDetails($id);
 $auth     = new Authentication();
 $auth->checkSession();
 
-// Handle vendor popup data
-// Handle vendor popup data - FIXED + DEBUG
-$popup_vendor_data = null;
-$vendor_id = isset($_GET['vendor_id']) ? (int)$_GET['vendor_id'] : 0;
-if ($vendor_id > 0) {
-    $popup_sql = "SELECT 
-                    vendor.id, vendor.name, vendor.email, vendor.offer, vendor.sdate, vendor.edate,
-                    GROUP_CONCAT(DISTINCT vendermobile.mobile) as mobiles,
-                    GROUP_CONCAT(DISTINCT venderscondition.condition) as vendor_conditions,
-                    GROUP_CONCAT(DISTINCT vendergcondition.condition) as general_conditions,
-                    GROUP_CONCAT(DISTINCT vendor_images.image) as vendor_images
-                  FROM vendor
-                  LEFT JOIN vendermobile ON vendor.id = vendermobile.vendor_id
-                  LEFT JOIN venderscondition ON vendor.id = venderscondition.vendor_id
-                  LEFT JOIN vendergcondition ON vendor.id = vendergcondition.vendor_id
-                  LEFT JOIN vendor_images ON vendor.id = vendor_images.vendor_id
-                  WHERE vendor.id = $vendor_id
-                  GROUP BY vendor.id";
+/**
+ * OFFERS + related tables
+ * venderoffer  (id = offer_id, vendor_id, offer, sdate, edate)
+ * vendor       (id)
+ * vendor_images(offer_id, image)
+ * vendermobile (offer_id, mobile)  // assume ab yaha offer_id hai
+ * venderemail  (offer_id, email)
+ */
 
-    $popup_rows = $db->getAllData($popup_sql);
-    $popup_vendor_data = !empty($popup_rows) ? $popup_rows[0] : null;
-}
-
-// Your main vendors query stays EXACTLY the same
-$sql = "SELECT vendor.id,
-               vendor.name,
-               vendor.offer,
-               vendor.address,
-               vendor.image,
-               vendor.edate,
-               vendermobile.mobile
-        FROM vendor
-        LEFT JOIN vendermobile ON vendor.id = vendermobile.vendor_id
-        WHERE vendor.status = 1
-        ORDER BY vendor.id DESC, vendermobile.vendor_id";
+$sql = "
+    SELECT 
+        vo.id              AS offer_id,
+        vo.vendor_id,
+        v.name             AS vendor_name,
+        v.address,
+        vo.offer,
+        vo.sdate,
+        vo.edate,
+        GROUP_CONCAT(DISTINCT vm.mobile)  AS mobiles,
+        GROUP_CONCAT(DISTINCT ve.email)   AS emails,
+        GROUP_CONCAT(DISTINCT vi.image)   AS images
+    FROM venderoffer vo
+    INNER JOIN vendor v          ON vo.vendor_id = v.id
+    LEFT JOIN vendermobile vm    ON vm.offer_id  = vo.id
+    LEFT JOIN venderemail ve     ON ve.offer_id  = vo.id
+    LEFT JOIN vendor_images vi   ON vi.offer_id  = vo.id
+    WHERE v.status = 1
+    GROUP BY vo.id
+    ORDER BY vo.id DESC
+";
 
 $rows = $db->getAllData($sql);
 
-/* group by vendor id so each vendor has its own mobiles */
-$vendors = [];
+$offers = [];
 foreach ($rows as $row) {
-    $vid = $row['id'];
-    if (!isset($vendors[$vid])) {
-        $vendors[$vid] = [
-            'id'      => $row['id'],
-            'name'    => $row['name'],
-            'offer'   => $row['offer'],
-            'address' => $row['address'],
-            'image'   => $row['image'],
-            'edate'   => $row['edate'],
-            'mobiles' => []
-        ];
-    }
-    if (!empty($row['mobile'])) {
-        $vendors[$vid]['mobiles'][] = $row['mobile'];
-    }
+    $offers[] = [
+        'offer_id'  => $row['offer_id'],
+        'vendor_id' => $row['vendor_id'],
+        'name'      => $row['vendor_name'],
+        'offer'     => $row['offer'],
+        'address'   => $row['address'],
+        'sdate'     => $row['sdate'],
+        'edate'     => $row['edate'],
+        'mobiles'   => !empty($row['mobiles']) ? explode(',', $row['mobiles']) : [],
+        'emails'    => !empty($row['emails'])  ? explode(',', $row['emails'])  : [],
+        'images'    => !empty($row['images'])  ? explode(',', $row['images'])  : [],
+    ];
 }
 
 function truncateText($text, $limit = 10)
@@ -81,7 +72,47 @@ function truncateText($text, $limit = 10)
     }
     return mb_substr($text, 0, $limit, 'UTF-8') . '...';
 }
+
+
+// Offer popup data
+$popup_vendor_data = null;
+
+// JS se query string me ?offer_id=ID bhejna hoga
+$offer_id = isset($_GET['offer_id']) ? (int)$_GET['offer_id'] : 0;
+
+if ($offer_id > 0) {
+    $popup_sql = "
+        SELECT 
+            vo.id            AS offer_id,
+            vo.vendor_id,
+            v.name           AS vendor_name,
+            v.address,
+            vo.offer,
+            vo.sdate,
+            vo.edate,
+            GROUP_CONCAT(DISTINCT vi.image)          AS vendor_images,
+            GROUP_CONCAT(DISTINCT vc.condition)      AS vendor_conditions,
+            GROUP_CONCAT(DISTINCT vgc.condition)     AS general_conditions,
+            GROUP_CONCAT(DISTINCT ve.email)          AS emails,
+            GROUP_CONCAT(DISTINCT vm.mobile)         AS mobiles
+        FROM venderoffer vo
+        INNER JOIN vendor v               ON vo.vendor_id = v.id
+        LEFT JOIN vendor_images vi        ON vi.offer_id   = vo.id
+        LEFT JOIN venderscondition vc     ON vc.offer_id   = vo.id
+        LEFT JOIN vendergcondition vgc    ON vgc.offer_id  = vo.id
+        LEFT JOIN venderemail ve          ON ve.offer_id   = vo.id
+        LEFT JOIN vendermobile vm         ON vm.offer_id   = vo.id
+        WHERE vo.id = $offer_id
+        GROUP BY vo.id
+        LIMIT 1
+    ";
+
+    $popup_rows = $db->getAllData($popup_sql);
+    $popup_vendor_data = !empty($popup_rows) ? $popup_rows[0] : null;
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -219,40 +250,48 @@ function truncateText($text, $limit = 10)
             <div class="vendors-content">
                 <h4>Grab the Vendor's Offers</h4>
                 <div class="vendors-detail-container">
-                    <?php if (!empty($vendors)): ?>
-                        <?php foreach ($vendors as $vendor): ?>
-                            <div class="vendors-detail" onclick="showOffer(<?php echo $vendor['id']; ?>)">
-                                <img src="<?php echo !empty($vendor['image'])
-                                                ? 'bachatdaddy@1357admin/adminuploads/images/vendors/' . htmlspecialchars($vendor['image'])
-                                                : './images/resources/321.jpg'; ?>"
-                                    alt="<?php echo htmlspecialchars($vendor['name']); ?>">
+                    <?php if (!empty($offers)): ?>
+                        <?php foreach ($offers as $offer): ?>
+                            <div class="vendors-detail" onclick="showOffer(<?php echo $offer['offer_id']; ?>)">
+                                <?php
+                                $imagePath = './images/resources/321.jpg';
+                                if (!empty($offer['images'])) {
+                                    $firstImg  = $offer['images'][0];
+                                    $imagePath = 'bachatdaddy@1357admin/adminuploads/images/vendors/' . htmlspecialchars($firstImg);
+                                }
+                                ?>
+                                <img src="<?php echo $imagePath; ?>"
+                                    alt="<?php echo htmlspecialchars($offer['name']); ?>">
 
                                 <div class="offer-details">
                                     <div class="offer_name">
-                                        <?php echo htmlspecialchars(truncateText($vendor['name'], 14)); ?>
+                                        <?php echo htmlspecialchars(truncateText($offer['name'], 14)); ?>
                                     </div>
 
                                     <div class="flat_discount">
                                         <span class="animate__animated animate__bounce animate__delay-2s animate__slower">
-                                            <?php echo htmlspecialchars($vendor['offer']); ?> off
+                                            <?php echo htmlspecialchars($offer['offer']); ?>
                                         </span>
                                     </div>
 
                                     <div class="address">
-                                        <?php echo htmlspecialchars(truncateText($vendor['address'], 20)); ?>
+                                        <?php echo htmlspecialchars(truncateText($offer['address'], 20)); ?>
                                     </div>
 
                                     <div class="mobile-number">
-                                        <?php if (!empty($vendor['mobiles'])): ?>
-                                            <?php foreach ($vendor['mobiles'] as $mobile): ?>
-                                                <a href="tel:<?php echo htmlspecialchars($mobile); ?>"><?php echo htmlspecialchars($mobile); ?></a>
+                                        <?php if (!empty($offer['mobiles'])): ?>
+                                            <?php foreach ($offer['mobiles'] as $mobile): ?>
+                                                <a href="tel:<?php echo htmlspecialchars($mobile); ?>">
+                                                    <?php echo htmlspecialchars($mobile); ?>
+                                                </a>
                                             <?php endforeach; ?>
                                         <?php else: ?>
                                             <div>No contact number</div>
                                         <?php endif; ?>
                                     </div>
+
                                     <div class="expiry-date">
-                                        exp: <span><?php echo htmlspecialchars($vendor['edate']); ?></span>
+                                        exp: <span><?php echo htmlspecialchars($offer['edate']); ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -320,14 +359,18 @@ function truncateText($text, $limit = 10)
                         <?php endif; ?>
 
                         <div class="question">Email:
-                            <a href="mailto:<?php echo htmlspecialchars($popup_vendor_data['email']); ?>"><?php echo $popup_vendor_data ? htmlspecialchars($popup_vendor_data['email']) : ''; ?></a>
+                            <a href="mailto:<?php echo htmlspecialchars($popup_vendor_data['emails']); ?>">
+                                <?php echo $popup_vendor_data ? htmlspecialchars($popup_vendor_data['emails']) : ''; ?>
+                            </a>
                         </div>
 
                         <div class="question">Contact Number:
                             <?php if ($popup_vendor_data && !empty($popup_vendor_data['mobiles'])): ?>
                                 <?php $mobiles = explode(',', $popup_vendor_data['mobiles']); ?>
                                 <?php foreach ($mobiles as $mobile): ?>
-                                    <a href="tel:<?php echo htmlspecialchars(trim($mobile)); ?>"><?php echo htmlspecialchars(trim($mobile)); ?></a>
+                                    <a href="tel:<?php echo htmlspecialchars(trim($mobile)); ?>">
+                                        <?php echo htmlspecialchars(trim($mobile)); ?>
+                                    </a>
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <span>+91</span>
@@ -354,14 +397,14 @@ function truncateText($text, $limit = 10)
         let informationContainer = document.getElementById("informationContainer");
         let currentVendorId = null;
 
-        const showOffer = (vendorId) => {
-            currentVendorId = vendorId;
+        const showOffer = (offer_id) => {
+            currentVendorId = offer_id;
 
             // Check if we're already on the vendor page - don't reload
             const urlParams = new URLSearchParams(window.location.search);
-            if (!urlParams.has('vendor_id') || urlParams.get('vendor_id') != vendorId) {
+            if (!urlParams.has('offer_id') || urlParams.get('offer_id') != offer_id) {
                 // Only reload if vendor_id is different or missing
-                window.location.href = window.location.pathname + '?vendor_id=' + vendorId + '#informationContainer';
+                window.location.href = window.location.pathname + '?offer_id=' + offer_id + '#informationContainer';
             } else {
                 // Already on correct page, just show popup
                 showPopup();
@@ -385,7 +428,7 @@ function truncateText($text, $limit = 10)
 
             // Clear URL parameter
             const urlParams = new URLSearchParams(window.location.search);
-            urlParams.delete('vendor_id');
+            urlParams.delete('offer_id');
             const newUrl = window.location.pathname + (urlParams.toString() ? '?' + urlParams.toString() : '');
             window.history.replaceState({}, document.title, newUrl);
             currentVendorId = null;
@@ -403,9 +446,9 @@ function truncateText($text, $limit = 10)
         // Auto-show popup if vendor_id exists in URL on page load
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('vendor_id')) {
-                const vendorId = urlParams.get('vendor_id');
-                currentVendorId = vendorId;
+            if (urlParams.has('offer_id')) {
+                const offer_id = urlParams.get('offer_id');
+                currentVendorId = offer_id;
                 showPopup();
             }
         });

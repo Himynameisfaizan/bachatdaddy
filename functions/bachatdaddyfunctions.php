@@ -324,6 +324,7 @@ class Vendor
                                         v.sdate,
                                         v.edate, 
                                         v.address AS vendor_address, 
+                                        v.mobile,
                                         v.city_id,           
                                         l.city AS city_name,  
                                         l.state AS city_state 

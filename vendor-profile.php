@@ -181,12 +181,6 @@ function truncateText($text, $length)
             <div class="container">
                 <div class="team-details__inner">
                     <div class="row vendor-column-width">
-
-                        <!-- Old -->
-
-                        <!-- Old -->
-
-
                         <div class="col-12 text-center text-capitalize">
                             <h3>Welcome <?= htmlspecialchars($vendorInfo['vendor_name']); ?></h3>
                         </div>
@@ -225,9 +219,44 @@ function truncateText($text, $length)
                                 </div>
                             </div>
                             <!-- right side abhi blank/chhod sakte ho; baad me offers add karenge -->
+
+                            <div class="col-xl-6 col-lg-7 vendor-secound-column">
+                                <div class="team-details__right">
+
+                                    <div class="main-slider__carousel owl-carousel owl-theme thm-owl__carousel"
+                                        data-owl-options='{"loop": true, "items": 1, "navText": ["<span class=\"icon-left-arrow\"></span>","<span class=\"icon-right-arrow\"></span>"], "margin": 0, "dots": true, "nav": false, "animateOut": "slideOutDown", "animateIn": "fadeIn", "active": true, "smartSpeed": 1000, "autoplay": true, "autoplayTimeout": 7000, "autoplayHoverPause": false}'>
+                                        <?php foreach ($iov as $offer): ?>
+                                            <div class="item main-slider__slide-1">
+                                                <img src="bachatdaddy@1357admin/adminuploads/images/vendors/<?php echo $offer['image']; ?>" alt="">
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <div class="vendor-profile-details">
+                                        <p class=""><strong>Eligibility : </strong> Bachatdaddy Card Holder</p>
+                                    </div>
+                                    <div class="vendor-profile-details">
+                                        <?php if ($sov != "" && $sov != null && $sov != '0'): ?>
+                                            <p><strong>Address : </strong></p>
+                                            <ul class="ul-padding">
+                                                <li>
+                                                    <?= htmlspecialchars($vendorInfo['vendor_address']); ?>
+                                                </li>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="vendor-profile-details">
+                                        <?php if ($gov != "" && $gov != null && $gov != '0'): ?>
+                                            <p><strong>Mobile Number : </strong></p>
+                                            <ul class="ul-padding">
+                                                <li>
+                                                    <?= htmlspecialchars($vendorInfo['mobile']); ?>
+                                                </li>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -444,4 +473,5 @@ function truncateText($text, $length)
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

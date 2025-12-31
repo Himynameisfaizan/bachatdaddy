@@ -74,7 +74,10 @@ if (!isset($_SESSION)) {
                                     <li>
                                         <a href="about.php">About</a>
                                     </li>
-                                    <li class="dropdown">
+                                    <li>
+                                        <a href="coupon-verify.php">Verify Coupon</a>
+                                    </li>
+                                    <!-- <li class="dropdown">
                                         <a href="#">Industry We Serve</a>
                                         <ul class="sub-menu">
                                             <?php foreach($industry as $category): ?>
@@ -98,7 +101,7 @@ if (!isset($_SESSION)) {
                                             <?php endforeach;?>
                                             
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     
                                     <!-- <li>
                                         <a href="what-we-do.php">What We Do</a>
