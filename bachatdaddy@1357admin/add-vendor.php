@@ -60,12 +60,18 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Submit') {
         $idof = $vendor->VlastInsertId();
         $vandor_id = $idof['id'];
 
-        $ido = $vendor->VlastOfferId();
-        $offer_id = $ido['id'];
-
         if (!empty($_POST['offers'])) {
             foreach ($_POST['offers'] as $offerIndex => $offerData) {
-                // Ab offer text sahi se aayega!
+                $offer = trim($offerData['offer'] ?? '');
+                $sdate = trim($offerData['sdate'] ?? '');
+                $edate = trim($offerData['edate'] ?? '');
+            }
+        }
+        if (!empty($_POST['offers'])) {
+            $ido = $vendor->VlastOfferId();
+            $offer_id = (int) $ido['id'] + 1;
+
+            foreach ($_POST['offers'] as $offerIndex => $offerData) {
                 $offer = trim($offerData['offer'] ?? '');
                 $sdate = trim($offerData['sdate'] ?? '');
                 $edate = trim($offerData['edate'] ?? '');
@@ -79,39 +85,21 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'Submit') {
         if (!empty($_POST['emails'])) {
             foreach ($_POST['emails'] as $email) {
                 $email = trim($email);
-                if (!empty($email)) {              // ← IMPORTANT
+                if (!empty($email)) {          
                     $result = $vendor->insertVendorEmail($vandor_id, $email, $offer_id);
                 }
                 // $result = $vendor->insertVendorEmail($vandor_id, $email);
             }
-        }
+        } 
         if (!empty($_POST['phones'])) {
             foreach ($_POST['phones'] as $phone) {
                 $phone = trim($phone);
-                if (!empty($phone)) {              // ← IMPORTANT
+                if (!empty($phone)) {             
                     $result = $vendor->insertVendorPhone($vandor_id, $phone, $offer_id);
                 }
                 // $result = $vendor->insertVendorPhone($vandor_id, $phone);
             }
         }
-        // foreach ($_POST['offers'] as $offer) {
-        // $offer = trim($offer);
-        // if (!empty($_POST['offers'])) {
-        //     echo "<pre>"; print_r($_POST['offers']); echo "</pre>"; exit;
-        //     foreach ($_POST['offers'] as $offerIndex => $offerData) {
-        //         echo "OfferData: "; print_r($offerData); exit;
-        //         $offer = trim($offerData['offers'][0] ?? '');
-        //         $sdate = $offerData['sdate'] ?? null;
-        //         $edate = $offerData['edate'] ?? null;
-
-        //         if (!empty($offer)) {  // ← ADD THIS
-        //             $result = $vendor->insertVendorOffer($vandor_id, $offer, $sdate, $edate);
-        //         }
-
-        //         // $result = $vendor->insertVendorOffer($vandor_id, $offer, $sdate, $edate);
-        //     }
-        // }
-
         if (!empty($_POST['sconditions'])) {
             foreach ($_POST['sconditions'] as $scondition) {
                 $scondition = trim($scondition);

@@ -11,7 +11,7 @@ session_start();
 		$email = $_POST['email'];
 		$pass = $_POST['password'];
 		$result = $auth->adminLogin($email, $pass);
-
+     
 		if ($result === true) {
 		header('Location: home.php');
 			exit();

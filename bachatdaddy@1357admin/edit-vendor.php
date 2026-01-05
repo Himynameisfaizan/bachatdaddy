@@ -73,7 +73,7 @@
                 foreach ($_POST['emails'] as $email) {
                     $email = trim($email); 
                     if($email != ""){
-                        $result=$vendor->insertVendorEmail($vendor_id, $email);
+                        $result=$vendor->insertVendorEmail($vendor_id, $email, $offer_id);
                     }
                 }
             }
@@ -81,7 +81,7 @@
                 foreach ($_POST['phones'] as $phone) {
                     $phone = trim($phone); 
                     if($phone != ""){
-                        $result = $vendor->insertVendorPhone($vendor_id, $phone);
+                        $result = $vendor->insertVendorPhone($vendor_id, $phone, $offer_id);
                     }
                 }
             }
@@ -89,7 +89,7 @@
                 foreach ($_POST['offers'] as $offer) {
                     $offer = trim($offer);
                     if($offer != ""){
-                        $result = $vendor->insertVendorOffer($vendor_id, $offer);
+                        $result = $vendor->insertVendorOffer($vandor_id, $offer, $sdate, $edate);
                     }
                 }
             }
@@ -97,7 +97,7 @@
                 foreach ($_POST['sconditions'] as $scondition) {
                     $scondition = trim($scondition);
                     if($scondition != ""){
-                        $result = $vendor->insertVendorScondition($vendor_id, $scondition);
+                        $result = $vendor->insertVendorScondition($vendor_id, $scondition, $offer_id);
                     }
                 }
             }
@@ -105,7 +105,7 @@
                 foreach ($_POST['gconditions'] as $gcondition) {
                     $gcondition = trim($gcondition);
                     if($gcondition != ""){
-                        $result = $vendor->insertVendorGcondition($vendor_id, $gcondition);
+                        $result = $vendor->insertVendorGcondition($vendor_id, $gcondition, $offer_id);
                     }
                 }
             }
@@ -119,7 +119,7 @@
                         $newImage = time() . "-" . $imageName;
                         $newDest = $dest . $newImage;
                         
-                        $result = $vendor->insertProductImages($vendor_id, $newImage);
+                        $result = $vendor->insertProductImages($vendor_id, $newImage, $offer_id);
                         if ($result) {
                             move_uploaded_file($tempName, $newDest);
                         }

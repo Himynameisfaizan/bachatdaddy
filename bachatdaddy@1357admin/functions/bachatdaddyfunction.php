@@ -480,9 +480,6 @@ class Vendor
         return $stmt;
     }
 
-
-
-
     public function insertVendorOffer($vendorId, $offer, $sdate, $edate)
     {
         $conn = new dbClass();
@@ -492,15 +489,19 @@ class Vendor
         $params = [
             ':vendorId' => $vendorId,
             ':offer' => $offer,
-            'sdate' => $sdate,
-            'edate' => $edate
+            ':sdate' => $sdate,
+            ':edate' => $edate
         ];
 
         // Execute the query with the parameters
-        $stmt = $conn->executeStatement($sql, $params);
-
-        return $stmt;
+        // $stmt = $conn->executeStatement($sql, $params);
+        $conn->executeStatement($sql, $params);
+        $current_max = $conn->getData("SELECT COALESCE(MAX(id), 0) as max_id FROM venderoffer");
+        $next_id = (int)$current_max['max_id'] + 1; 
+        
+        return $next_id;
     }
+
     // Get Specific Vendor Offer
     public function getVendorOffer($id)
     {

@@ -19,7 +19,6 @@
 	<meta name="author" content="DexignLab">
 	<meta name="robots" content="">
 
-	
 	<meta name="format-detection" content="telephone=no">
 
 	<!-- Mobile Specific -->

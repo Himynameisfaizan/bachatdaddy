@@ -30,6 +30,7 @@
 						<ul aria-expanded="false">
 							<li><a href="add-vendor.php">Add Vendors</a></li>
 							<li><a href="manage-vendor.php">View/Manage Vendors</a></li>
+							<li><a href="vendor-coupon-limits.php">Manage Coupons</a></li>
 						</ul>
 					</li>
 					<li><a  href="registrations.php" aria-expanded="false">
