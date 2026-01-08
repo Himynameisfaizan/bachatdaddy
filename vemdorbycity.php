@@ -89,17 +89,16 @@
 
         <!--Page Header Start-->
         <section class="page-header">
-            <div class="page-header__bg" style="background-image: url(images/backgrounds/page-header-bg.jpg);">
+            <div class="page-header__bg" style="background-image: url(images/backgrounds/bg-what.jpg); opacity: 0.1;">
             </div>
             
             <div class="container">
                 <div class="page-header__inner">
-                    <h2><?= $editdata["name"]?></h2>
+                    <h2 style="color: #0f0c0c;"><?= $editdata["name"]?></h2>
                     <ul class="thm-breadcrumb list-unstyled">
-                        <li><a><?=   $city["state"]?></a></li>
-                        <li><span class="icon-down-arrow"></span></li>
-                        
-                        <li><?=  $city["city"]?></li>
+                        <li style="color: #0f0c0c;"><a><?=   $city["state"]?></a></li>
+                        <li><span class="icon-down-arrow" style="color: #0f0c0c;"></span></li>
+                        <li style="color: #0f0c0c;"><?=  $city["city"]?></li>
                     </ul>
                 </div>
             </div>

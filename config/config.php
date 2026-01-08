@@ -23,7 +23,7 @@ class dbClass
 	private function connect()
 	{
 
-		$this->host = 'localhost:3307';
+		$this->host = 'localhost';
 		$this->user = 'root';
 		$this->pass = '';
 		$this->dbname = 'bachatdaddy_db';

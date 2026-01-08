@@ -55,19 +55,18 @@ include 'functions/authentication.php';
         ul {
             list-style-type: none;
         }
+
         body {
             background: #f5f6fb;
         }
     </style>
     <style>
-        
+
     </style>
 
 </head>
 
 <body class="custom-cursor">
-
-
     <section>
         <div class="verify-wrapper">
             <div class="verify-card row g-0">
@@ -118,16 +117,17 @@ include 'functions/authentication.php';
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="form-label"><b>Coupon Code</b></label>
+                                    <label class="form-label"><b>Select Vendor</b></label>
                                     <div class="icon-input">
                                         <span class="input-icon">
-                                            <i class="ri-eye-close-fill"></i>
+                                            <i class="ri-store-line"></i>
                                         </span>
-                                        <input type="text" class="form-control coupon-input" id="couponCode" name="coupon_code" placeholder="BD7FAAXX" required>
+                                        <select class="form-control" id="vendorSelect" name="vendor_id" required>
+                                            <option value="">Loading vendors...</option>
+                                        </select>
                                     </div>
-                                    <div class="verify-hint mt-1">Ask customer to show coupon code from their app/website.</div>
+                                    <div class="verify-hint mt-1">Select the vendor/store where customer visited.</div>
                                 </div>
-
                                 <div class="col-12">
                                     <div id="verifyResult" class="mt-2" style="display:none;"></div>
                                 </div>
@@ -175,64 +175,73 @@ include 'functions/authentication.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('couponVerifyForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // ← ye important hai, page reload nahi hoga
+        $(document).ready(function() {
+            $.getJSON('api/verify-coupon.php')
+                .done(function(data) {
+                    const select = document.getElementById('vendorSelect');
+                    select.innerHTML = '<option value="">Select Vendor</option>';
 
-            const cardNumber = document.getElementById('cardNumber').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const couponCode = document.getElementById('couponCode').value.trim().toUpperCase();
-
-            // Validation
-            if (!cardNumber || !email || !couponCode) {
-                const box = document.getElementById('verifyResult');
-                box.style.display = 'block';
-                box.className = 'alert alert-warning mb-0';
-                box.innerHTML = 'All fields are required.';
-                return;
-            }
-
-            const payload = {
-                card_number: cardNumber,
-                email: email,
-                coupon_code: couponCode
-            };
-
-            const box = document.getElementById('verifyResult');
-            box.style.display = 'block';
-            box.className = 'alert alert-info mb-0';
-            box.innerHTML = 'Checking coupon, please wait...';
-
-            fetch('./api/verify-coupon.php', { // adjust path
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.valid) {
-                        box.className = 'alert alert-success mb-0';
-                        box.innerHTML = `
-        <strong>✓ Coupon is valid!</strong>
-        ${data.offer_text ? 'Offer: ' + data.offer_text + ' ' : ''}
-        Status: Not used yet. You can give discount.
-      `;
-                    } else {
-                        box.className = 'alert alert-danger mb-0';
-                        box.innerHTML = `
-        <strong>✗ Coupon invalid or already used.</strong>
-        ${data.message || 'Please re-check card, email and code.'}
-      `;
+                    for (let i = 0; i < data.length; i++) {
+                        const option = document.createElement('option');
+                        option.value = data[i].id;
+                        option.text = data[i].name;
+                        select.appendChild(option);
                     }
                 })
-                .catch(error => {
-                    box.className = 'alert alert-warning mb-0';
-                    box.innerHTML = 'Something went wrong, please try again';
-                    console.error("Error:", error)
+                .fail(function(xhr, status, error) {
+                    document.getElementById('vendorSelect').innerHTML = '<option>Error loading vendors</option>';
                 });
+
+            // Form submit
+            document.getElementById('couponVerifyForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const cardNumber = document.getElementById('cardNumber').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const vendorId = document.getElementById('vendorSelect').value;
+
+                if (!cardNumber || !email || !vendorId) {
+                    showResult('All fields required.', 'warning');
+                    return;
+                }
+
+                showResult('Verifying visit...', 'info');
+
+                fetch('api/verify-visit.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            card_number: cardNumber,
+                            email: email,
+                            vendor_id: vendorId
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            showResult(`✓ Visit verified! Count: ${data.visit_count}/${data.max_limit}`, 'success');
+                        } else {
+                            showResult(`✗ ${data.message}`, 'danger');
+                        }
+                    })
+                    .catch(err => {
+                        showResult('Server error, try again.', 'warning');
+                        console.error(err);
+                        
+                    });
+            });
+
+            function showResult(msg, type) {
+                const box = document.getElementById('verifyResult');
+                box.className = `alert alert-${type} mb-0`;
+                box.innerHTML = msg;
+                box.style.display = 'block';
+            }
         });
     </script>
+
 
 </body>
 
