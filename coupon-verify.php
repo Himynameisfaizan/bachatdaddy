@@ -221,7 +221,7 @@ include 'functions/authentication.php';
                     .then(res => res.json())
                     .then(data => {
                         if (data.success) {
-                            showResult(`✓ Visit verified! Count: ${data.visit_count}/${data.max_limit}`, 'success');
+                            showResult(`✓ Coupon Used! Count: ${data.visit_count}/${data.max_limit}`, 'success');
                         } else {
                             showResult(`✗ ${data.message}`, 'danger');
                         }
