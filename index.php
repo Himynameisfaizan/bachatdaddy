@@ -88,6 +88,25 @@ $subin = $common->getAllSubIn();
             <div class="main-slider__carousel owl-carousel owl-theme thm-owl__carousel"
                 data-owl-options='{"loop": true, "items": 1, "navText": ["<span class=\"icon-left-arrow\"></span>","<span class=\"icon-right-arrow\"></span>"], "margin": 0, "dots": true, "nav": false, "animateOut": "slideOutDown", "animateIn": "fadeIn", "active": true, "smartSpeed": 1000, "autoplay": true, "autoplayTimeout": 7000, "autoplayHoverPause": false}'>
 
+                <!-- Re-create banner start -->
+                <section class='hero-container'>
+                    <div class='hero-grid-two-part'>
+                        <div class="hero-content">
+                            <h1>Make Easier Day <br><span>with</span> <br> Our Card</h1>
+                            <p>Save big on Hotels, Education, Healthcare, Jewellery, Lifestyle Outlets and more with BACHATDADDY Card – make every purchase smarter and more rewarding!</p>
+                            <div class="btn-to-connect">
+                                <a href="contact.php"><button>Apply now</button></a>
+                                <!-- <a class="cta-btn " href="javascript:void(0)">Get Your Card</a> -->
+                            </div>
+                        </div>
+                        <div class="hero-image">
+                            <img src="images/banner/3.png" alt="banner image">
+                        </div>
+                    </div>
+                </section>
+                <!-- Re-create banner end -->
+
+
                 <!-- <div class="item main-slider__slide-1">
                     <div class="main-slider__bg" style="background-image: url(images/banner/1.jpg);">
                     </div>
@@ -120,27 +139,11 @@ $subin = $common->getAllSubIn();
                     </div>
                 </div> -->
 
-                <!-- Re-create banner start -->
-                <section class='hero-container'>
-                    <div class='hero-grid-two-part'>
-                        <div class="hero-content">
-                            <h1>Make Easier Day <br><span>with</span> <br> Our Card</h1>
-                            <p>Save big on Hotels, Education, Healthcare, Jewellery, Lifestyle Outlets and more with BACHATDADDY Card – make every purchase smarter and more rewarding!</p>
-                            <div class="btn-to-connect">
-                                <a href="contact.php"><button>Apply now</button></a>
-                                <!-- <a class="cta-btn " href="javascript:void(0)">Get Your Card</a> -->
-                            </div>
-                        </div>
-                        <div class="hero-image">
-                            <img src="images/banner/3.png" alt="">
-                        </div>
-                    </div>
-                </section>
-                <!-- Re-create banner end -->
+
 
             </div>
+        </section>
     </div>
-    </section>
     <!--Main Sllider Start -->
 
     <!--Feature Two Start -->
@@ -239,16 +242,18 @@ $subin = $common->getAllSubIn();
                         <div class="portfolio-three__single">
                             <div class="portfolio-three__img-box">
                                 <div class="portfolio-three__img">
-                                   <a href="vendors.php?id=<?php echo base64_encode($subrow['id']); ?>"> <img src="bachatdaddy@1357admin/adminuploads/images/vendor-category/<?php echo $subrow['image']; ?>"
-                                    alt=""></a>
+                                    <a href="vendors.php?id=<?php echo base64_encode($subrow['id']); ?>">
+                                        <img src="bachatdaddy@1357admin/adminuploads/images/vendor-category/<?php echo $subrow['image']; ?>"
+                                            alt="vendor image">
+                                    </a>
                                     <div class="blur-overlap"></div>
-                                        <div class="blur-overlay"></div>
+                                    <div class="blur-overlay"></div>
                                 </div>
                             </div>
                             <div class="portfolio-three__content">
                                 <h3 class="portfolio-three__title">
                                     <!-- <a href="vendors.php?id=<#?php echo base64_encode($category['id']); ?>"><#?php echo $category['name']; ?></a> -->
-                                   <?php echo $subrow['name']; ?>
+                                    <?php echo $subrow['name']; ?>
                                 </h3>
                             </div>
                         </div>
@@ -419,7 +424,7 @@ $subin = $common->getAllSubIn();
                 <li>
                     <div class="counter-one__icon">
                         <!-- <span class="icon-icon-satisfied-clients"></span> -->
-                       <span style="margin-top: -25px;"> <img src="images/experience.png" alt=""></span>
+                        <span style="margin-top: -25px;"> <img src="images/experience.png" alt=""></span>
                     </div>
                     <div class="counter-one__count count-box counted">
                         <h3 class="count-text" data-stop="650" data-speed="1500">650</h3>

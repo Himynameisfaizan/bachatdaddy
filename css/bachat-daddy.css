@@ -9843,10 +9843,13 @@ Redesign end
 }
 
 .filter-layout .filter-item {
-  width: 20%;
+  width: 21%;
   margin-left: 20px;
   position: relative;
-  /* background-color: red; */
+  margin-top: 20px;
+  background-color: #ededf4;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .portfolio-three__single::after {
@@ -9856,7 +9859,6 @@ Redesign end
   width: 250px;
   height: 30vh;
   border-radius: 10%;
-  border-image: linear-gradient(to top, #00000000 0%, #ee8e2150 100%) 1;
   border-width: 2px;
   border-style: solid;
   opacity: 0;
@@ -9864,19 +9866,16 @@ Redesign end
 }
 
 .portfolio-three__single:hover::after {
-  border-image: linear-gradient(to top, #00000000 0%, #ee8e2150 100%) 1;
-  opacity: 1;
+  opacity: 0;
 }
 
 .portfolio-three__single {
-  /* background-color: red;    */
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   flex-direction: column;
-  height: 350px;
   cursor: pointer;
 }
 
@@ -9886,6 +9885,9 @@ Redesign end
 
 .portfolio-three__single:hover .portfolio-three__content h3 {
   color: white;
+}
+.portfolio-three__single:hover .portfolio-three__content h3 a{
+  color: white !important;
 }
 
 .portfolio-three__single:hover .portfolio-three__img img {
@@ -9902,15 +9904,24 @@ Redesign end
 .portfolio-three__content {
   position: relative;
   background-color: #ededf4;
-  height: 22vh;
-  width: 250px;
+  width: 100%;
+  height: 50px;
   z-index: 5;
-  margin-top: -80px;
-  border-radius: 10%;
+  border-radius: 10px;
   transition: 0.5s;
+  margin-top: 10px; 
 }
 
 .portfolio-three__content h3 {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #141111;
+  font-size: 22px;
+  transition: 0.5s;
+}
+.portfolio-three__content h3 a{
   position: absolute;
   bottom: 5%;
   left: 50%;
@@ -9925,7 +9936,7 @@ Redesign end
 }
 
 .portfolio-three__img img {
-  border-radius: 10%;
+  border-radius: 10px;
   width: 100%;
   height: 100%;
   object-fit: cover;

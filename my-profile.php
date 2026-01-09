@@ -254,7 +254,7 @@ if ($offer_id > 0) {
                         <?php foreach ($offers as $offer): ?>
                             <div class="vendors-detail" onclick="showOffer(<?php echo $offer['offer_id']; ?>)">
                                 <?php
-                                $imagePath = './images/resources/321.jpg';
+                                $imagePath = './images/resources/322.jpg';
                                 if (!empty($offer['images'])) {
                                     $firstImg  = $offer['images'][0];
                                     $imagePath = 'bachatdaddy@1357admin/adminuploads/images/vendors/' . htmlspecialchars($firstImg);

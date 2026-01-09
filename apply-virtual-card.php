@@ -239,7 +239,7 @@ $disableFields = [
                     </div>
 
                     <input type="hidden" class="form-control" value="<?= $userdetail['id']; ?>" name="id" id="user_id">
-                    <button name="submit" type="submit" id="submitButton">Get OTP</button>
+                    <button name="submit" type="submit" id="submitButton" disabled>Get OTP</button>
                 </form>
                 <!-- New form -->
             </div>
@@ -260,7 +260,7 @@ $disableFields = [
                     <input type="number" maxlength="1" name="" id="" class="digit">
                 </div>
                 <div class="otpmsg">Please enter the one-time password sent to your mail</div>
-                <button>
+                <button disabled>
                     Submit
                 </button>
             </form>
