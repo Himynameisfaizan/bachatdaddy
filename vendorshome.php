@@ -3,6 +3,11 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+if ($_SESSION['USER_Type'] != 'vendor') {
+    header('Location: login.php');
+    exit;
+}
+
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
 $common = new Common();

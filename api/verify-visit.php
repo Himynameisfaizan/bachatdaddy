@@ -6,10 +6,10 @@ $db = new dbClass();
 
 $input = json_decode(file_get_contents('php://input'), true);
 $card_number = trim($input['card_number'] ?? '');
-$email = trim($input['email'] ?? '');
+$phone = trim($input['phone'] ?? '');
 $vendor_id = (int)($input['vendor_id'] ?? 0);
 
-if (!$card_number || !$email || !$vendor_id) {
+if (!$card_number || !$phone || !$vendor_id) {
     echo json_encode(['success' => false, 'message' => 'Missing fields']);
     exit;
 }
@@ -17,12 +17,12 @@ if (!$card_number || !$email || !$vendor_id) {
 try {
     // 1. CARDNUMBER verify
     $card = $db->getDataWithParams(
-        "SELECT id FROM cardnumber WHERE uniqueNum = :card AND userEmail = :email",
-        [':card' => $card_number, ':email' => $email]
+        "SELECT id FROM cardnumber WHERE uniqueNum = :card AND userPhone = :phone",
+        [':card' => $card_number, ':phone' => $phone]
     );
     
     if (!$card) {
-        echo json_encode(['success' => false, 'message' => 'Card or email not found']);
+        echo json_encode(['success' => false, 'message' => 'Card or phone not found']);
         exit;
     }
     $cardnumber_id = $card['id'];

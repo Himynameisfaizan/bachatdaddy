@@ -1,8 +1,15 @@
 <?php
 session_start();
+
+if ($_SESSION['USER_Type'] != 'vendor') {
+    header('Location: login.php');  // Ya jahan chahiye redirect
+    exit;
+}
+
 include 'config/config.php';
 include 'functions/bachatdaddyfunctions.php';
 include 'functions/authentication.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +85,7 @@ include 'functions/authentication.php';
                         <span>Discount Card · Vendor Panel</span>
                     </div>
                     <h4>Verify Customer Coupon</h4>
-                    <p>Check card, email and coupon code before giving discount to customer.</p>
+                    <p>Check card, phone and card number before giving discount to customer.</p>
                     <hr class="border-light opacity-25">
                     <ul class="list-unstyled small mt-3">
                         <li>• Only active card holders are eligible.</li>
@@ -108,12 +115,12 @@ include 'functions/authentication.php';
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label"><b>Customer Email</b></label>
+                                    <label class="form-label"><b>Customer Phone</b></label>
                                     <div class="icon-input">
                                         <span class="input-icon">
-                                            <i class="ri-mail-unread-line"></i>
+                                            <i class="ri-phone-line"></i>
                                         </span>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="customer@example.com" required>
+                                        <input type="phone" class="form-control" id="phone" name="phone" placeholder="+91 " required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -197,10 +204,10 @@ include 'functions/authentication.php';
                 e.preventDefault();
 
                 const cardNumber = document.getElementById('cardNumber').value.trim();
-                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
                 const vendorId = document.getElementById('vendorSelect').value;
 
-                if (!cardNumber || !email || !vendorId) {
+                if (!cardNumber || !phone || !vendorId) {
                     showResult('All fields required.', 'warning');
                     return;
                 }
@@ -214,7 +221,7 @@ include 'functions/authentication.php';
                         },
                         body: JSON.stringify({
                             card_number: cardNumber,
-                            email: email,
+                            phone: phone,
                             vendor_id: vendorId
                         })
                     })
